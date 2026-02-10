@@ -240,9 +240,174 @@ p {
     font-style: italic;
 }
 
-.hero-image {
+/* Premium Dynamic Hero with SVG Morphing Reveal */
+
+.hero {
+    margin-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(232, 197, 160, 0.1) 0%, rgba(232, 155, 155, 0.1) 100%);
     position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.15) 0%, transparent 50%);
+    animation: gradientShift 15s ease infinite;
+    pointer-events: none;
+}
+
+@keyframes gradientShift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(10%, -10%); }
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1400px;
+    width: 100%;
+    z-index: 1;
+}
+
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 3/4;
+    border-radius: 20px;
+    overflow: hidden;
     animation: fadeIn 1.2s ease-out;
+    background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
+}
+
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-base {
+    z-index: 1;
+}
+
+/* SVG Mask Container - Premium Morphing Reveal */
+.hero-mask-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.mask-path {
+    /* No filter - filters inside SVG masks create luminance artifacts */
+}
+
+.reveal-overlay-img {
+    filter: brightness(1.1) contrast(1.05);
+}
+
+/* Signature Animation */
+.signature-overlay {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    width: 300px;
+    height: 200px;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.signature-stroke {
+    animation: draw-signature 3s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes draw-signature {
+    0% {
+        stroke-dashoffset: 1000;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 0;
+    }
+}
+
+/* Hero Text */
+.hero-text {
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    margin-bottom: 0.5rem;
+    color: var(--black);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--sand);
+    margin-bottom: 0.5rem;
+}
+
+.hero-description {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+}
+
+.hero-accent {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-left: 3px solid var(--sand);
+    background: rgba(212, 165, 116, 0.1);
+    border-radius: 5px;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: var(--black);
+    font-style: italic;
 }
 
 @keyframes fadeIn {
@@ -251,74 +416,6 @@ p {
     }
     to {
         opacity: 1;
-    }
-}
-
-.reveal-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: none;
-    background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
-}
-
-.reveal-base {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    position: relative;
-    z-index: 1;
-}
-
-.reveal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 2;
-    clip-path: circle(0px at 50% 50%);
-    transition: clip-path 0.05s ease-out;
-}
-
-.reveal-top {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Liquid background animation */
-.reveal-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 40%, rgba(232, 197, 160, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(232, 155, 155, 0.15) 0%, transparent 50%);
-    animation: liquidFlow 6s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes liquidFlow {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(20px, -10px) scale(1.05);
-    }
-    50% {
-        transform: translate(-10px, 15px) scale(0.95);
-    }
-    75% {
-        transform: translate(-20px, -15px) scale(1.05);
     }
 }
 
@@ -1010,7 +1107,7 @@ p {
 
 /* Books Section */
 .books-section {
-    padding: 6rem 2rem;
+    padding: 3rem 2rem;
     background: linear-gradient(180deg, rgba(232, 155, 155, 0.05) 0%, transparent 100%);
 }
 
@@ -1021,9 +1118,12 @@ p {
 
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .book-card {
@@ -1963,7 +2063,7 @@ p {
 
 .sponsorship-tiers {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
 
@@ -2155,9 +2255,26 @@ p {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .hero-content {
+    .hero-container {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .hero-image-container {
+        max-width: 500px;
+        margin: 0 auto;
+        aspect-ratio: 9/12;
+    }
+
+    .hero-mask-svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .signature-overlay {
+        width: 250px;
+        height: 170px;
+        left: 5%;
     }
 
     .about-content {
@@ -2202,6 +2319,40 @@ p {
 
 .nav-menu.active {
     left: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .hero-image-container {
+        max-width: 100%;
+        aspect-ratio: 9/12;
+    }
+
+    .hero-mask-svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .signature-overlay {
+        width: 200px;
+        height: 140px;
+        bottom: 15%;
+        left: 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-image-container {
+        max-width: 100%;
+        aspect-ratio: 9/12;
+        border-radius: 15px;
+    }
+
+    .signature-overlay {
+        width: 150px;
+        height: 100px;
+        bottom: 10%;
+        left: 10%;
+    }
 }
 
 .hamburger.active span:nth-child(1) {

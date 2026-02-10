@@ -301,4 +301,341 @@ document.querySelectorAll('.product-btn.affiliate-link').forEach(link => {
     });
 });
 
+// ============================================
+// PREMIUM MORPHING HERO WITH SAND CURSOR EFFECT
+// ============================================
+
+const maskPath = document.querySelector('.mask-path');
+const signatureStrokes = document.querySelectorAll('.signature-stroke');
+const heroContainer = document.querySelector('.hero-image-container');
+const heroSection = document.querySelector('.hero');
+
+if (maskPath && heroContainer) {
+    // State variables
+    let mouseX = 0;
+    let mouseY = 0;
+    let scrollProgress = 0;
+    let time = 0;
+    let isMouseOver = false;
+    
+    // Sand cursor particles
+    const sandParticles = [];
+    
+    // Animation constants
+    const revealCenter = { x: 400, y: 300 }; // Center of SVG viewBox
+    
+    // Active waves system - waves spawn and travel dynamically
+    const activeWaves = [];
+    
+    // Wave spawn configuration
+    const waveSpawnRate = 2.0; // Spawn new wave every 2 seconds (less frequent)
+    let lastWaveSpawnTime = -1; // Force immediate first spawn
+    const WAVE_TRAVEL_TIME = 8; // Seconds for a wave to cross (slower travel)
+    
+    // Generate new waves continuously from all directions
+    function updateWaves(currentTime) {
+        // Spawn new waves periodically
+        if (currentTime - lastWaveSpawnTime > waveSpawnRate) {
+            const spawnDirection = Math.floor(Math.random() * 4); // 0=top, 1=bottom, 2=left, 3=right
+            
+            activeWaves.push({
+                spawnTime: currentTime,
+                direction: spawnDirection,
+                amplitude: 15 + Math.random() * 25,    // 15-40px edge waviness
+                width: 60 + Math.random() * 80,         // 60-140px band thickness
+                cycles: 2 + Math.random() * 3,           // 2-5 oscillation cycles (VISIBLE undulation)
+                phase: Math.random() * Math.PI * 2,
+                timePhase: Math.random() * Math.PI * 2   // Offset for time-based animation
+            });
+            
+            lastWaveSpawnTime = currentTime;
+        }
+        
+        // Remove waves that have fully exited the viewport
+        for (let i = activeWaves.length - 1; i >= 0; i--) {
+            const age = currentTime - activeWaves[i].spawnTime;
+            if (age > WAVE_TRAVEL_TIME + 1) {
+                activeWaves.splice(i, 1);
+            }
+        }
+    }
+    
+    // Track mouse movement over hero
+    heroContainer.addEventListener('mousemove', (e) => {
+        isMouseOver = true;
+        const rect = heroContainer.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width) * 800;
+        mouseY = ((e.clientY - rect.top) / rect.height) * 600;
+        
+        // Spawn sand particles at cursor
+        spawnSandParticles(mouseX, mouseY);
+    });
+    
+    heroContainer.addEventListener('mouseleave', () => {
+        isMouseOver = false;
+    });
+    
+    // Spawn sand particles around cursor
+    function spawnSandParticles(x, y) {
+        const particleCount = 3;
+        for (let i = 0; i < particleCount; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 1 + Math.random() * 2;
+            const lifetime = 0.6 + Math.random() * 0.4;
+            
+            sandParticles.push({
+                x: x,
+                y: y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                lifetime: lifetime,
+                age: 0,
+                size: 1.5 + Math.random() * 2
+            });
+        }
+    }
+    
+    // Update sand particles
+    function updateSandParticles(deltaTime) {
+        for (let i = sandParticles.length - 1; i >= 0; i--) {
+            const p = sandParticles[i];
+            p.age += deltaTime;
+            p.x += p.vx * deltaTime * 100;
+            p.y += p.vy * deltaTime * 100;
+            
+            // Remove dead particles
+            if (p.age >= p.lifetime) {
+                sandParticles.splice(i, 1);
+            }
+        }
+    }
+    
+    // Track scroll
+    let scrollY = 0;
+    window.addEventListener('scroll', () => {
+        scrollY = window.scrollY;
+        const heroHeight = heroSection.offsetHeight;
+        scrollProgress = Math.min(scrollY / (heroHeight * 0.75), 1);
+        
+        // Trigger signature animation at scroll threshold
+        if (scrollProgress > 0.4 && scrollProgress < 0.7) {
+            triggerSignatureAnimation(scrollProgress);
+        }
+    });
+    
+    // Generate mask from ONLY active traveling waves.
+    // CRITICAL: Each wave is a SEPARATE sub-path (M...Z) so they never
+    // create connecting lines through the center.
+    // Image starts 100% hidden. Only wave bands reveal it.
+    function generateMorphPath(time) {
+        const subPaths = []; // Each wave = separate closed sub-path
+        const W = 800; // viewBox width
+        const H = 600; // viewBox height
+        const RES = 60; // Points per edge (smooth enough, performant)
+        
+        for (let wi = 0; wi < activeWaves.length; wi++) {
+            const wave = activeWaves[wi];
+            const age = time - wave.spawnTime;
+            const progress = age / WAVE_TRAVEL_TIME; // 0 to 1
+            
+            if (progress < 0 || progress > 1.2) continue;
+            
+            // Fade in/out at edges so waves don't pop
+            const fadeDist = 0.15;
+            let opacity = 1;
+            if (progress < fadeDist) opacity = progress / fadeDist;
+            if (progress > 1 - fadeDist) opacity = Math.max(0, (1 - progress) / fadeDist);
+            
+            const halfW = wave.width * opacity * 0.5; // Band half-thickness
+            if (halfW < 2) continue; // Too thin to see
+            
+            const topEdge = [];
+            const bottomEdge = [];
+            
+            if (wave.direction === 0 || wave.direction === 1) {
+                // HORIZONTAL BAND traveling vertically (top-down or bottom-up)
+                // yCenter = current vertical position of wave center
+                let yCenter;
+                if (wave.direction === 0) {
+                    // From top: starts above viewport, exits below
+                    yCenter = -100 + progress * (H + 200);
+                } else {
+                    // From bottom: starts below viewport, exits above
+                    yCenter = H + 100 - progress * (H + 200);
+                }
+                
+                for (let i = 0; i <= RES; i++) {
+                    const x = (i / RES) * W;
+                    
+                    // Organic undulation along the band edge
+                    const waviness = Math.sin(x / W * Math.PI * 2 * wave.cycles + wave.phase + time * 0.8 + wave.timePhase) * wave.amplitude;
+                    
+                    // Cursor: slightly thicken band near mouse
+                    let cursorBoost = 0;
+                    if (isMouseOver) {
+                        const dx = x - mouseX;
+                        const dy = yCenter - mouseY;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 180) {
+                            cursorBoost = (1 - dist / 180) * 30;
+                        }
+                    }
+                    
+                    topEdge.push(`${x},${yCenter - halfW + waviness - cursorBoost}`);
+                    bottomEdge.push(`${x},${yCenter + halfW - waviness + cursorBoost}`);
+                }
+            }
+            else {
+                // VERTICAL BAND traveling horizontally (left-right or right-left)
+                let xCenter;
+                if (wave.direction === 2) {
+                    // From left: starts off-screen left, exits right
+                    xCenter = -100 + progress * (W + 200);
+                } else {
+                    // From right: starts off-screen right, exits left
+                    xCenter = W + 100 - progress * (W + 200);
+                }
+                
+                for (let i = 0; i <= RES; i++) {
+                    const y = (i / RES) * H;
+                    
+                    // Organic undulation along the band edge
+                    const waviness = Math.sin(y / H * Math.PI * 2 * wave.cycles + wave.phase + time * 0.8 + wave.timePhase) * wave.amplitude;
+                    
+                    // Cursor: slightly thicken band near mouse
+                    let cursorBoost = 0;
+                    if (isMouseOver) {
+                        const dx = xCenter - mouseX;
+                        const dy = y - mouseY;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 180) {
+                            cursorBoost = (1 - dist / 180) * 30;
+                        }
+                    }
+                    
+                    // For vertical bands: topEdge = left edge, bottomEdge = right edge
+                    topEdge.push(`${xCenter - halfW + waviness - cursorBoost},${y}`);
+                    bottomEdge.push(`${xCenter + halfW - waviness + cursorBoost},${y}`);
+                }
+            }
+            
+            // Build this wave as its own CLOSED sub-path
+            // Top/left edge forward, then bottom/right edge reversed, then close
+            bottomEdge.reverse();
+            const subPath = `M${topEdge.join(' L')} L${bottomEdge.join(' L')} Z`;
+            subPaths.push(subPath);
+        }
+        
+        // No waves? Return empty path = 100% hidden
+        if (subPaths.length === 0) {
+            return 'M0,0 L0,0 Z';
+        }
+        
+        // CRITICAL: Join with space, NOT with L.
+        // Each "M...Z" is an independent sub-path.
+        // SVG fills each one separately. No connecting lines. No center fill.
+        return subPaths.join(' ');
+    }
+    
+    // Animate signature on scroll
+    function triggerSignatureAnimation(progress) {
+        signatureStrokes.forEach((stroke, index) => {
+            const delay = index * 0.3;
+            const relativeProgress = (progress - 0.4 - delay) * 3;
+            
+            if (relativeProgress >= 0 && relativeProgress <= 1) {
+                const dashoffset = 1000 * (1 - relativeProgress);
+                stroke.style.strokeDashoffset = dashoffset;
+                stroke.style.opacity = Math.min(relativeProgress * 2, 1);
+                
+                if (relativeProgress === 1) {
+                    stroke.style.animation = 'fadeOut 1s ease-out forwards';
+                }
+            } else if (relativeProgress > 1) {
+                stroke.style.strokeDashoffset = 0;
+                stroke.style.opacity = 0;
+            }
+        });
+    }
+    
+    // Create sand particle canvas overlay
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'absolute';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '4';
+    heroContainer.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        const rect = heroContainer.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Draw sand particles on canvas
+    function drawSandParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        const rect = heroContainer.getBoundingClientRect();
+        const scaleX = canvas.width / 600;
+        const scaleY = canvas.height / 800;
+        
+        sandParticles.forEach(p => {
+            const opacity = 1 - (p.age / p.lifetime);
+            const canvasX = (p.x / 800) * canvas.width;
+            const canvasY = (p.y / 600) * canvas.height;
+            
+            ctx.fillStyle = `rgba(212, 165, 116, ${opacity * 0.8})`;
+            ctx.beginPath();
+            ctx.arc(canvasX, canvasY, p.size * opacity, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+    
+    // Animate the mask path and particles
+    let lastTime = Date.now();
+    function updateMaskPath() {
+        const now = Date.now();
+        const deltaTime = (now - lastTime) / 1000;
+        lastTime = now;
+        
+        time += 0.016;
+        
+        // Update wave system - spawn new waves dynamically
+        updateWaves(time);
+        
+        // Update particles
+        updateSandParticles(deltaTime);
+        drawSandParticles();
+        
+        // Generate new path from ONLY active traveling waves
+        const newPath = generateMorphPath(time);
+        
+        maskPath.setAttribute('d', newPath);
+        
+        requestAnimationFrame(updateMaskPath);
+    }
+    
+    // Start animation loop
+    updateMaskPath();
+    
+    // Add fade-out keyframe for signature
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+console.log('Conversion tracking initialized');
+
 console.log('Conversion tracking initialized');
