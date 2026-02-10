@@ -1,0 +1,31 @@
+{
+  "name": "amanda-harnett-website",
+  "version": "1.0.0",
+  "description": "Professional website for Amanda Harnett - Beach Volleyball Player",
+  "author": "Amanda Harnett",
+  "license": "All Rights Reserved",
+  "keywords": [
+    "beach volleyball",
+    "athlete",
+    "sports",
+    "professional",
+    "portfolio"
+  ],
+  "scripts": {
+    "serve": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "social": {
+    "instagram": "https://instagram.com/",
+    "tiktok": "https://tiktok.com/@",
+    "youtube": "https://youtube.com/@",
+    "twitter": "https://twitter.com/"
+  },
+  "contact": {
+    "email": "contact@amandaharnett.com",
+    "business": "business@amandaharnett.com"
+  }
+}

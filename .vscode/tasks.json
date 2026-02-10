@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Local Web Server",
+			"type": "shell",
+			"command": "cd c:\\Users\\Pam\\Desktop\\AMANDA\\ HARNETT\\amanda-harnett-website && python -m http.server 8000",
+			"isBackground": true
+		}
+	]
+}

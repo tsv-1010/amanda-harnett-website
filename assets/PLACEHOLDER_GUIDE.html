@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Placeholder Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #D4A574;
+            margin-bottom: 30px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .placeholder-card {
+            border: 2px solid #D4A574;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .placeholder-card h3 {
+            color: #E89B9B;
+            margin-top: 0;
+        }
+        .placeholder-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .dimensions {
+            font-weight: bold;
+            color: #D4A574;
+            margin: 10px 0;
+        }
+        .tips {
+            background: #E8C5A0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Amanda Harnett Website - Image Placeholder Guide</h1>
+        
+        <div class="grid">
+            <div class="placeholder-card">
+                <h3>1. Hero Image</h3>
+                <p>Large introductory image on the homepage</p>
+                <div class="dimensions">Size: 600x600px+ (Square)</div>
+                <p>Format: JPG or WebP</p>
+                <p>Location: <code>assets/hero/amanda.jpg</code></p>
+                <div class="tips">
+                    <strong>💡 Tips:</strong><br>
+                    • Use a high-quality photo of Amanda<br>
+                    • Headshot or upper body preferred<br>
+                    • Good lighting with sand/beach background
+                </div>
+            </div>
+
+            <div class="placeholder-card">
+                <h3>2. Gallery Images (5x)</h3>
+                <p>Tournament and competition photos</p>
+                <div class="dimensions">Size: 800x500px+ (16:10 landscape)</div>
+                <p>Format: JPG or WebP</p>
+                <p>Location: <code>assets/gallery/photo-*.jpg</code></p>
+                <div class="tips">
+                    <strong>💡 Tips:</strong><br>
+                    • Action shots from tournaments<br>
+                    • Training session photos<br>
+                    • Victory moments<br>
+                    • Variety of settings and emotions
+                </div>
+            </div>
+
+            <div class="placeholder-card">
+                <h3>3. Dual Section Images (2x)</h3>
+                <p>"On Court" and "Off Court" section images</p>
+                <div class="dimensions">Size: 600x600px+ (Square)</div>
+                <p>Format: JPG or WebP</p>
+                <p>Location: <code>assets/about/dual-*.jpg</code></p>
+                <div class="tips">
+                    <strong>💡 Tips:</strong><br>
+                    • One playing/training photo<br>
+                    • One relaxed/lifestyle photo<br>
+                    • Consistent lighting and style
+                </div>
+            </div>
+
+            <div class="placeholder-card">
+                <h3>4. About Section Portrait</h3>
+                <p>Professional portrait for about section</p>
+                <div class="dimensions">Size: 600x800px+ (3:4 portrait)</div>
+                <p>Format: JPG or WebP</p>
+                <p>Location: <code>assets/about/amanda-portrait.jpg</code></p>
+                <div class="tips">
+                    <strong>💡 Tips:</strong><br>
+                    • Professional portrait photo<br>
+                    • Full body or 3/4 body shot<br>
+                    • Clear, professional styling<br>
+                    • Could be in athletic gear or casual
+                </div>
+            </div>
+
+            <div class="placeholder-card">
+                <h3>5. Partner Logos</h3>
+                <p>Sponsorship and partner brand logos</p>
+                <div class="dimensions">Size: 300x300px+ (Square)</div>
+                <p>Format: PNG with transparency</p>
+                <p>Location: <code>assets/partners/logo-*.png</code></p>
+                <div class="tips">
+                    <strong>💡 Tips:</strong><br>
+                    • Request vector files when possible<br>
+                    • Use PNG for transparency<br>
+                    • Keep consistent sizing<br>
+                    • Include 2-5 major sponsors
+                </div>
+            </div>
+
+            <div class="placeholder-card">
+                <h3>Image Optimization Tips</h3>
+                <p>Make your site fast and efficient</p>
+                <div class="tips">
+                    <strong>💡 Best Practices:</strong><br>
+                    • Compress images before uploading<br>
+                    • Use WebP format for modern browsers<br>
+                    • Lazy load images below the fold<br>
+                    • Target 80-100 quality for JPG<br>
+                    • Keep file size under 200KB<br>
+                    • Use a CDN for faster delivery<br>
+                    <br>
+                    <strong>Tools:</strong><br>
+                    • TinyPNG.com<br>
+                    • ImageOptim<br>
+                    • Cloudinary<br>
+                    • SharpJS
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #E8C5A0; border-radius: 10px;">
+            <h3 style="color: #666;">📝 How to Update Images in HTML</h3>
+            <p><strong>Find this in index.html:</strong></p>
+            <code style="display: block; padding: 10px; background: white; border-radius: 5px; margin: 10px 0;">
+&lt;img id="heroImage" src="" alt="Amanda Harnett" class="hero-img"&gt;
+            </code>
+            <p><strong>Replace with:</strong></p>
+            <code style="display: block; padding: 10px; background: white; border-radius: 5px; margin: 10px 0;">
+&lt;img id="heroImage" src="assets/hero/amanda.jpg" alt="Amanda Harnett" class="hero-img"&gt;
+            </code>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #F2B8B8; border-radius: 10px;">
+            <h3 style="color: #666;">🎨 Color References for Your Photos</h3>
+            <p>Choose photos that work well with Amanda's brand colors:</p>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>Color</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>Hex</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>Usage</strong></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Primary Sand</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">#D4A574</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Accents, borders, headers</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Blush Pink</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">#E89B9B</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Secondary accent, hover states</td>
+                </tr>
+            </table>
+            <p style="margin-top: 15px;">💡 <strong>Tip:</strong> Photos with warm tones, golden hour lighting, and beach/sand settings will look best with this color palette!</p>
+        </div>
+    </div>
+</body>
+</html>

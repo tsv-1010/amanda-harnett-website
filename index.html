@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanda Harnett | Professional Beach Volleyball Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics 4 -->
+    <!-- 
+    SETUP INSTRUCTIONS:
+    1. Go to https://analytics.google.com
+    2. Create a GA4 property for this website
+    3. Copy your Measurement ID (looks like: G-XXXXXXXXXX)
+    4. Replace 'G-PLACEHOLDER' below with your Measurement ID
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PLACEHOLDER');
+        
+        // Helper function to track conversions
+        window.trackConversion = function(eventName, eventData = {}) {
+            gtag('event', eventName, eventData);
+        };
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home" class="logo-text">AH</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#books" class="nav-link">Books</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                <li><a href="#shop" class="nav-link">Shop</a></li>
+                <li><a href="#on-court" class="nav-link">On Court</a></li>
+                <li><a href="#off-court" class="nav-link">Off Court</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#partners" class="nav-link">Partners</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Amanda Harnett
+                </h1>
+                <p class="hero-subtitle">
+                    Professional Beach Volleyball Player
+                </p>
+                <p class="hero-description">
+                    AVP • FIVB • NORCECA
+                </p>
+                <div class="hero-accent">
+                    <span class="tagline">"Born in the snow, lives in the sand"</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/hero/AmandaHarnettTeamCanada.JPG" alt="Amanda Harnett - Professional Beach Volleyball Player" class="hero-img">
+            </div>
+        </div>
+        <!-- Newsletter Signup in Hero -->
+        <div class="hero-newsletter">
+            <p>Join Amanda's Community</p>
+            <div id="beehiv-signup" class="newsletter-form">
+                <!-- Beehiv signup form will be embedded here -->
+                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+                <p class="newsletter-note">Get updates on tournaments, books, and exclusive content</p>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <p>Scroll to explore</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Tour</h3>
+                <p>AVP • FIVB • NORCECA</p>
+            </div>
+            <div class="stat-card">
+                <h3>Based</h3>
+                <p>Los Angeles, CA</p>
+            </div>
+            <div class="stat-card">
+                <h3>From</h3>
+                <p>Canada</p>
+            </div>
+            <div class="stat-card">
+                <h3>Goal</h3>
+                <p>2028 & 2032 Olympics</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message Section -->
+    <section class="message-section">
+        <div class="message-container">
+            <h2 class="section-title">A Message from Amanda</h2>
+            <div class="message-content">
+                <p class="message-text">
+                    From the frozen Canadian landscape to the golden California beaches, my journey has been defined by relentless pursuit and unwavering dedication. Every tournament, every training session, and every moment on the court brings me closer to my dreams of representing Canada on the Olympic stage.
+                </p>
+                <p class="message-text">
+                    The transition from snow to sand wasn't just a change of scenery—it was a transformation. Beach volleyball requires a different spirit, a unique blend of athleticism and freedom. I've embraced both worlds, and they've shaped who I am today.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section id="books" class="books-section">
+        <div class="books-container">
+            <h2 class="section-title">Children's Books Series</h2>
+            <p class="section-subtitle">Teaching Confidence & Inner Psychology</p>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="assets/books/PiggyKayWS_Cover.jpeg" alt="Piggy and Kay: A Winter Sparkle" class="book-img">
+                    </div>
+                    <h3>Piggy & Kay</h3>
+                    <p class="book-series">A Winter Sparkle</p>
+                    <p class="book-age">Ages 2-8</p>
+                    <p class="book-description">A heartwarming winter tale about friendship, confidence, and kindness.</p>
+                    <a href="https://piggy-and-kay.vercel.app" target="_blank" class="book-link">Pre-Order Now →</a>
+                    <p class="book-note">First in an expanding series</p>
+                </div>
+                <div class="book-card coming-soon">
+                    <div class="book-coming">
+                        <p>Coming Soon</p>
+                    </div>
+                    <h3>Piggy & Kay</h3>
+                    <p class="book-series">Next Adventure</p>
+                    <p class="book-age">Ages 2-8</p>
+                    <p class="book-description">More stories of friendship, confidence, and adventure from the Piggy & Kay universe.</p>
+                    <button class="book-notify">Notify Me</button>
+                </div>
+            </div>
+            <p class="books-mission" style="text-align: center; margin-top: 3rem; font-style: italic; color: var(--blush);">
+                "Building confidence and inner psychology, one story at a time."
+            </p>
+        </div>
+    </section>
+
+    <!-- Gallery Section with Scroll Effect -->
+    <section class="gallery-section">
+        <h2 class="section-title">Moments in Motion</h2>
+        <div class="horizontal-scroll">
+            <div class="scroll-container" id="galleryScroll">
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaDigging.png" alt="Amanda digging" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Defensive Skills</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaDivingInternational3.png" alt="Amanda diving" class="gallery-img">
+                    </div>
+                    <p class="image-caption">International Competition</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaDivingInternationalComp.JPG" alt="Amanda in international match" class="gallery-img">
+                    </div>
+                    <p class="image-caption">FIVB World Tour</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaDivingInternationalComp2.JPG" alt="Amanda competing" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Tournament Action</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaJumpFloat.png" alt="Amanda floating" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Jump Float Serve</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaJumpServe.png" alt="Amanda serving" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Powerful Serve</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaJumpServeAVP.png" alt="Amanda AVP serve" class="gallery-img">
+                    </div>
+                    <p class="image-caption">AVP Pro Series</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaPassing.png" alt="Amanda passing" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Setting Technique</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaPractice.png" alt="Amanda practice" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Training Focus</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/AmandaServePrep.jpg" alt="Amanda serve prep" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Court Presence</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <img src="assets/gallery/IMG_7160.JPG" alt="Amanda action shot" class="gallery-img">
+                    </div>
+                    <p class="image-caption">Peak Performance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section">
+        <div class="blog-container">
+            <h2 class="section-title">Insights & Updates</h2>
+            <p class="section-subtitle">Thoughts on volleyball, travel, career, and personal growth</p>
+            
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="" alt="AVP Tour insights" class="blog-featured">
+                        <span class="blog-category career">Career</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Lessons Learned from the AVP Pro Tour</h3>
+                        <div class="blog-meta">
+                            <span class="blog-date">February 10, 2026</span>
+                            <span class="blog-author">By Amanda Harnett</span>
+                        </div>
+                        <p class="blog-excerpt">
+                            After competing in multiple AVP events this season, I've learned invaluable lessons about consistency, mental resilience, and adapting to different playing conditions. Here's what the pro circuit has taught me about competing at the highest level.
+                        </p>
+                        <a href="#" class="blog-link">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="" alt="FIVB World Tour" class="blog-featured">
+                        <span class="blog-category travel">Travel</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Traveling the World on the FIVB Tour</h3>
+                        <div class="blog-meta">
+                            <span class="blog-date">January 27, 2026</span>
+                            <span class="blog-author">By Amanda Harnett</span>
+                        </div>
+                        <p class="blog-excerpt">
+                            Competing on the international FIVB World Tour has taken me to incredible destinations across the globe. From tournament logistics to cultural experiences, the nomadic lifestyle of a pro beach volleyball player is both challenging and rewarding.
+                        </p>
+                        <a href="#" class="blog-link">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="" alt="Career milestones" class="blog-featured">
+                        <span class="blog-category update">Update</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Reflecting on Growth: From Snow to Sand</h3>
+                        <div class="blog-meta">
+                            <span class="blog-date">January 13, 2026</span>
+                            <span class="blog-author">By Amanda Harnett</span>
+                        </div>
+                        <p class="blog-excerpt">
+                            Looking back at my journey—from playing in Canada to training in Los Angeles to competing internationally—I'm struck by how far I've come. This post explores the pivotal moments and lessons that shaped my path to professional beach volleyball.
+                        </p>
+                        <a href="#" class="blog-link">Read More →</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="blog-cta">
+                <p>New insights posted bi-weekly. Subscribe to never miss an update.</p>
+                <a href="#" class="blog-newsletter-btn">Subscribe to Blog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Flow Section (Strategic CTA) -->
+    <section class="partnership-flow">
+        <div class="partnership-flow-content">
+            <h2>Ready to Work Together?</h2>
+            <p>Whether you're interested in sponsorship opportunities, training programs, or exclusive partnerships, let's explore how we can collaborate.</p>
+            <a href="#partners" class="flow-cta-btn">Explore Partnership Opportunities →</a>
+        </div>
+    </section>
+
+    <!-- On Court / Off Court Sections -->
+    <section class="dual-section">
+        <div class="dual-container">
+            <div class="dual-item">
+                <div class="dual-content">
+                    <h2 id="on-court" class="dual-title">On Court</h2>
+                    <p class="dual-text">
+                        Championships, tournaments, and the pursuit of excellence. From the AVP Pro Series to international FIVB events, Amanda competes at the highest levels of professional beach volleyball.
+                    </p>
+                    <a href="#" class="dual-link">View Statistics →</a>
+                </div>
+                <div class="dual-image">
+                    <img src="" alt="Amanda playing volleyball" class="dual-img">
+                </div>
+            </div>
+            <div class="dual-item reversed">
+                <div class="dual-image">
+                    <img src="" alt="Amanda off court" class="dual-img">
+                </div>
+                <div class="dual-content">
+                    <h2 id="off-court" class="dual-title">Off Court</h2>
+                    <p class="dual-text">
+                        Training sessions, beach life, and moments away from competition. Discover the person behind the athlete and how Amanda prepares for the world's biggest tournaments.
+                    </p>
+                    <a href="#" class="dual-link">Behind the Scenes →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <h2 class="section-title">About Amanda</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Professional Beach Volleyball Player</h3>
+                    <p>
+                        Amanda Harnett is a Canadian professional beach volleyball player competing on the international stage. Based in Los Angeles, she competes in the AVP Pro Series, FIVB World Tour, and NORCECA competitions.
+                    </p>
+                    <p>
+                        With her sights set on the 2028 and 2032 Olympic Games, Amanda continues to refine her craft and push the boundaries of her sport. Her unique background—from Canadian roots to California training—brings a distinctive perspective to beach volleyball.
+                    </p>
+                    <h3>Career Highlights</h3>
+                    <ul class="highlights-list">
+                        <li>AVP Pro Series Competitor</li>
+                        <li>FIVB World Tour Participant</li>
+                        <li>NORCECA Championships Competitor</li>
+                        <li>Olympic Aspirant (2028, 2032)</li>
+                        <li>Los Angeles-Based Training</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="" alt="Amanda Harnett portrait" class="about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Timeline Section -->
+    <section id="schedule" class="timeline-section">
+        <div class="timeline-container">
+            <h2 class="section-title">2026 Tournament Schedule</h2>
+            <p class="section-subtitle">Follow Amanda's season across AVP and FIVB tours. Sponsor a leg of her journey.</p>
+            
+            <div class="timeline-scroll">
+                <!-- Central Timeline Line -->
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Events -->
+                <div class="timeline-events">
+                    <!-- Event 1 -->
+                    <div class="timeline-event top">
+                        <div class="event-card">
+                            <div class="event-date">Feb 15-18</div>
+                            <div class="event-name">Long Beach Open</div>
+                            <div class="event-type avp">AVP Pro Open</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Long Beach, CA</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">Feb 22-25</div>
+                            <div class="event-name">Mexico City Elite</div>
+                            <div class="event-type fivb-elite">FIVB Elite</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Mexico City, Mexico</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 3 -->
+                    <div class="timeline-event top">
+                        <div class="event-card">
+                            <div class="event-date">Mar 8-10</div>
+                            <div class="event-name">Austin Challenger</div>
+                            <div class="event-type avp-challenger">AVP Challenger</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Austin, TX</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 4 -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">Mar 15-18</div>
+                            <div class="event-name">Cancun Futures</div>
+                            <div class="event-type fivb-futures">FIVB Futures</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Cancun, Mexico</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 5 -->
+                    <div class="timeline-event top">
+                        <div class="event-card">
+                            <div class="event-date">Apr 5-7</div>
+                            <div class="event-name">Miami League</div>
+                            <div class="event-type avp-league">AVP Pro League</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Miami, FL</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 6 -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">Apr 19-22</div>
+                            <div class="event-name">San Juan Challenge</div>
+                            <div class="event-type fivb-challenge">FIVB Challenge</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>San Juan, Puerto Rico</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 7 -->
+                    <div class="timeline-event top">
+                        <div class="event-card">
+                            <div class="event-date">May 10-12</div>
+                            <div class="event-name">San Diego Pro Open</div>
+                            <div class="event-type avp">AVP Pro Open</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>San Diego, CA</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 8 -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">May 24-27</div>
+                            <div class="event-name">Gstaad Elite</div>
+                            <div class="event-type fivb-elite">FIVB Elite</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Gstaad, Switzerland</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+
+                    <!-- Event 9 -->
+                    <div class="timeline-event top">
+                        <div class="event-card">
+                            <div class="event-date">Jun 15-18</div>
+                            <div class="event-name">Tokyo Challenge</div>
+                            <div class="event-type fivb-challenge">FIVB Challenge</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Tokyo, Japan</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <a href="#" class="event-sponsor-btn">Sponsor This Leg</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-note">
+                <p>💡 <strong>Sponsor a Tournament Leg:</strong> Each destination represents travel, accommodation, and competitive opportunity. Partner with Amanda for a specific tournament to maximize brand visibility where she competes at the highest level.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="shop-section">
+        <div class="shop-container">
+            <h2 class="section-title">Shop & Services</h2>
+            <p class="section-subtitle">Training programs, exclusive merchandise, and personalized coaching</p>
+            <div class="products-grid">
+                <!-- Coaching Session -->
+                <div class="product-card">
+                    <div class="product-category">Service</div>
+                    <h3>One-on-One Coaching Session</h3>
+                    <p class="product-description">60-minute personalized coaching session with Amanda. Perfect for improving your skills, technique, and game strategy.</p>
+                    <div class="product-price">$199</div>
+                    <a href="#shop-inquiry" class="product-btn">Book Now</a>
+                </div>
+
+                <!-- Jump Training Program -->
+                <div class="product-card">
+                    <div class="product-category">Digital</div>
+                    <h3>Jump Training Program</h3>
+                    <p class="product-description">12-week digital training program designed to maximize your vertical jump and overall athletic performance.</p>
+                    <div class="product-price">$79</div>
+                    <a href="#" class="product-btn shopify-add">Add to Cart</a>
+                </div>
+
+                <!-- Signed Book -->
+                <div class="product-card">
+                    <div class="product-category">Physical</div>
+                    <h3>Piggy & Kay: A Winter Sparkle (Signed)</h3>
+                    <p class="product-description">Hardcover children's book signed by Amanda. Teaches confidence and inner psychology to ages 2-8.</p>
+                    <div class="product-price">$32</div>
+                    <a href="#" class="product-btn shopify-add">Add to Cart</a>
+                </div>
+
+                <!-- Sticker Pack -->
+                <div class="product-card">
+                    <div class="product-category">Merch</div>
+                    <h3>Piggy & Kay Sticker Pack</h3>
+                    <p class="product-description">Colorful sticker pack featuring characters from Amanda's children's book series. Set of 12.</p>
+                    <div class="product-price">$10</div>
+                    <a href="#" class="product-btn shopify-add">Add to Cart</a>
+                </div>
+
+                <!-- Signed Ball -->
+                <div class="product-card">
+                    <div class="product-category">Merch</div>
+                    <h3>Signed Volleyball</h3>
+                    <p class="product-description">Official volleyball signed by Amanda Harnett. Premium quality, perfect for collectors and fans.</p>
+                    <div class="product-price">$75</div>
+                    <a href="#" class="product-btn shopify-add">Add to Cart</a>
+                </div>
+
+                <!-- Affiliate Product -->
+                <div class="product-card">
+                    <div class="product-category">Affiliate</div>
+                    <h3>Just Ingredients Supplements</h3>
+                    <p class="product-description">Amanda's choice for health supplements. Premium nutrition to fuel your athletic performance.</p>
+                    <div class="product-price">Varies</div>
+                    <a href="#" class="product-btn affiliate-link" target="_blank">Shop Now →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsorship Opportunities Section -->
+    <section class="sponsorship-opportunities">
+        <div class="sponsorship-container">
+            <h2 class="section-title">Partner With Amanda</h2>
+            <p class="section-subtitle">Strategic partnerships with a professional athlete and children's book author</p>
+            
+            <div class="sponsorship-intro">
+                <p>Amanda offers customized partnership packages designed around your brand's goals and objectives. Whether you're looking for event appearances, content collaboration, team training, or long-term ambassadorship, we craft solutions that deliver measurable value.</p>
+            </div>
+
+            <div class="sponsorship-tiers">
+                <!-- Appearances & Events -->
+                <div class="sponsorship-card">
+                    <h3 class="sponsorship-tier-title">Appearances & Events</h3>
+                    <p class="sponsorship-scope">Perfect for conferences, launches, and community events</p>
+                    <ul class="sponsorship-features">
+                        <li>✓ Personal appearance & speaking</li>
+                        <li>✓ Meet & greet opportunities</li>
+                        <li>✓ Photo & video content</li>
+                        <li>✓ Social media promotion</li>
+                        <li>✓ Customizable scope & duration</li>
+                    </ul>
+                    <div class="sponsorship-cta">
+                        <a href="#" class="sponsorship-btn secondary" data-type="appearance">Schedule Call</a>
+                    </div>
+                </div>
+
+                <!-- Content Collaboration -->
+                <div class="sponsorship-card featured">
+                    <div class="badge">Popular</div>
+                    <h3 class="sponsorship-tier-title">Content Collaboration</h3>
+                    <p class="sponsorship-scope">Influencer-style content partnership for digital brands</p>
+                    <ul class="sponsorship-features">
+                        <li>✓ Branded Instagram & TikTok content</li>
+                        <li>✓ Behind-the-scenes training footage</li>
+                        <li>✓ Product features & testimonials</li>
+                        <li>✓ Performance metrics & analytics</li>
+                        <li>✓ Flexible 3-6 month terms</li>
+                    </ul>
+                    <div class="sponsorship-cta">
+                        <a href="#" class="sponsorship-btn secondary" data-type="content">Schedule Call</a>
+                    </div>
+                </div>
+
+                <!-- Corporate & Team Training -->
+                <div class="sponsorship-card">
+                    <h3 class="sponsorship-tier-title">Corporate & Team Training</h3>
+                    <p class="sponsorship-scope">Leadership training and team building experiences</p>
+                    <ul class="sponsorship-features">
+                        <li>✓ Customized training sessions</li>
+                        <li>✓ Leadership & mindset workshops</li>
+                        <li>✓ Team building experiences</li>
+                        <li>✓ On-site or virtual options</li>
+                        <li>✓ Scalable for any group size</li>
+                    </ul>
+                    <div class="sponsorship-cta">
+                        <a href="#" class="sponsorship-btn secondary" data-type="training">Schedule Call</a>
+                    </div>
+                </div>
+
+                <!-- Long-Term Ambassador -->
+                <div class="sponsorship-card">
+                    <h3 class="sponsorship-tier-title">Ambassador Program</h3>
+                    <p class="sponsorship-scope">Year-round strategic partnership & brand integration</p>
+                    <ul class="sponsorship-features">
+                        <li>✓ Exclusive brand partnership</li>
+                        <li>✓ Monthly content & appearances</li>
+                        <li>✓ Tournament support & visibility</li>
+                        <li>✓ Product development collaboration</li>
+                        <li>✓ Full ecosystem integration</li>
+                    </ul>
+                    <div class="sponsorship-cta">
+                        <a href="#" class="sponsorship-btn secondary" data-type="ambassador">Schedule Call</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="partnership-cta-section">
+                <h3>Let's Create Something Great Together</h3>
+                <p>Download Amanda's press kit to learn more about her reach, audience, and opportunities.</p>
+                <div class="partnership-buttons">
+                    <a href="#" class="cta-btn primary">Download Press Kit</a>
+                    <a href="mailto:contact@amandaharnett.com?subject=Partnership%20Inquiry" class="cta-btn secondary">Direct Inquiry</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners & Sponsors Section -->
+    <section id="partners" class="partners-section">
+        <div class="partners-container">
+            <h2 class="section-title">Partners & Ambassadorships</h2>
+            <p class="section-subtitle">
+                Amanda is proud to partner with brands that share her commitment to excellence, health, and personal growth.
+            </p>
+            
+            <!-- Platinum Partners -->
+            <div class="sponsor-tier">
+                <h3 class="tier-title">🏆 Platinum Ambassador</h3>
+                <div class="partners-grid platinum">
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="assets/partners/Monarch-Large.svg" alt="Monarch Athletic Club" class="sponsor-img">
+                        </div>
+                        <h4>Monarch Athletic Club</h4>
+                        <p class="partner-role">Official Wellness Partner</p>
+                        <p class="partner-description">Monarch Athletic Club is a premier, medically-driven luxury fitness and wellness destination that integrates personalized training, physical therapy, nutrition, and diagnostic health services to promote longevity and holistic health.</p>
+                        <a href="https://monarchclubs.com/" target="_blank" class="partner-link">Visit Monarch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gold Partners -->
+            <div class="sponsor-tier">
+                <h3 class="tier-title">🥇 Official League Partner</h3>
+                <div class="partners-grid gold">
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="assets/partners/AVP Pro Beach Volleyball_idMb_ph_od_0.png" alt="AVP Pro Beach Volleyball" class="sponsor-img avp-logo">
+                        </div>
+                        <h4>AVP Pro Beach Volleyball</h4>
+                        <p class="partner-role">Professional Tour</p>
+                        <p class="partner-description">The American Volleyball Professionals (AVP) Pro Tour is the premier professional beach volleyball league in the United States, showcasing the world's best athletes.</p>
+                        <a href="https://www.avpbeachvolleyball.com/" target="_blank" class="partner-link">Visit AVP →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsor Inquiry -->
+            <div class="sponsor-inquiry">
+                <h3>Interested in Partnering with Amanda?</h3>
+                <p>Amanda is always interested in connecting with brands and organizations that align with her values.</p>
+                <a href="mailto:contact@amandaharnett.com" class="sponsor-cta">Send Sponsorship Inquiry →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section">
+        <div class="social-container">
+            <h2 class="section-title">Follow Amanda</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/amandaharnett" target="_blank" class="social-link">Instagram</a>
+                <a href="https://www.tiktok.com/@amandaharnett" target="_blank" class="social-link">TikTok</a>
+                <a href="#" class="social-link">YouTube</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section in Footer -->
+    <section class="footer-newsletter">
+        <div class="footer-newsletter-content">
+            <h3>Stay Updated</h3>
+            <p>Subscribe to receive tournament updates, book releases, and exclusive content from Amanda.</p>
+            <div id="beehiv-footer-signup" class="newsletter-form newsletter-footer-form">
+                <!-- Beehiv signup form will be embedded here -->
+                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <h3>Amanda Harnett</h3>
+                <p>Professional Beach Volleyball Player & Author</p>
+                <p class="footer-contact">
+                    <a href="mailto:contact@amandaharnett.com">Business Inquiries</a>
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+            </div>
+            <div class="footer-credit">
+                <p>&copy; 2026 Amanda Harnett. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

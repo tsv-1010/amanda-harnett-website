@@ -1,0 +1,126 @@
+/* Sample meta tags to add to <head> section */
+
+<!-- Basic SEO -->
+<meta name="description" content="Amanda Harnett | Professional Beach Volleyball Player from Canada competing on AVP, FIVB, and NORCECA tours. Training in Los Angeles, working towards 2028 and 2032 Olympics.">
+<meta name="keywords" content="beach volleyball, professional athlete, Amanda Harnett, Canada, Olympics, AVP, FIVB, NORCECA">
+<meta name="author" content="Amanda Harnett">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (Social Media Sharing) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amandaharnett.com">
+<meta property="og:title" content="Amanda Harnett | Professional Beach Volleyball Player">
+<meta property="og:description" content="Professional beach volleyball player from Canada competing at the highest levels. AVP, FIVB, NORCECA. 2028 and 2032 Olympic aspirant.">
+<meta property="og:image" content="https://amandaharnett.com/assets/hero/amanda.jpg">
+<meta property="og:site_name" content="Amanda Harnett">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://amandaharnett.com">
+<meta property="twitter:title" content="Amanda Harnett | Professional Beach Volleyball Player">
+<meta property="twitter:description" content="Professional beach volleyball player from Canada competing at the highest levels.">
+<meta property="twitter:image" content="https://amandaharnett.com/assets/hero/amanda.jpg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Theme Color for Mobile Browsers -->
+<meta name="theme-color" content="#D4A574">
+
+<!-- Security Headers (to add to server config) -->
+<!-- Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self'; -->
+<!-- X-Content-Type-Options: nosniff -->
+<!-- X-Frame-Options: SAMEORIGIN -->
+<!-- X-XSS-Protection: 1; mode=block -->
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
+
+<!-- Google Search Console -->
+<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
+
+<!-- Sitemap and Robots -->
+<!-- Add to server root: -->
+<!-- robots.txt -->
+<!-- User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://amandaharnett.com/sitemap.xml -->
+
+<!-- Structured Data (Schema.org) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Amanda Harnett",
+  "jobTitle": "Professional Beach Volleyball Player",
+  "image": "https://amandaharnett.com/assets/hero/amanda.jpg",
+  "sameAs": [
+    "https://www.instagram.com/",
+    "https://www.tiktok.com/@",
+    "https://www.youtube.com/@",
+    "https://twitter.com/"
+  ],
+  "url": "https://amandaharnett.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCity": "Los Angeles",
+    "addressRegion": "CA",
+    "addressCountry": "US"
+  },
+  "birthPlace": {
+    "@type": "Place",
+    "name": "Canada"
+  },
+  "knowsAbout": [
+    "Beach Volleyball",
+    "AVP Pro Series",
+    "FIVB World Tour",
+    "NORCECA"
+  ]
+}
+</script>
+
+<!-- Alternative/Additional Pages Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Amanda Harnett",
+  "url": "https://amandaharnett.com",
+  "logo": "https://amandaharnett.com/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Business Inquiries",
+    "email": "business@amandaharnett.com"
+  },
+  "sameAs": [
+    "https://www.instagram.com/",
+    "https://www.tiktok.com/@",
+    "https://www.youtube.com/@",
+    "https://twitter.com/"
+  ]
+}
+</script>
+
+<!-- Performance & Optimization -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+<!-- Preload Critical Resources -->
+<link rel="preload" as="image" href="assets/hero/amanda.jpg">
+<link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" type="font/woff2" crossorigin>
+
+<!-- Alternate Language (if needed) -->
+<link rel="alternate" hreflang="en" href="https://amandaharnett.com/en/">
+<link rel="alternate" hreflang="fr" href="https://amandaharnett.com/fr/">

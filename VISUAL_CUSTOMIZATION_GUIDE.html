@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanda's Website - Visual Customization Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8C5A0 0%, #F2B8B8 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #D4A574;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .card {
+            border: 2px solid #D4A574;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fafafa;
+        }
+        .card-title {
+            color: #E89B9B;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .card-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        .highlight {
+            background: #FFF8E1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #D4A574;
+        }
+        .code-block {
+            background: #f0f0f0;
+            border-left: 3px solid #D4A574;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        .step {
+            background: linear-gradient(135deg, #E8C5A0 0%, #E89B9B 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .section-header {
+            background: linear-gradient(135deg, #D4A574 0%, #E89B9B 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .file-list {
+            list-style: none;
+            margin-left: 0;
+        }
+        .file-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        .file-icon {
+            color: #D4A574;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #E8C5A0;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .checklist {
+            list-style: none;
+        }
+        .checklist li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .checklist li:before {
+            content: "☐";
+            color: #D4A574;
+            font-size: 1.3rem;
+            margin-right: 10px;
+        }
+        .color-swatch {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+        }
+        .sidebar {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #D4A574;
+            margin: 20px 0;
+        }
+        .quick-tip {
+            background: #E8F5E9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+            margin: 15px 0;
+        }
+        .warning {
+            background: #FFF3E0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FF9800;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Amanda Harnett Website - Visual Customization Guide</h1>
+        <p class="subtitle">Complete visual reference for customizing your website</p>
+
+        <!-- Quick Links -->
+        <div class="section-header">📍 Quick Navigation</div>
+        <ul class="file-list">
+            <li><span class="file-icon">📖</span> <strong>INDEX.md</strong> - Start here for overview</li>
+            <li><span class="file-icon">🚀</span> <strong>QUICK_START.md</strong> - 5-minute getting started guide</li>
+            <li><span class="file-icon">📄</span> <strong>index.html</strong> - The actual website (double-click to open)</li>
+            <li><span class="file-icon">🎨</span> <strong>styles.css</strong> - All styling and colors</li>
+            <li><span class="file-icon">⚙️</span> <strong>script.js</strong> - Interactive features</li>
+        </ul>
+
+        <!-- Section: Understanding Your Website -->
+        <div class="section-header">🌐 Understanding Your Website</div>
+        
+        <div class="step">
+            <div class="step-number">1️⃣</div>
+            <strong>Open Your Website:</strong> Double-click <span class="highlight">index.html</span> to view in browser
+        </div>
+
+        <div class="step">
+            <div class="step-number">2️⃣</div>
+            <strong>What You See:</strong> A complete website with placeholder images and text
+        </div>
+
+        <div class="step">
+            <div class="step-number">3️⃣</div>
+            <strong>What Works:</strong> All animations, navigation, responsive design, and links
+        </div>
+
+        <!-- Color Section -->
+        <div class="section-header">🎨 Color Customization</div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">Primary Sand</div>
+                <div style="display: flex; align-items: center; margin: 10px 0;">
+                    <div class="color-swatch" style="background: #D4A574;"></div>
+                    <code>#D4A574</code>
+                </div>
+                <p class="card-content">Used for: Headers, borders, links, accents</p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Blush Pink</div>
+                <div style="display: flex; align-items: center; margin: 10px 0;">
+                    <div class="color-swatch" style="background: #E89B9B;"></div>
+                    <code>#E89B9B</code>
+                </div>
+                <p class="card-content">Used for: Accents, hover states, highlights</p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Light Sand</div>
+                <div style="display: flex; align-items: center; margin: 10px 0;">
+                    <div class="color-swatch" style="background: #E8C5A0;"></div>
+                    <code>#E8C5A0</code>
+                </div>
+                <p class="card-content">Used for: Backgrounds, gradients, overlays</p>
+            </div>
+        </div>
+
+        <div class="quick-tip">
+            <strong>💡 How to Change Colors:</strong>
+            <div class="code-block">In styles.css, lines 2-11, change the hex codes:
+:root {
+    --sand: #D4A574;        ← Change this to your color
+    --blush: #E89B9B;       ← Or this one
+    /* ... */
+}</div>
+        </div>
+
+        <!-- Text Customization -->
+        <div class="section-header">📝 Text Customization</div>
+
+        <table>
+            <tr>
+                <th>Section</th>
+                <th>Location in HTML</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>Hero Title</td>
+                <td>Line ~57</td>
+                <td><code>&lt;h1&gt;Amanda Harnett&lt;/h1&gt;</code></td>
+            </tr>
+            <tr>
+                <td>Subtitle</td>
+                <td>Line ~61</td>
+                <td><code>&lt;p class="hero-subtitle"&gt;...</code></td>
+            </tr>
+            <tr>
+                <td>Tagline</td>
+                <td>Line ~69</td>
+                <td><code>&lt;span class="tagline"&gt;...</code></td>
+            </tr>
+            <tr>
+                <td>Stats</td>
+                <td>Lines ~85-96</td>
+                <td><code>&lt;div class="stat-card"&gt;...</code></td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>Lines ~108-118</td>
+                <td><code>&lt;p class="message-text"&gt;...</code></td>
+            </tr>
+            <tr>
+                <td>Section Titles</td>
+                <td>Throughout</td>
+                <td><code>&lt;h2 class="section-title"&gt;...</code></td>
+            </tr>
+        </table>
+
+        <div class="warning">
+            <strong>⚠️ When Editing HTML:</strong>
+            Use a text editor like VS Code, Notepad++, or Sublime Text. Don't use Word or Google Docs!
+        </div>
+
+        <!-- Image Customization -->
+        <div class="section-header">🖼️ Image Customization</div>
+
+        <div class="quick-tip">
+            <strong>Step 1: Create Folders</strong>
+            <p>In the <span class="highlight">assets</span> folder, create these subfolders:</p>
+            <div class="code-block">assets/
+├── hero/
+├── gallery/
+├── about/
+└── partners/</div>
+        </div>
+
+        <div class="quick-tip">
+            <strong>Step 2: Add Your Images</strong>
+            <p>Put your photos in the correct folders with proper filenames</p>
+        </div>
+
+        <div class="quick-tip">
+            <strong>Step 3: Update HTML</strong>
+            <p>Find empty src="" and add your image paths</p>
+            <div class="code-block">BEFORE: &lt;img src="" alt="..."&gt;
+AFTER:  &lt;img src="assets/hero/amanda.jpg" alt="..."&gt;</div>
+        </div>
+
+        <table>
+            <tr>
+                <th>Image Type</th>
+                <th>Size</th>
+                <th>Location</th>
+                <th>HTML Line</th>
+            </tr>
+            <tr>
+                <td>Hero Image</td>
+                <td>600x600px</td>
+                <td>assets/hero/</td>
+                <td>~73</td>
+            </tr>
+            <tr>
+                <td>Gallery (5x)</td>
+                <td>800x500px</td>
+                <td>assets/gallery/</td>
+                <td>~145-169</td>
+            </tr>
+            <tr>
+                <td>Dual Images (2x)</td>
+                <td>600x600px</td>
+                <td>assets/about/</td>
+                <td>~180-190</td>
+            </tr>
+            <tr>
+                <td>About Portrait</td>
+                <td>600x800px</td>
+                <td>assets/about/</td>
+                <td>~220</td>
+            </tr>
+            <tr>
+                <td>Partner Logos</td>
+                <td>300x300px</td>
+                <td>assets/partners/</td>
+                <td>~235-250</td>
+            </tr>
+        </table>
+
+        <!-- Link Customization -->
+        <div class="section-header">🔗 Link Customization</div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">Social Media</div>
+                <p class="card-content">Lines ~381-388</p>
+                <div class="code-block">
+&lt;a href="https://instagram.com/YOUR_HANDLE"&gt;
+    Instagram
+&lt;/a&gt;
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Contact Email</div>
+                <p class="card-content">Line ~397</p>
+                <div class="code-block">
+&lt;a href="mailto:YOUR_EMAIL@..."&gt;
+    Business Inquiries
+&lt;/a&gt;
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Partner Links</div>
+                <p class="card-content">Lines ~245-258</p>
+                <div class="code-block">
+&lt;a href="https://partner-website.com"&gt;
+    Partner Name
+&lt;/a&gt;
+                </div>
+            </div>
+        </div>
+
+        <!-- Customization Checklist -->
+        <div class="section-header">✅ Customization Checklist</div>
+
+        <ul class="checklist">
+            <li>Hero image (600x600px)</li>
+            <li>Hero title and subtitle</li>
+            <li>Hero tagline: "Born in the snow, lives in the sand"</li>
+            <li>Stats: Update Tour, Based, From, Goal</li>
+            <li>Message: Update Amanda's personal message</li>
+            <li>Gallery images (5+ at 800x500px)</li>
+            <li>Gallery captions</li>
+            <li>On Court / Off Court images and text</li>
+            <li>About section text and portrait (600x800px)</li>
+            <li>About section highlights/achievements</li>
+            <li>Partner logos (300x300px each)</li>
+            <li>Partner descriptions and links</li>
+            <li>Instagram handle and link</li>
+            <li>TikTok handle and link</li>
+            <li>YouTube channel and link</li>
+            <li>Twitter/X handle and link</li>
+            <li>Contact email address</li>
+            <li>Add favicon (optional)</li>
+            <li>Add meta tags (for SEO)</li>
+            <li>Test on mobile device</li>
+        </ul>
+
+        <!-- File-by-File Guide -->
+        <div class="section-header">📁 File-by-File Customization Guide</div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">index.html</div>
+                <p class="card-content">
+                    <strong>What it is:</strong> Your website structure<br><br>
+                    <strong>Edit for:</strong> Text, image paths, links<br><br>
+                    <strong>Don't break:</strong> HTML tags like &lt;div&gt;, &lt;a&gt;, etc.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">styles.css</div>
+                <p class="card-content">
+                    <strong>What it is:</strong> All design and styling<br><br>
+                    <strong>Edit for:</strong> Colors, fonts, spacing<br><br>
+                    <strong>Best for:</strong> Changing colors via CSS variables
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">script.js</div>
+                <p class="card-content">
+                    <strong>What it is:</strong> Interactive features<br><br>
+                    <strong>Edit for:</strong> Advanced customization only<br><br>
+                    <strong>Caution:</strong> Can break if modified incorrectly
+                </p>
+            </div>
+        </div>
+
+        <!-- Common Issues -->
+        <div class="section-header">🆘 Common Issues & Solutions</div>
+
+        <div class="warning">
+            <strong>Issue: Images not showing</strong>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-top: 10px;">
+                <li>Check image path in src="" matches your folder structure</li>
+                <li>Make sure image file actually exists in that folder</li>
+                <li>Use forward slashes: assets/hero/image.jpg (not backslashes)</li>
+                <li>Refresh browser and clear cache (Ctrl+Shift+Delete)</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>Issue: Text looks broken or styling weird</strong>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-top: 10px;">
+                <li>Make sure styles.css is in the same folder as index.html</li>
+                <li>Don't delete or rename CSS file</li>
+                <li>Refresh browser and clear cache</li>
+                <li>Check browser console for errors (F12)</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>Issue: Mobile menu not working</strong>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-top: 10px;">
+                <li>Make sure script.js is in same folder as index.html</li>
+                <li>On mobile (width &lt; 768px), hamburger should appear</li>
+                <li>Check F12 console for JavaScript errors</li>
+                <li>Try different browser to isolate issue</li>
+            </ul>
+        </div>
+
+        <!-- Style Customization Examples -->
+        <div class="section-header">🎨 Advanced Style Customization</div>
+
+        <table>
+            <tr>
+                <th>What to Change</th>
+                <th>Location</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>Button hover color</td>
+                <td>CSS line ~450</td>
+                <td>Change <code>var(--sand)</code> to <code>var(--blush)</code></td>
+            </tr>
+            <tr>
+                <td>Font size</td>
+                <td>CSS line ~65-75</td>
+                <td>Change <code>1.3rem</code> to <code>1.5rem</code></td>
+            </tr>
+            <tr>
+                <td>Spacing between sections</td>
+                <td>CSS line ~300+</td>
+                <td>Change <code>padding: 6rem</code> to <code>padding: 4rem</code></td>
+            </tr>
+            <tr>
+                <td>Border radius (roundness)</td>
+                <td>CSS throughout</td>
+                <td>Change <code>border-radius: 12px</code> to <code>border-radius: 20px</code></td>
+            </tr>
+            <tr>
+                <td>Animation speed</td>
+                <td>CSS line ~900+</td>
+                <td>Change <code>0.3s</code> to <code>0.5s</code> for slower</td>
+            </tr>
+        </table>
+
+        <!-- Final Tips -->
+        <div class="section-header">💡 Pro Tips</div>
+
+        <ul class="checklist">
+            <li>Always make a backup before editing files</li>
+            <li>Use a real text editor (VS Code, Sublime, NotePad++)</li>
+            <li>Test changes immediately in browser</li>
+            <li>Keep image file sizes under 200KB</li>
+            <li>Use descriptive image names</li>
+            <li>Optimize images before uploading</li>
+            <li>Always test on mobile before publishing</li>
+            <li>Keep track of all your changes</li>
+            <li>Use Git/version control if possible</li>
+            <li>Monitor Google Analytics after launch</li>
+        </ul>
+
+        <!-- Documentation Links -->
+        <div class="section-header">📚 Full Documentation</div>
+
+        <ul class="file-list" style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
+            <li><span class="file-icon">📖</span> <strong>INDEX.md</strong> - Complete overview (start here!)</li>
+            <li><span class="file-icon">🚀</span> <strong>QUICK_START.md</strong> - 5-minute getting started</li>
+            <li><span class="file-icon">📄</span> <strong>README.md</strong> - Full technical documentation</li>
+            <li><span class="file-icon">✅</span> <strong>CUSTOMIZATION.md</strong> - Content checklist</li>
+            <li><span class="file-icon">🌐</span> <strong>DEPLOYMENT_GUIDE.md</strong> - How to go live</li>
+            <li><span class="file-icon">🎨</span> <strong>DESIGN_REFERENCE.md</strong> - Design details</li>
+            <li><span class="file-icon">🖼️</span> <strong>assets/PLACEHOLDER_GUIDE.html</strong> - Image specs</li>
+            <li><span class="file-icon">🔍</span> <strong>HEAD_TAGS_REFERENCE.html</strong> - SEO tags</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: linear-gradient(135deg, #E8C5A0 0%, #E89B9B 100%); color: white; border-radius: 10px;">
+            <h2 style="margin-bottom: 10px;">Ready to Customize?</h2>
+            <p>Open <strong>index.html</strong> in your browser, then edit with a text editor</p>
+            <p style="margin-top: 15px; font-size: 0.9rem;">For detailed guides, read the documentation files included in your website folder</p>
+        </div>
+    </div>
+</body>
+</html>
