@@ -16,13 +16,24 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-    let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
+    // Strip query string from URL (e.g., ?v=4 for cache busting)
+    const urlPath = req.url.split('?')[0];
+    let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
     const ext = path.extname(filePath).toLowerCase();
     
     fs.readFile(filePath, (err, data) => {
         if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.end('<h1>404 Not Found</h1>');
+            // Serve custom 404 page with game
+            const notFoundPath = path.join(__dirname, '404.html');
+            fs.readFile(notFoundPath, (err404, data404) => {
+                if (err404) {
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.end('<h1>404 Not Found</h1>');
+                    return;
+                }
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.end(data404);
+            });
             return;
         }
         

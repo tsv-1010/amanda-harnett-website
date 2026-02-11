@@ -1854,6 +1854,44 @@ p {
     box-shadow: 0 8px 16px rgba(212, 165, 116, 0.3);
 }
 
+/* Dual CTA Group for Events */
+.event-cta-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.event-cta-group .event-sponsor-btn,
+.event-cta-group .event-fan-btn {
+    flex: 1;
+    padding: 0.6rem 0.4rem;
+    font-size: 0.75rem;
+}
+
+.event-fan-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--blush-light) 100%);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+}
+
+.event-fan-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(232, 155, 155, 0.3);
+}
+
 .timeline-note {
     background: linear-gradient(135deg, rgba(232, 197, 160, 0.1) 0%, rgba(232, 155, 155, 0.1) 100%);
     padding: 1.5rem;
