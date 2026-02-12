@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amanda Harnett | Professional Beach Volleyball Player</title>
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=6">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -274,18 +274,23 @@
                     class="hero-img hero-base"
                 />
                 
-                <!-- SVG Mask for Morphing Reveal (overlay on top of base) -->
+                <!-- SVG Mask for Calm Wave Reveal (overlay on top of base) -->
                 <svg class="hero-mask-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
                     <defs>
+                        <!-- Soft edge filter - subtle blur for smooth wave -->
+                        <filter id="softEdge" x="-2%" y="-2%" width="104%" height="104%">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
+                        </filter>
+                        
                         <!-- Mask: black = hidden, white path = revealed -->
                         <mask id="revealMask">
                             <rect width="800" height="600" fill="black"/>
-                            <!-- Starts EMPTY - no initial reveal. JS adds traveling wave sub-paths -->
-                            <path class="mask-path" d="M0,0 L0,0 Z" fill="white"/>
+                            <!-- Smooth flowing wave path - JS animates this -->
+                            <path class="mask-path" d="M0,0 L0,0 Z" fill="white" filter="url(#softEdge)"/>
                         </mask>
                     </defs>
                     
-                    <!-- Overlay Image with mask (Game Mode - reveals through morphing waves) -->
+                    <!-- Overlay Image with mask (Game Mode - reveals through ocean waves) -->
                     <image 
                         class="reveal-overlay-img" 
                         href="assets/hero/PlacebolderGlasses.jpg" 
@@ -594,76 +599,110 @@
         </div>
     </section>
 
-    <!-- Gallery Section with Scroll Effect -->
+    <!-- Gallery Section with Parallax Scroll Effect -->
     <section class="gallery-section">
         <h2 class="section-title">Moments in Motion</h2>
-        <div class="horizontal-scroll">
-            <div class="scroll-container" id="galleryScroll">
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaDigging.png" alt="Amanda digging" class="gallery-img">
+        <p class="gallery-instruction">Drag or scroll to explore</p>
+        <div class="parallax-gallery" id="parallaxGallery">
+            <div class="parallax-track" id="parallaxTrack">
+                <div class="parallax-slide" data-title="Defensive Skills">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaDigging.png" alt="Amanda digging" class="parallax-img">
                     </div>
-                    <p class="image-caption">Defensive Skills</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Defensive Skills</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaDivingInternational3.png" alt="Amanda diving" class="gallery-img">
+                <div class="parallax-slide" data-title="International Competition">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaDivingInternational3.png" alt="Amanda diving" class="parallax-img">
                     </div>
-                    <p class="image-caption">International Competition</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">International Competition</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaDivingInternationalComp.JPG" alt="Amanda in international match" class="gallery-img">
+                <div class="parallax-slide" data-title="FIVB World Tour">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaDivingInternationalComp.JPG" alt="Amanda in international match" class="parallax-img">
                     </div>
-                    <p class="image-caption">FIVB World Tour</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">FIVB World Tour</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaDivingInternationalComp2.JPG" alt="Amanda competing" class="gallery-img">
+                <div class="parallax-slide" data-title="Tournament Action">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaDivingInternationalComp2.JPG" alt="Amanda competing" class="parallax-img">
                     </div>
-                    <p class="image-caption">Tournament Action</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Tournament Action</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaJumpFloat.png" alt="Amanda floating" class="gallery-img">
+                <div class="parallax-slide" data-title="Jump Float Serve">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaJumpFloat.png" alt="Amanda floating" class="parallax-img">
                     </div>
-                    <p class="image-caption">Jump Float Serve</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Jump Float Serve</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaJumpServe.png" alt="Amanda serving" class="gallery-img">
+                <div class="parallax-slide" data-title="Powerful Serve">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaJumpServe.png" alt="Amanda serving" class="parallax-img">
                     </div>
-                    <p class="image-caption">Powerful Serve</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Powerful Serve</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaJumpServeAVP.png" alt="Amanda AVP serve" class="gallery-img">
+                <div class="parallax-slide" data-title="AVP Pro Series">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaJumpServeAVP.png" alt="Amanda AVP serve" class="parallax-img">
                     </div>
-                    <p class="image-caption">AVP Pro Series</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">AVP Pro Series</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaPassing.png" alt="Amanda passing" class="gallery-img">
+                <div class="parallax-slide" data-title="Setting Technique">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaPassing.png" alt="Amanda passing" class="parallax-img">
                     </div>
-                    <p class="image-caption">Setting Technique</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Setting Technique</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaPractice.png" alt="Amanda practice" class="gallery-img">
+                <div class="parallax-slide" data-title="Training Focus">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaPractice.png" alt="Amanda practice" class="parallax-img">
                     </div>
-                    <p class="image-caption">Training Focus</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Training Focus</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/AmandaServePrep.jpg" alt="Amanda serve prep" class="gallery-img">
+                <div class="parallax-slide" data-title="Court Presence">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/AmandaServePrep.jpg" alt="Amanda serve prep" class="parallax-img">
                     </div>
-                    <p class="image-caption">Court Presence</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Court Presence</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="image-placeholder">
-                        <img src="assets/gallery/IMG_7160.JPG" alt="Amanda action shot" class="gallery-img">
+                <div class="parallax-slide" data-title="Peak Performance">
+                    <div class="slide-image-wrapper">
+                        <img src="assets/gallery/IMG_7160.JPG" alt="Amanda action shot" class="parallax-img">
                     </div>
-                    <p class="image-caption">Peak Performance</p>
+                    <div class="slide-overlay">
+                        <span class="slide-title">Peak Performance</span>
+                        <span class="slide-arrow">↗</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1090,6 +1129,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=3"></script>
+    <script src="script.js?v=7"></script>
 </body>
 </html>
