@@ -75,6 +75,11 @@ p {
     border-bottom: 1px solid rgba(212, 165, 116, 0.2);
 }
 
+/* Scroll offset for fixed navbar */
+[id] {
+    scroll-margin-top: 80px;
+}
+
 .nav-container {
     width: 100%;
     max-width: 1400px;
