@@ -888,3 +888,190 @@ console.log('Conversion tracking initialized');
     
     console.log('Sticker drop initialized for books section');
 })();
+
+// ==========================================
+// Journey Tracker Widget
+// ==========================================
+
+(function initJourneyTracker() {
+    const tracker = document.querySelector('.journey-tracker');
+    if (!tracker) return;
+    
+    // Constants
+    const START_DATE = new Date('2026-01-01');
+    const END_DATE = new Date('2028-07-14');
+    const WEEKS_TOTAL = 133; // ~2.5 years
+    
+    // Calculate countdown
+    const today = new Date();
+    const daysToOlympics = Math.ceil((END_DATE - today) / (1000 * 60 * 60 * 24));
+    
+    // Update countdown display
+    const countdownEl = document.getElementById('daysToOlympics');
+    if (countdownEl) {
+        countdownEl.textContent = daysToOlympics;
+    }
+    
+    // Load data - try localStorage first (from admin page), then fall back to JSON file
+    async function loadData() {
+        // Check localStorage first (synced from admin page)
+        const localData = localStorage.getItem('journeyTrackerData');
+        if (localData) {
+            return JSON.parse(localData);
+        }
+        
+        // Fall back to JSON file
+        try {
+            const response = await fetch('data/journey-tracker.json');
+            if (response.ok) {
+                return await response.json();
+            }
+        } catch (e) {
+            console.log('Journey tracker: No data file found, using empty state');
+        }
+        
+        // Return empty structure
+        return {
+            totals: { training: 0, practice: 0, tournament: 0, filmStudy: 0, flights: 0, recovery: 0, coaching: 0 },
+            activities: []
+        };
+    }
+    
+    // Build heatmap grid
+    function buildHeatmap(data) {
+        const grid = document.querySelector('.heatmap-grid');
+        if (!grid) return;
+        
+        // Create activity lookup by date
+        const activityMap = new Map();
+        if (data.activities) {
+            data.activities.forEach(a => {
+                activityMap.set(a.date, a.types.length);
+            });
+        }
+        
+        // Clear existing cells
+        grid.innerHTML = '';
+        
+        // Generate cells for each day in the grid
+        // Grid is 52 columns (weeks) x 7 rows (days)
+        let currentDate = new Date(START_DATE);
+        
+        // Adjust to start on Sunday
+        const dayOfWeek = currentDate.getDay();
+        currentDate.setDate(currentDate.getDate() - dayOfWeek);
+        
+        for (let week = 0; week < 52; week++) {
+            for (let day = 0; day < 7; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'heatmap-cell';
+                
+                const dateStr = currentDate.toISOString().split('T')[0];
+                const activityCount = activityMap.get(dateStr) || 0;
+                
+                // Check if date is in valid range
+                const isBeforeStart = currentDate < START_DATE;
+                const isAfterEnd = currentDate > END_DATE;
+                const isFuture = currentDate > today;
+                
+                if (isBeforeStart || isAfterEnd) {
+                    cell.style.visibility = 'hidden';
+                } else if (isFuture) {
+                    cell.classList.add('future');
+                } else if (activityCount > 0) {
+                    // Set intensity level based on number of activities
+                    const level = Math.min(activityCount, 4);
+                    cell.classList.add(`level-${level}`);
+                }
+                
+                // Tooltip on hover
+                if (!isBeforeStart && !isAfterEnd) {
+                    const dateLabel = currentDate.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    cell.title = `${dateLabel}: ${activityCount} ${activityCount === 1 ? 'activity' : 'activities'}`;
+                }
+                
+                grid.appendChild(cell);
+                
+                // Move to next day
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        }
+    }
+    
+    // Update stats
+    function updateStats(data) {
+        const totals = data.totals || {};
+        
+        // Map stat elements to data keys
+        const statMap = {
+            'training': 'training',
+            'practice': 'practice', 
+            'tournament': 'tournament',
+            'filmStudy': 'filmStudy',
+            'recovery': 'recovery',
+            'flights': 'flights',
+            'coaching': 'coaching'
+        };
+        
+        // Update each stat
+        document.querySelectorAll('.stat-item').forEach(item => {
+            const type = item.dataset.type;
+            if (type && statMap[type]) {
+                const valueEl = item.querySelector('.stat-value');
+                if (valueEl) {
+                    const targetValue = totals[type] || 0;
+                    animateCounter(valueEl, targetValue);
+                }
+            }
+        });
+    }
+    
+    // Animate counter from 0 to target
+    function animateCounter(element, target) {
+        const duration = 1000;
+        const start = 0;
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease out
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(start + (target - start) * eased);
+            
+            element.textContent = current;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+    
+    // Initialize
+    async function init() {
+        const data = await loadData();
+        buildHeatmap(data);
+        updateStats(data);
+    }
+    
+    // Run when visible (intersection observer for performance)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                init();
+                observer.disconnect();
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(tracker);
+    
+    console.log('Journey tracker initialized');
+})();

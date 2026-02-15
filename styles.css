@@ -2868,3 +2868,245 @@ p {
 #books button {
     cursor: pointer;
 }
+
+/* ==========================================
+   Journey Tracker Widget
+   ========================================== */
+
+.journey-tracker {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.journey-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.journey-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.journey-countdown {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.countdown-days {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blush);
+}
+
+.countdown-label {
+    font-size: 0.7rem;
+    color: var(--gray);
+    text-transform: uppercase;
+}
+
+/* Heatmap Grid */
+.journey-heatmap {
+    margin-bottom: 1rem;
+}
+
+.heatmap-months {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
+    padding: 0 2px;
+}
+
+.heatmap-month {
+    font-size: 0.6rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(52, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+    gap: 3px;
+}
+
+.heatmap-cell {
+    aspect-ratio: 1;
+    background: #EBEDF0;
+    border-radius: 2px;
+    transition: transform 0.15s ease;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.8);
+    z-index: 10;
+    position: relative;
+}
+
+/* Activity intensity levels */
+.heatmap-cell.level-1 {
+    background: #FFE5E5;
+}
+
+.heatmap-cell.level-2 {
+    background: #F5B3B3;
+}
+
+.heatmap-cell.level-3 {
+    background: #E89B9B;
+}
+
+.heatmap-cell.level-4 {
+    background: #D87070;
+}
+
+/* Future dates */
+.heatmap-cell.future {
+    background: #F8F8F8;
+    opacity: 0.5;
+}
+
+/* Legend */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    font-size: 0.6rem;
+    color: var(--gray);
+}
+
+.legend-label {
+    font-size: 0.6rem;
+    color: var(--gray);
+    opacity: 0.7;
+}
+
+.legend-scale {
+    display: flex;
+    gap: 2px;
+}
+
+.legend-box {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: #EBEDF0;
+}
+
+.legend-box.level-0 {
+    background: #EBEDF0;
+}
+
+.legend-box.level-1 {
+    background: #FFE5E5;
+}
+
+.legend-box.level-2 {
+    background: #F5B3B3;
+}
+
+.legend-box.level-3 {
+    background: #E89B9B;
+}
+
+.legend-box.level-4 {
+    background: #D87070;
+}
+
+/* Stats Grid */
+.journey-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.6rem;
+    color: var(--gray);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 0.15rem;
+}
+
+.journey-note {
+    font-size: 0.7rem;
+    color: var(--gray);
+    opacity: 0.6;
+    text-align: center;
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
+/* Journey tracker responsive */
+@media (max-width: 768px) {
+    .journey-tracker {
+        padding: 1.25rem;
+        margin: 1.5rem auto 0;
+    }
+    
+    .heatmap-grid {
+        gap: 1.5px;
+    }
+    
+    .journey-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .journey-tracker {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .heatmap-months {
+        display: none;
+    }
+    
+    .heatmap-grid {
+        gap: 1px;
+    }
+    
+    .journey-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

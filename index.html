@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amanda Harnett | Professional Beach Volleyball Player</title>
-    <link rel="stylesheet" href="styles.css?v=12">
+    <link rel="stylesheet" href="styles.css?v=18">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -334,6 +334,86 @@
                 </p>
                 <div class="hero-accent">
                     <span class="tagline">"Born in the snow, lives in the sand"</span>
+                </div>
+                
+                <!-- Olympic Journey Tracker Widget -->
+                <div class="journey-tracker" id="journeyTracker">
+                    <div class="journey-header">
+                        <h3 class="journey-title">Road to LA 2028</h3>
+                        <div class="journey-countdown">
+                            <span class="countdown-number" id="daysToOlympics">---</span>
+                            <span class="countdown-label">days to go</span>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-heatmap" id="journeyHeatmap">
+                        <div class="heatmap-months" id="heatmapMonths">
+                            <span class="heatmap-month">Jan</span>
+                            <span class="heatmap-month">Feb</span>
+                            <span class="heatmap-month">Mar</span>
+                            <span class="heatmap-month">Apr</span>
+                            <span class="heatmap-month">May</span>
+                            <span class="heatmap-month">Jun</span>
+                            <span class="heatmap-month">Jul</span>
+                            <span class="heatmap-month">Aug</span>
+                            <span class="heatmap-month">Sep</span>
+                            <span class="heatmap-month">Oct</span>
+                            <span class="heatmap-month">Nov</span>
+                            <span class="heatmap-month">Dec</span>
+                        </div>
+                        <div class="heatmap-grid" id="heatmapGrid"></div>
+                        <div class="heatmap-legend">
+                            <span class="legend-label">Less</span>
+                            <div class="legend-scale">
+                                <span class="legend-box level-0"></span>
+                                <span class="legend-box level-1"></span>
+                                <span class="legend-box level-2"></span>
+                                <span class="legend-box level-3"></span>
+                                <span class="legend-box level-4"></span>
+                            </div>
+                            <span class="legend-label">More</span>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-stats" id="journeyStats">
+                        <div class="stat-item" data-type="training">
+                            <span class="stat-icon">🏋️</span>
+                            <span class="stat-value" id="statTraining">0</span>
+                            <span class="stat-label">Trainings</span>
+                        </div>
+                        <div class="stat-item" data-type="practice">
+                            <span class="stat-icon">🏐</span>
+                            <span class="stat-value" id="statPractice">0</span>
+                            <span class="stat-label">Practices</span>
+                        </div>
+                        <div class="stat-item" data-type="tournament">
+                            <span class="stat-icon">🏆</span>
+                            <span class="stat-value" id="statTournament">0</span>
+                            <span class="stat-label">Tournaments</span>
+                        </div>
+                        <div class="stat-item" data-type="filmStudy">
+                            <span class="stat-icon">🎬</span>
+                            <span class="stat-value" id="statFilmStudy">0</span>
+                            <span class="stat-label">Film Sessions</span>
+                        </div>
+                        <div class="stat-item" data-type="recovery">
+                            <span class="stat-icon">🧘</span>
+                            <span class="stat-value" id="statRecovery">0</span>
+                            <span class="stat-label">Recovery</span>
+                        </div>
+                        <div class="stat-item" data-type="flights">
+                            <span class="stat-icon">✈️</span>
+                            <span class="stat-value" id="statFlights">0</span>
+                            <span class="stat-label">Flights</span>
+                        </div>
+                        <div class="stat-item" data-type="coaching">
+                            <span class="stat-icon">👩‍🏫</span>
+                            <span class="stat-value" id="statCoaching">0</span>
+                            <span class="stat-label">Coached</span>
+                        </div>
+                    </div>
+                    
+                    <p class="journey-note">Tracking every session on the road to the Olympics</p>
                 </div>
             </div>
         </div>
@@ -1371,6 +1451,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=10"></script>
+    <script src="script.js?v=14"></script>
 </body>
 </html>

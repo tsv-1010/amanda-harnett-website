@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanda's Journey Logger</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --sand: #D4A574;
+            --sand-light: #E8CCB0;
+            --blush: #E89B9B;
+            --white: #FEFEFE;
+            --gray-dark: #4A4A4A;
+            --gray-light: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--sand-light) 0%, var(--white) 50%, #FDE8E8 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--blush);
+            font-size: 0.95rem;
+        }
+        
+        .countdown {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--blush);
+        }
+        
+        .countdown-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+        }
+        
+        .form-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        
+        .date-picker {
+            margin-bottom: 1.5rem;
+        }
+        
+        .date-picker label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .date-picker input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--sand-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .date-picker input:focus {
+            outline: none;
+            border-color: var(--blush);
+        }
+        
+        .activities-section h3 {
+            font-size: 1rem;
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .activity-item:hover {
+            background: var(--sand-light);
+        }
+        
+        .activity-item.selected {
+            background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
+            border-color: var(--blush);
+        }
+        
+        .activity-item.selected .activity-label {
+            color: var(--white);
+        }
+        
+        .activity-item input {
+            display: none;
+        }
+        
+        .activity-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+        
+        .activity-label {
+            font-weight: 500;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+        
+        .notes-section {
+            margin-top: 1.5rem;
+        }
+        
+        .coaching-section {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+        
+        .coaching-section label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .coaching-counter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .counter-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: var(--sand);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .counter-btn:hover {
+            background: var(--blush);
+            transform: scale(1.1);
+        }
+        
+        .counter-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .counter-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .counter-label {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+            opacity: 0.7;
+        }
+        
+        .notes-section label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .notes-section textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--sand-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 80px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .notes-section textarea:focus {
+            outline: none;
+            border-color: var(--blush);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 155, 155, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: #D4EDDA;
+            border-radius: 10px;
+            margin-top: 1rem;
+            color: #155724;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .recent-logs {
+            margin-top: 2rem;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .recent-logs h3 {
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .log-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .log-item:last-child {
+            border-bottom: none;
+        }
+        
+        .log-date {
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+        
+        .log-activities {
+            font-size: 1.2rem;
+        }
+        
+        .instructions {
+            margin-top: 2rem;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .instructions h3 {
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .instructions ol {
+            padding-left: 1.2rem;
+            color: var(--gray-dark);
+            line-height: 1.8;
+        }
+        
+        .instructions a {
+            color: var(--blush);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏐 Amanda's Journey Logger</h1>
+            <p>Road to LA 2028</p>
+        </div>
+        
+        <div class="countdown">
+            <span class="countdown-number" id="daysLeft">---</span>
+            <span class="countdown-label">days until the Olympics</span>
+        </div>
+        
+        <div class="form-card">
+            <div class="date-picker">
+                <label for="activityDate">📅 Date</label>
+                <input type="date" id="activityDate">
+            </div>
+            
+            <div class="activities-section">
+                <h3>What did you do today? (select all that apply)</h3>
+                <div class="activity-grid">
+                    <label class="activity-item" data-type="training">
+                        <input type="checkbox" name="activity" value="training">
+                        <span class="activity-icon">🏋️</span>
+                        <span class="activity-label">Training</span>
+                    </label>
+                    <label class="activity-item" data-type="practice">
+                        <input type="checkbox" name="activity" value="practice">
+                        <span class="activity-icon">🏐</span>
+                        <span class="activity-label">Practice</span>
+                    </label>
+                    <label class="activity-item" data-type="tournament">
+                        <input type="checkbox" name="activity" value="tournament">
+                        <span class="activity-icon">🏆</span>
+                        <span class="activity-label">Tournament</span>
+                    </label>
+                    <label class="activity-item" data-type="filmStudy">
+                        <input type="checkbox" name="activity" value="filmStudy">
+                        <span class="activity-icon">🎬</span>
+                        <span class="activity-label">Film Study</span>
+                    </label>
+                    <label class="activity-item" data-type="recovery">
+                        <input type="checkbox" name="activity" value="recovery">
+                        <span class="activity-icon">🧘</span>
+                        <span class="activity-label">Recovery</span>
+                    </label>
+                    <label class="activity-item" data-type="flights">
+                        <input type="checkbox" name="activity" value="flights">
+                        <span class="activity-icon">✈️</span>
+                        <span class="activity-label">Flights</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="coaching-section">
+                <label>👩‍🏫 How many people did you coach today?</label>
+                <div class="coaching-counter">
+                    <button type="button" class="counter-btn" id="coachingMinus">−</button>
+                    <span class="counter-value" id="coachingCount">0</span>
+                    <button type="button" class="counter-btn" id="coachingPlus">+</button>
+                    <span class="counter-label">sessions</span>
+                </div>
+            </div>
+            
+            <div class="notes-section">
+                <label for="notes">📝 Quick Note (optional)</label>
+                <textarea id="notes" placeholder="e.g., Great beach session with partner!"></textarea>
+            </div>
+            
+            <button class="submit-btn" id="submitBtn">
+                ✓ Log Activity
+            </button>
+            
+            <div class="success-message" id="successMessage">
+                ✅ Activity logged! Keep crushing it! 💪
+            </div>
+        </div>
+        
+        <div class="recent-logs">
+            <h3>📋 Recent Logs</h3>
+            <div id="recentLogs">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📲 Quick Setup for iPhone</h3>
+            <ol>
+                <li>Tap the Share button in Safari</li>
+                <li>Tap "Add to Home Screen"</li>
+                <li>Name it "Journey Log"</li>
+                <li>Now you have a quick-tap app!</li>
+            </ol>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray-dark);">
+                <strong>Google Sheets Integration:</strong> Coming soon! For now, logs are saved to local storage.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Calculate days to Olympics
+        const olympicDate = new Date('2028-07-14');
+        const today = new Date();
+        const daysLeft = Math.ceil((olympicDate - today) / (1000 * 60 * 60 * 24));
+        document.getElementById('daysLeft').textContent = daysLeft;
+        
+        // Set default date to today
+        const dateInput = document.getElementById('activityDate');
+        dateInput.valueAsDate = new Date();
+        
+        // Activity selection
+        const activityItems = document.querySelectorAll('.activity-item');
+        activityItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'INPUT') {
+                    const checkbox = item.querySelector('input');
+                    checkbox.checked = !checkbox.checked;
+                }
+                item.classList.toggle('selected', item.querySelector('input').checked);
+            });
+        });
+        
+        // Coaching counter
+        let coachingCount = 0;
+        const coachingCountEl = document.getElementById('coachingCount');
+        
+        document.getElementById('coachingMinus').addEventListener('click', () => {
+            if (coachingCount > 0) {
+                coachingCount--;
+                coachingCountEl.textContent = coachingCount;
+            }
+        });
+        
+        document.getElementById('coachingPlus').addEventListener('click', () => {
+            coachingCount++;
+            coachingCountEl.textContent = coachingCount;
+        });
+        
+        // Load existing data from localStorage
+        function loadData() {
+            const stored = localStorage.getItem('journeyTrackerData');
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            // Default structure
+            return {
+                meta: {
+                    startDate: "2026-01-01",
+                    endDate: "2028-07-14",
+                    lastUpdated: new Date().toISOString().split('T')[0]
+                },
+                totals: {
+                    training: 0,
+                    practice: 0,
+                    tournament: 0,
+                    filmStudy: 0,
+                    flights: 0,
+                    recovery: 0,
+                    coaching: 0
+                },
+                activities: []
+            };
+        }
+        
+        // Save data
+        function saveData(data) {
+            localStorage.setItem('journeyTrackerData', JSON.stringify(data));
+        }
+        
+        // Display recent logs
+        function displayRecentLogs() {
+            const data = loadData();
+            const recentContainer = document.getElementById('recentLogs');
+            
+            if (data.activities.length === 0) {
+                recentContainer.innerHTML = '<p style="color: #999; text-align: center;">No activities logged yet</p>';
+                return;
+            }
+            
+            // Get last 5 entries, most recent first
+            const recent = data.activities.slice(-5).reverse();
+            
+            const icons = {
+                training: '🏋️',
+                practice: '🏐',
+                tournament: '🏆',
+                filmStudy: '🎬',
+                recovery: '🧘',
+                flights: '✈️'
+            };
+            
+            recentContainer.innerHTML = recent.map(entry => {
+                const dateObj = new Date(entry.date + 'T00:00:00');
+                const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                let activityIcons = entry.types.map(t => icons[t] || '').join(' ');
+                // Add coaching with count if present
+                if (entry.coachingCount) {
+                    activityIcons += ` 👩‍🏫×${entry.coachingCount}`;
+                }
+                return `
+                    <div class="log-item">
+                        <span class="log-date">${dateStr}</span>
+                        <span class="log-activities">${activityIcons}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Initial display
+        displayRecentLogs();
+        
+        // Form submission
+        document.getElementById('submitBtn').addEventListener('click', async () => {
+            const date = dateInput.value;
+            const selectedCheckboxes = document.querySelectorAll('input[name="activity"]:checked');
+            const selectedTypes = Array.from(selectedCheckboxes).map(cb => cb.value);
+            const notes = document.getElementById('notes').value;
+            
+            if (!date) {
+                alert('Please select a date');
+                return;
+            }
+            
+            if (selectedTypes.length === 0 && coachingCount === 0) {
+                alert('Please select at least one activity or log coaching sessions');
+                return;
+            }
+            
+            // Load, update, save
+            const data = loadData();
+            
+            // Check if entry exists for this date
+            const existingIndex = data.activities.findIndex(a => a.date === date);
+            
+            // Create entry object
+            const entry = { date, types: selectedTypes, notes };
+            if (coachingCount > 0) {
+                entry.coachingCount = coachingCount;
+            }
+            
+            if (existingIndex >= 0) {
+                // Update existing entry
+                data.activities[existingIndex] = entry;
+            } else {
+                // Add new entry
+                data.activities.push(entry);
+                // Sort by date
+                data.activities.sort((a, b) => a.date.localeCompare(b.date));
+            }
+            
+            data.meta.lastUpdated = new Date().toISOString().split('T')[0];
+            
+            // Recalculate totals from scratch for accuracy
+            data.totals = {
+                training: 0,
+                practice: 0,
+                tournament: 0,
+                filmStudy: 0,
+                flights: 0,
+                recovery: 0,
+                coaching: 0
+            };
+            data.activities.forEach(a => {
+                // Count regular activities
+                a.types.forEach(t => {
+                    if (!data.totals[t]) data.totals[t] = 0;
+                    data.totals[t]++;
+                });
+                // Add coaching sessions (can be multiple per day)
+                if (a.coachingCount) {
+                    data.totals.coaching += a.coachingCount;
+                }
+            });
+            
+            saveData(data);
+            
+            // Show success
+            const btn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            btn.disabled = true;
+            btn.textContent = '✓ Logged!';
+            successMsg.classList.add('show');
+            
+            // Reset form after delay
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = '✓ Log Activity';
+                successMsg.classList.remove('show');
+                
+                // Reset checkboxes
+                selectedCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                    cb.closest('.activity-item').classList.remove('selected');
+                });
+                document.getElementById('notes').value = '';
+                
+                // Reset coaching counter
+                coachingCount = 0;
+                coachingCountEl.textContent = '0';
+                
+                // Refresh recent logs
+                displayRecentLogs();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
