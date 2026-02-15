@@ -387,19 +387,39 @@ if (maskPath && heroContainer) {
     });
     
     // SMOOTH FLOWING WAVE PATH GENERATOR
-    // Creates calming, flowing ocean swell effect
+    // Creates calming tide effect - washes up from bottom to top, then retreats
     function generateCalmWavePath(time) {
         const W = 800;
         const H = 600;
         const RES = 80;
         
-        // Base wave position - gently oscillates up and down
-        // Main breathing rhythm: 12 second cycle (slow, calming)
-        const breathCycle = time * 0.08;
-        const baseY = H * (0.45 + 0.25 * Math.sin(breathCycle));
+        // TIDE CYCLE: Full wash up and retreat
+        // Total cycle: 16 seconds (8s up, 8s down)
+        const TIDE_CYCLE = 16;
+        const cycleTime = time % TIDE_CYCLE;
+        const halfCycle = TIDE_CYCLE / 2;
+        
+        let tideProgress;
+        if (cycleTime < halfCycle) {
+            // WASH IN: Bottom to top (0 to 1)
+            // Ease-out: fast start, slows as it reaches peak
+            const t = cycleTime / halfCycle;
+            tideProgress = 1 - Math.pow(1 - t, 2.5);
+        } else {
+            // RETREAT: Top to bottom (1 to 0)
+            // Ease-in: slow start, speeds up as it pulls back
+            const t = (cycleTime - halfCycle) / halfCycle;
+            tideProgress = 1 - Math.pow(t, 2);
+        }
+        
+        // Map tideProgress to Y position
+        // 0% progress = bottom (H), 100% progress = top (0)
+        // Add small margin so wave never fully disappears or covers everything
+        const minY = 30;   // Highest point (near top, ~95% reveal)
+        const maxY = H - 30; // Lowest point (near bottom, ~5% reveal)
+        const baseY = maxY - (maxY - minY) * tideProgress;
         
         const edgePoints = [];
-        const bottomPoints = [];
         
         for (let i = 0; i <= RES; i++) {
             const t = i / RES;
@@ -414,7 +434,7 @@ if (maskPath && heroContainer) {
             // Layer 3: Subtle third harmonic (adds organic feel without choppiness)
             const swell3 = Math.sin(t * Math.PI * 3.5 + time * 0.15 + 0.8) * 10;
             
-            // Combine swells with smooth blending
+            // Combine base tide position with wave undulation
             let waveY = baseY + swell1 + swell2 + swell3;
             
             // Gentle mouse interaction - wave slightly bulges toward cursor
@@ -429,10 +449,9 @@ if (maskPath && heroContainer) {
             }
             
             // Clamp to bounds
-            waveY = Math.max(20, Math.min(H - 20, waveY));
+            waveY = Math.max(10, Math.min(H - 10, waveY));
             
             edgePoints.push({ x, y: waveY });
-            bottomPoints.push({ x, y: H + 10 }); // Extends past bottom
         }
         
         // Build smooth path with bezier curves for flowing edge
