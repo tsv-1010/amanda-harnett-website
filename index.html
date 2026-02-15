@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amanda Harnett | Professional Beach Volleyball Player</title>
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=10">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -90,7 +90,7 @@
                     {
                         "@type": "SportsOrganization",
                         "name": "AVP Pro Beach Volleyball",
-                        "url": "https://www.avpbeachvolleyball.com/"
+                        "url": "https://avp.com/"
                     },
                     {
                         "@type": "SportsOrganization",
@@ -426,7 +426,16 @@
     <section id="schedule" class="timeline-section">
         <div class="timeline-container">
             <h2 class="section-title">2026 Tournament Schedule</h2>
-            <p class="section-subtitle">Follow Amanda's season across AVP and FIVB tours. Sponsor a leg of her journey.</p>
+            <p class="section-subtitle">Follow Amanda's 2026 season. From League Qualifiers to Heritage events, sponsor a leg of her journey.</p>
+            
+            <!-- Event Type Legend -->
+            <div class="event-legend">
+                <div class="legend-item"><span class="legend-dot heritage"></span> Heritage (Premier)</div>
+                <div class="legend-item"><span class="legend-dot contender"></span> Heritage Contender</div>
+                <div class="legend-item"><span class="legend-dot league"></span> AVP League</div>
+                <div class="legend-item"><span class="legend-dot qualifier"></span> League Qualifier</div>
+                <div class="legend-item"><span class="legend-dot triple-crown"></span> Triple Crown</div>
+            </div>
             
             <div class="timeline-scroll">
                 <!-- Central Timeline Line -->
@@ -434,37 +443,17 @@
                 
                 <!-- Timeline Events -->
                 <div class="timeline-events">
-                    <!-- Event 1 -->
+                    <!-- Event 1: March 7 - Highline -->
                     <div class="timeline-event top">
                         <div class="event-card">
-                            <div class="event-date">Feb 15-18</div>
-                            <div class="event-name">Long Beach Open</div>
-                            <div class="event-type avp">AVP Pro Open</div>
+                            <div class="event-date">Mar 7</div>
+                            <div class="event-name">Highline Open</div>
+                            <div class="event-type avp-league">AVP League Format</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>Long Beach, CA</span>
+                                <span>Location TBD</span>
                             </div>
-                            <div class="event-sponsor">
-                                <span class="sponsor-label">Featured Sponsor:</span>
-                                <div class="sponsor-placeholder">Your Brand Here</div>
-                            </div>
-                            <div class="event-cta-group">
-                                <a href="https://www.avpbeachvolleyball.com" target="_blank" class="event-fan-btn">📺 Watch Live</a>
-                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Event 2 -->
-                    <div class="timeline-event bottom">
-                        <div class="event-card">
-                            <div class="event-date">Feb 22-25</div>
-                            <div class="event-name">Mexico City Elite</div>
-                            <div class="event-type fivb-elite">FIVB Elite</div>
-                            <div class="event-destination">
-                                <span class="destination-icon">📍</span>
-                                <span>Mexico City, Mexico</span>
-                            </div>
+                            <div class="event-note">Hosted by Highline — up-and-coming tournament organizer</div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
                                 <div class="sponsor-placeholder">Your Brand Here</div>
@@ -476,12 +465,100 @@
                         </div>
                     </div>
 
-                    <!-- Event 3 -->
+                    <!-- Event 2: March 14-15 - Triple Crown #2 -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card triple-crown">
+                            <div class="event-date">Mar 14-15</div>
+                            <div class="event-name">AVP Next Triple Crown #2</div>
+                            <div class="event-type avp-next">Triple Crown Series</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Austin, TX</span>
+                            </div>
+                            <div class="event-note">💰 Win all 3 Triple Crown events for bonus prize money</div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 3: March 28 - League Qualifier 1 -->
                     <div class="timeline-event top">
+                        <div class="event-card qualifier">
+                            <div class="event-date">Mar 28</div>
+                            <div class="event-name">League Qualifier 1</div>
+                            <div class="event-type avp-qualifier">League Qualifier</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Location TBD</span>
+                            </div>
+                            <div class="event-note">🎯 Qualify for AVP The League — represent a city team!</div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 4: April 3 - League Qualifier 2 -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card qualifier">
+                            <div class="event-date">Apr 3</div>
+                            <div class="event-name">League Qualifier 2</div>
+                            <div class="event-type avp-qualifier">League Qualifier</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Location TBD</span>
+                            </div>
+                            <div class="event-note">🎯 Qualify for AVP The League — represent a city team!</div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 5: April 11 - League Qualifier 3 -->
+                    <div class="timeline-event top">
+                        <div class="event-card qualifier">
+                            <div class="event-date">Apr 11</div>
+                            <div class="event-name">League Qualifier 3</div>
+                            <div class="event-type avp-qualifier">League Qualifier</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Location TBD</span>
+                            </div>
+                            <div class="event-note">🎯 Final qualifier — last chance to make The League!</div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 6: April 17-19 - AVP Austin Open (Heritage Contender) -->
+                    <div class="timeline-event bottom">
                         <div class="event-card">
-                            <div class="event-date">Mar 8-10</div>
-                            <div class="event-name">Austin Challenger</div>
-                            <div class="event-type avp-challenger">AVP Challenger</div>
+                            <div class="event-date">Apr 17-19</div>
+                            <div class="event-name">AVP Austin Open</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
                                 <span>Austin, TX</span>
@@ -491,21 +568,170 @@
                                 <div class="sponsor-placeholder">Your Brand Here</div>
                             </div>
                             <div class="event-cta-group">
-                                <a href="https://www.avpbeachvolleyball.com" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
                                 <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Event 4 -->
-                    <div class="timeline-event bottom">
-                        <div class="event-card">
-                            <div class="event-date">Mar 15-18</div>
-                            <div class="event-name">Cancun Futures</div>
-                            <div class="event-type fivb-futures">FIVB Futures</div>
+                    <!-- Event 7: May 15-17 - AVP Huntington (Heritage) -->
+                    <div class="timeline-event top">
+                        <div class="event-card highlight">
+                            <div class="event-date">May 15-17</div>
+                            <div class="event-name">AVP Huntington Beach Open</div>
+                            <div class="event-type avp-heritage">AVP Heritage</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>Cancun, Mexico</span>
+                                <span>Huntington Beach, CA</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 8: May 23-24 - AVP South Florida (Heritage Contender) -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">May 23-24</div>
+                            <div class="event-name">AVP South Florida Open</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Pompano Beach, FL</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 9: May 29-31 - AVP League Week 1 Belmar -->
+                    <div class="timeline-event top">
+                        <div class="event-card league">
+                            <div class="event-date">May 30-31</div>
+                            <div class="event-name">AVP League Week 1</div>
+                            <div class="event-type avp-league">AVP The League</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Belmar, NJ</span>
+                            </div>
+                            <div class="event-note">🏆 City vs City team competition begins!</div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 10: June 13-14 - AVP Virginia Beach (Heritage Contender) -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">Jun 13-14</div>
+                            <div class="event-name">AVP Virginia Beach Open</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Virginia Beach, VA</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 11: June 20-21 - Triple Crown #3 -->
+                    <div class="timeline-event top">
+                        <div class="event-card triple-crown">
+                            <div class="event-date">Jun 20-21</div>
+                            <div class="event-name">AVP Next Triple Crown #3</div>
+                            <div class="event-type avp-next">Triple Crown Series</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Austin, TX</span>
+                            </div>
+                            <div class="event-note">💰 Final Triple Crown event — championship stakes!</div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 12: July 3-5 - AVP Denver (Heritage Contender) -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">Jul 3-5</div>
+                            <div class="event-name">AVP Denver Open</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Denver, CO</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 13: July 8-10 - AVP Waupaca (Heritage Contender) -->
+                    <div class="timeline-event top">
+                        <div class="event-card">
+                            <div class="event-date">Jul 8-10</div>
+                            <div class="event-name">AVP Waupaca Open</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Waupaca, WI</span>
+                            </div>
+                            <div class="event-sponsor">
+                                <span class="sponsor-label">Featured Sponsor:</span>
+                                <div class="sponsor-placeholder">Your Brand Here</div>
+                            </div>
+                            <div class="event-cta-group">
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 14: Mid July - Vancouver Open -->
+                    <div class="timeline-event bottom">
+                        <div class="event-card">
+                            <div class="event-date">Mid July</div>
+                            <div class="event-name">Vancouver Open</div>
+                            <div class="event-type independent">Open Tournament</div>
+                            <div class="event-destination">
+                                <span class="destination-icon">📍</span>
+                                <span>Vancouver, BC</span>
                             </div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
@@ -518,106 +744,107 @@
                         </div>
                     </div>
 
-                    <!-- Event 5 -->
+                    <!-- Event 15: August 14-16 - AVP Manhattan Beach (Heritage - PREMIER) -->
                     <div class="timeline-event top">
-                        <div class="event-card">
-                            <div class="event-date">Apr 5-7</div>
-                            <div class="event-name">Miami League</div>
-                            <div class="event-type avp-league">AVP Pro League</div>
+                        <div class="event-card highlight premier">
+                            <div class="event-date">Aug 14-16</div>
+                            <div class="event-name">AVP Manhattan Beach Open</div>
+                            <div class="event-type avp-heritage">AVP Heritage</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>Miami, FL</span>
+                                <span>Manhattan Beach, CA</span>
                             </div>
+                            <div class="event-note">👑 The "Super Bowl" of beach volleyball</div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
                                 <div class="sponsor-placeholder">Your Brand Here</div>
                             </div>
                             <div class="event-cta-group">
-                                <a href="https://www.avpbeachvolleyball.com" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
                                 <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Event 6 -->
+                    <!-- Event 16: September 5-7 - AVP Motherlode (Heritage Contender) -->
                     <div class="timeline-event bottom">
                         <div class="event-card">
-                            <div class="event-date">Apr 19-22</div>
-                            <div class="event-name">San Juan Challenge</div>
-                            <div class="event-type fivb-challenge">FIVB Challenge</div>
+                            <div class="event-date">Sep 5-7</div>
+                            <div class="event-name">AVP Motherlode</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>San Juan, Puerto Rico</span>
+                                <span>Aspen, CO</span>
                             </div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
                                 <div class="sponsor-placeholder">Your Brand Here</div>
                             </div>
                             <div class="event-cta-group">
-                                <a href="https://www.instagram.com/amandaharnett" target="_blank" class="event-fan-btn">🔔 Get Notified</a>
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
                                 <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Event 7 -->
+                    <!-- Event 17: Early September - AVP Hermosa -->
                     <div class="timeline-event top">
                         <div class="event-card">
-                            <div class="event-date">May 10-12</div>
-                            <div class="event-name">San Diego Pro Open</div>
-                            <div class="event-type avp">AVP Pro Open</div>
+                            <div class="event-date">Early Sep</div>
+                            <div class="event-name">AVP Hermosa</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>San Diego, CA</span>
+                                <span>Hermosa Beach, CA</span>
                             </div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
                                 <div class="sponsor-placeholder">Your Brand Here</div>
                             </div>
                             <div class="event-cta-group">
-                                <a href="https://www.avpbeachvolleyball.com" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
                                 <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Event 8 -->
+                    <!-- Event 18: September 18-20 - AVP Laguna (Heritage) -->
                     <div class="timeline-event bottom">
-                        <div class="event-card">
-                            <div class="event-date">May 24-27</div>
-                            <div class="event-name">Gstaad Elite</div>
-                            <div class="event-type fivb-elite">FIVB Elite</div>
+                        <div class="event-card highlight">
+                            <div class="event-date">Sep 18-20</div>
+                            <div class="event-name">AVP Laguna Open</div>
+                            <div class="event-type avp-heritage">AVP Heritage</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>Gstaad, Switzerland</span>
+                                <span>Laguna Beach, CA</span>
                             </div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
                                 <div class="sponsor-placeholder">Your Brand Here</div>
                             </div>
                             <div class="event-cta-group">
-                                <a href="https://www.volleyball.world/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
                                 <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Event 9 -->
+                    <!-- Event 19: September 25-27 - AVP Midwest (Heritage Contender) -->
                     <div class="timeline-event top">
                         <div class="event-card">
-                            <div class="event-date">Jun 15-18</div>
-                            <div class="event-name">Tokyo Challenge</div>
-                            <div class="event-type fivb-challenge">FIVB Challenge</div>
+                            <div class="event-date">Sep 25-27</div>
+                            <div class="event-name">AVP Midwest Open</div>
+                            <div class="event-type avp-contender">Heritage Contender</div>
                             <div class="event-destination">
                                 <span class="destination-icon">📍</span>
-                                <span>Tokyo, Japan</span>
+                                <span>Location TBD</span>
                             </div>
                             <div class="event-sponsor">
                                 <span class="sponsor-label">Featured Sponsor:</span>
                                 <div class="sponsor-placeholder">Your Brand Here</div>
                             </div>
                             <div class="event-cta-group">
-                                <a href="https://www.volleyball.world/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
+                                <a href="https://avp.com/" target="_blank" class="event-fan-btn">📺 Watch Live</a>
                                 <a href="#partners" class="event-sponsor-btn">Sponsor This Leg</a>
                             </div>
                         </div>
@@ -1083,7 +1310,7 @@
                         <h4>AVP Pro Beach Volleyball</h4>
                         <p class="partner-role">Professional Tour</p>
                         <p class="partner-description">The American Volleyball Professionals (AVP) Pro Tour is the premier professional beach volleyball league in the United States, showcasing the world's best athletes.</p>
-                        <a href="https://www.avpbeachvolleyball.com/" target="_blank" class="partner-link">Visit AVP →</a>
+                        <a href="https://avp.com/" target="_blank" class="partner-link">Visit AVP →</a>
                     </div>
                 </div>
             </div>

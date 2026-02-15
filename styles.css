@@ -1673,8 +1673,8 @@ p {
 .timeline-scroll {
     position: relative;
     overflow-x: auto;
-    overflow-y: hidden;
-    padding: 3rem 0;
+    overflow-y: visible;
+    padding: 12rem 0 3rem 0;
     margin-bottom: 2rem;
     scroll-behavior: smooth;
 }
@@ -1830,9 +1830,38 @@ p {
 }
 
 .event-type.avp,
-.event-type.avp-league,
 .event-type.avp-challenger {
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 100%);
+    color: var(--white);
+}
+
+.event-type.avp-league {
+    background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
+    color: #1a1a1a;
+}
+
+.event-type.avp-heritage {
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+    color: var(--white);
+}
+
+.event-type.avp-contender {
+    background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+    color: var(--white);
+}
+
+.event-type.avp-qualifier {
+    background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
+    color: var(--white);
+}
+
+.event-type.avp-next {
+    background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%);
+    color: var(--white);
+}
+
+.event-type.independent {
+    background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%);
     color: var(--white);
 }
 
@@ -1841,6 +1870,105 @@ p {
 .event-type.fivb-futures {
     background: linear-gradient(135deg, #4166F5 0%, #6A8BFF 100%);
     color: var(--white);
+}
+
+/* Event Legend */
+.event-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.legend-dot.heritage {
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+}
+
+.legend-dot.contender {
+    background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+}
+
+.legend-dot.league {
+    background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
+}
+
+.legend-dot.qualifier {
+    background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
+}
+
+.legend-dot.triple-crown {
+    background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%);
+}
+
+/* Event Notes */
+.event-note {
+    font-size: 0.8rem;
+    color: var(--gray-dark);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    border-left: 3px solid var(--sand-medium);
+}
+
+/* Special card styles */
+.event-card.triple-crown {
+    border: 2px solid #3498DB;
+    box-shadow: 0 4px 20px rgba(52, 152, 219, 0.2);
+}
+
+.event-card.qualifier {
+    border: 2px solid #9B59B6;
+    box-shadow: 0 4px 20px rgba(155, 89, 182, 0.2);
+}
+
+.event-card.league {
+    border: 2px solid #F4D03F;
+    box-shadow: 0 4px 20px rgba(244, 208, 63, 0.2);
+}
+
+/* Highlight card for major events like Manhattan Beach Open */
+.event-card.highlight {
+    border: 2px solid #E74C3C;
+    box-shadow: 0 8px 30px rgba(231, 76, 60, 0.3);
+}
+
+.event-card.highlight::before {
+    content: '⭐ HERITAGE EVENT';
+    display: block;
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.8rem;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+}
+
+.event-card.highlight.premier::before {
+    content: '👑 PREMIER HERITAGE EVENT';
 }
 
 .event-destination {
