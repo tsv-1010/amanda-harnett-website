@@ -755,3 +755,136 @@ console.log('Conversion tracking initialized');
     
     console.log('Parallax gallery initialized');
 })();
+
+// ============================================
+// STICKER DROP EFFECT - Books Section Only
+// ============================================
+(function initStickerDrop() {
+    const booksSection = document.querySelector('#books');
+    if (!booksSection) return;
+    
+    // Sticker images - add your sticker filenames here
+    const stickerImages = [
+        'assets/stickers/Kay-Searching.png',
+        'assets/stickers/Kay-Snow-Angel.png',
+        'assets/stickers/Piggy-and-Kay.png',
+        'assets/stickers/Piggy-And-Kay-Sitting.png',
+        'assets/stickers/Piggy-Boots.png',
+        'assets/stickers/Piggy-Searching.png',
+        'assets/stickers/Piggy-SnowAngel.png'
+    ];
+    
+    // Configuration
+    const config = {
+        minSize: 40,
+        maxSize: 80,
+        fadeOutDelay: 3000,  // How long stickers stay visible (ms)
+        maxStickers: 15,     // Max stickers on screen at once
+        rotationRange: 30    // Random rotation range in degrees
+    };
+    
+    let activeStickers = [];
+    
+    // Create sticker container
+    const stickerContainer = document.createElement('div');
+    stickerContainer.className = 'sticker-container';
+    booksSection.style.position = 'relative';
+    booksSection.appendChild(stickerContainer);
+    
+    // Get hint text from HTML
+    const hint = booksSection.querySelector('.sticker-hint');
+    
+    function createSticker(x, y) {
+        // Check if images exist
+        if (stickerImages.length === 0) return;
+        
+        // Limit max stickers
+        if (activeStickers.length >= config.maxStickers) {
+            const oldestSticker = activeStickers.shift();
+            oldestSticker.remove();
+        }
+        
+        // Create sticker element
+        const sticker = document.createElement('div');
+        sticker.className = 'sticker';
+        
+        // Random sticker image
+        const randomImage = stickerImages[Math.floor(Math.random() * stickerImages.length)];
+        
+        // Random size
+        const size = config.minSize + Math.random() * (config.maxSize - config.minSize);
+        
+        // Random rotation
+        const rotation = (Math.random() - 0.5) * 2 * config.rotationRange;
+        
+        // Random slight offset from click point
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+        
+        sticker.style.cssText = `
+            left: ${x + offsetX}px;
+            top: ${y + offsetY}px;
+            width: ${size}px;
+            height: ${size}px;
+            transform: translate(-50%, -50%) rotate(${rotation}deg) scale(0);
+        `;
+        
+        // Create image
+        const img = document.createElement('img');
+        img.src = randomImage;
+        img.alt = 'Piggy & Kay sticker';
+        img.draggable = false;
+        img.onerror = () => sticker.remove(); // Remove if image fails to load
+        
+        sticker.appendChild(img);
+        stickerContainer.appendChild(sticker);
+        activeStickers.push(sticker);
+        
+        // Animate in (pop effect)
+        requestAnimationFrame(() => {
+            sticker.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(1.2)`;
+            setTimeout(() => {
+                sticker.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(1)`;
+            }, 150);
+        });
+        
+        // Fade out and remove after delay
+        setTimeout(() => {
+            sticker.classList.add('fade-out');
+            setTimeout(() => {
+                sticker.remove();
+                activeStickers = activeStickers.filter(s => s !== sticker);
+            }, 500);
+        }, config.fadeOutDelay);
+        
+        // Hide hint after first click
+        hint.classList.add('hidden');
+    }
+    
+    // Handle clicks on books section
+    booksSection.addEventListener('click', (e) => {
+        // Don't create stickers when clicking buttons/links
+        if (e.target.closest('a, button')) return;
+        
+        // Get position relative to books section
+        const rect = booksSection.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        createSticker(x, y);
+    });
+    
+    // Also support touch
+    booksSection.addEventListener('touchstart', (e) => {
+        if (e.target.closest('a, button')) return;
+        
+        const touch = e.touches[0];
+        const rect = booksSection.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        
+        createSticker(x, y);
+    }, { passive: true });
+    
+    console.log('Sticker drop initialized for books section');
+})();
