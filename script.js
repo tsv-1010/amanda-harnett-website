@@ -1,3 +1,18 @@
+// Preloader - Hide when page is fully loaded
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Minimum display time of 800ms for branding
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            // Remove from DOM after animation completes
+            setTimeout(() => {
+                preloader.remove();
+            }, 500);
+        }, 800);
+    }
+});
+
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
