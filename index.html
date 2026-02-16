@@ -2,12 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amanda Harnett | Professional Beach Volleyball Player</title>
-    <link rel="stylesheet" href="styles.css?v=29">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Amanda Harnett | Canadian Professional Beach Volleyball Player | Team Canada | AVP & FIVB</title>
+    
+    <!-- Critical Resource Preloads -->
+    <link rel="preload" href="assets/hero/AmandaHarnettTeamCanada.JPG" as="image" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=31">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- RSS/Sitemap Discovery -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     
     <!-- Google Analytics 4 -->
     <!-- 
@@ -30,25 +43,51 @@
         };
     </script>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Amanda Harnett is a Canadian professional beach volleyball player competing on AVP Pro Series, FIVB World Tour, and NORCECA. Olympic aspirant for LA 2028 and Brisbane 2032. Author of children's book series Piggy & Kay.">
-    <meta name="keywords" content="Amanda Harnett, beach volleyball, AVP, FIVB, Team Canada, Olympic beach volleyball, professional athlete, women's beach volleyball, volleyball training, Piggy and Kay">
+    <!-- SEO Meta Tags - Optimized for Search, AI, and Voice -->
+    <meta name="description" content="Amanda Harnett is a Canadian professional beach volleyball player from Burlington, Ontario. She represents Team Canada on the AVP Pro Series (partnering with Hannah Frohling), FIVB World Tour, and NORCECA circuits. A 2019 Lima Pan American Games competitor, University of Toronto graduate, and author of the children's book 'Piggy & Kay: A Winter Sparkle'. Amanda is pursuing Olympic qualification for Los Angeles 2028 and Brisbane 2032.">
+    <meta name="keywords" content="Amanda Harnett, Amanda Harnett beach volleyball, Amanda Harnett Team Canada, Amanda Harnett AVP, Amanda Harnett FIVB, Canadian beach volleyball player, professional beach volleyball, women's beach volleyball, Olympic beach volleyball Canada, Hannah Frohling partner, Burlington Ontario athlete, University of Toronto volleyball, Piggy and Kay book, Pan American Games beach volleyball, volleyball coaching, jump training program, LA 2028 Olympics, Brisbane 2032 Olympics">
     <meta name="author" content="Amanda Harnett">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    
+    <!-- Geographic Meta -->
+    <meta name="geo.region" content="CA-ON">
+    <meta name="geo.placename" content="Burlington, Ontario">
+    <meta name="geo.position" content="43.3255;-79.7990">
+    <meta name="ICBM" content="43.3255, -79.7990">
     
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Amanda Harnett | Professional Beach Volleyball Player">
-    <meta property="og:description" content="Canadian professional beach volleyball player competing on AVP & FIVB tours. Olympic aspirant for 2028 & 2032. Author of Piggy & Kay children's book series.">
-    <meta property="og:image" content="assets/hero/AmandaHarnettTeamCanada.JPG">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Amanda Harnett | Canadian Professional Beach Volleyball Player | Team Canada">
+    <meta property="og:description" content="Official website of Amanda Harnett - Canadian professional beach volleyball player representing Team Canada. AVP Pro Series, FIVB World Tour competitor. 2019 Pan Am Games athlete. Olympic aspirant for LA 2028 & Brisbane 2032. Author of Piggy & Kay children's book series.">
+    <meta property="og:image" content="https://amandaharnett.com/assets/hero/AmandaHarnettTeamCanada.JPG">
+    <meta property="og:image:alt" content="Amanda Harnett - Team Canada Beach Volleyball Player">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://amandaharnett.com">
+    <meta property="og:site_name" content="Amanda Harnett">
+    <meta property="og:locale" content="en_US">
+    <meta property="profile:first_name" content="Amanda">
+    <meta property="profile:last_name" content="Harnett">
+    <meta property="profile:username" content="amandaharnett">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Amanda Harnett | Pro Beach Volleyball">
     <meta name="twitter:description" content="Canadian pro beach volleyball player. AVP & FIVB competitor. Olympic aspirant 2028/2032.">
+    <meta name="twitter:site" content="@amandaharnett">
+    <meta name="twitter:creator" content="@amandaharnett">
     
-    <!-- JSON-LD Structured Data for SEO & AI Discovery -->
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://amandaharnett.com">
+    
+    <!-- Additional Meta for AI/LLM Discovery -->
+    <meta name="ai-content-declaration" content="This is the official website of Amanda Harnett, Canadian professional beach volleyball player.">
+    <meta name="entity-type" content="Person, Athlete, Author">
+    <meta name="entity-name" content="Amanda Harnett">
+    
+    <!-- JSON-LD Structured Data for SEO, GEO, AEO & LLM Discovery -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -57,11 +96,17 @@
                 "@type": "WebSite",
                 "@id": "https://amandaharnett.com/#website",
                 "url": "https://amandaharnett.com",
-                "name": "Amanda Harnett",
-                "description": "Official website of Amanda Harnett - Professional Beach Volleyball Player & Author",
+                "name": "Amanda Harnett - Official Website",
+                "description": "Official website of Amanda Harnett - Canadian Professional Beach Volleyball Player, Team Canada Athlete, and Children's Book Author",
                 "publisher": {
                     "@id": "https://amandaharnett.com/#person"
-                }
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://amandaharnett.com/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                },
+                "inLanguage": "en-US"
             },
             {
                 "@type": ["Person", "Athlete"],
@@ -69,45 +114,148 @@
                 "name": "Amanda Harnett",
                 "givenName": "Amanda",
                 "familyName": "Harnett",
-                "description": "Canadian professional beach volleyball player competing on the AVP Pro Series, FIVB World Tour, and NORCECA circuits. Olympic aspirant for LA 2028 and Brisbane 2032.",
-                "image": "assets/hero/AmandaHarnettTeamCanada.JPG",
+                "alternateName": ["Amanda Harnett Canada", "Amanda Harnett Beach Volleyball", "Amanda Harnett AVP"],
+                "description": "Amanda Harnett is a Canadian professional beach volleyball player representing Team Canada on the AVP Pro Series, FIVB Beach Volleyball World Tour, and NORCECA circuits. Born in 1997 in Burlington, Ontario (near Toronto), Amanda is a University of Toronto graduate pursuing Olympic qualification for LA 2028 and Brisbane 2032. She is also the author of the children's book series 'Piggy & Kay' and founder of volleyball training programs. Amanda partners with Hannah Frohling on the AVP Tour.",
+                "image": {
+                    "@type": "ImageObject",
+                    "url": "https://amandaharnett.com/assets/hero/AmandaHarnettTeamCanada.JPG",
+                    "caption": "Amanda Harnett - Team Canada Beach Volleyball"
+                },
                 "url": "https://amandaharnett.com",
-                "sameAs": [
-                    "https://www.instagram.com/amandaharnett",
-                    "https://www.tiktok.com/@amandaharnett"
-                ],
-                "jobTitle": "Professional Beach Volleyball Player",
-                "sport": "Beach Volleyball",
+                "birthDate": "1997",
+                "birthPlace": {
+                    "@type": "Place",
+                    "name": "Burlington, Ontario, Canada",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Burlington",
+                        "addressRegion": "Ontario",
+                        "addressCountry": "CA"
+                    }
+                },
+                "height": {
+                    "@type": "QuantitativeValue",
+                    "value": "175",
+                    "unitCode": "CMT",
+                    "unitText": "5'9\""
+                },
                 "nationality": {
                     "@type": "Country",
-                    "name": "Canada"
+                    "name": "Canada",
+                    "identifier": "CA"
                 },
                 "homeLocation": {
                     "@type": "Place",
-                    "name": "Los Angeles, California"
+                    "name": "Los Angeles, California",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Los Angeles",
+                        "addressRegion": "California",
+                        "addressCountry": "US"
+                    }
                 },
+                "alumniOf": {
+                    "@type": "CollegeOrUniversity",
+                    "name": "University of Toronto",
+                    "url": "https://www.utoronto.ca"
+                },
+                "sameAs": [
+                    "https://www.instagram.com/amandaharnett",
+                    "https://www.tiktok.com/@amandaharnett",
+                    "https://www.linkedin.com/in/amanda-harnett-5b9226174/",
+                    "https://zora.co/@amandaharnett",
+                    "https://olympic.ca/team-canada/amanda-harnett/",
+                    "https://volleyball.ca/en/athletes/amanda-harnett",
+                    "https://www.fivb.com/players/players-database/player/156177",
+                    "http://www.bvbinfo.com/player.asp?ID=16617",
+                    "https://women.volleybox.net/amanda-harnett-p22895/beach_tournaments",
+                    "https://cbva.com/profile/28179"
+                ],
+                "jobTitle": "Professional Beach Volleyball Player",
+                "sport": "Beach Volleyball",
+                "memberOf": [
+                    {
+                        "@type": "SportsTeam",
+                        "name": "Team Canada Beach Volleyball",
+                        "sport": "Beach Volleyball",
+                        "parentOrganization": {
+                            "@type": "SportsOrganization",
+                            "name": "Canadian Olympic Committee",
+                            "url": "https://olympic.ca"
+                        }
+                    }
+                ],
                 "affiliation": [
                     {
                         "@type": "SportsOrganization",
-                        "name": "AVP Pro Beach Volleyball",
-                        "url": "https://avp.com/"
+                        "name": "AVP Pro Beach Volleyball Tour",
+                        "url": "https://avp.com/",
+                        "description": "Association of Volleyball Professionals - Premier US beach volleyball tour"
                     },
                     {
                         "@type": "SportsOrganization",
-                        "name": "FIVB Beach Volleyball World Tour"
+                        "name": "FIVB Beach Volleyball World Tour",
+                        "url": "https://www.fivb.com",
+                        "description": "International Federation of Volleyball - Global elite beach volleyball circuit"
                     },
                     {
                         "@type": "SportsOrganization", 
-                        "name": "Volleyball Canada"
+                        "name": "Volleyball Canada",
+                        "url": "https://volleyball.ca",
+                        "description": "National governing body for volleyball in Canada"
+                    },
+                    {
+                        "@type": "SportsOrganization",
+                        "name": "NORCECA",
+                        "description": "North, Central America and Caribbean Volleyball Confederation"
+                    },
+                    {
+                        "@type": "Organization",
+                        "name": "Monarch Athletic Club",
+                        "url": "https://monarchclubs.com/",
+                        "description": "Official Wellness Partner - Premium medically-driven luxury fitness destination"
                     }
                 ],
-                "knowsAbout": ["Beach Volleyball", "Athletic Training", "Children's Literature", "Sports Psychology"],
+                "colleague": {
+                    "@type": "Person",
+                    "name": "Hannah Frohling",
+                    "description": "AVP beach volleyball partner, Pepperdine University alumna"
+                },
+                "knowsAbout": [
+                    "Beach Volleyball",
+                    "Professional Athletics",
+                    "Olympic Sports",
+                    "Athletic Training",
+                    "Jump Training",
+                    "Children's Literature",
+                    "Sports Psychology",
+                    "Volleyball Coaching"
+                ],
                 "award": [
+                    "2019 Lima Pan American Games Competitor - Team Canada",
                     "AVP Pro Series Competitor",
                     "FIVB World Tour Participant",
-                    "NORCECA Championships Competitor"
+                    "NORCECA Championships Competitor",
+                    "Team Canada National Team Member"
                 ],
-                "seeks": "Olympic Games qualification for LA 2028 and Brisbane 2032"
+                "seeks": "Olympic Games qualification for Los Angeles 2028 and Brisbane 2032",
+                "hasOccupation": [
+                    {
+                        "@type": "Occupation",
+                        "name": "Professional Beach Volleyball Player",
+                        "occupationalCategory": "27-2021.00"
+                    },
+                    {
+                        "@type": "Occupation",
+                        "name": "Author",
+                        "occupationalCategory": "27-3043.00"
+                    },
+                    {
+                        "@type": "Occupation",
+                        "name": "Volleyball Coach",
+                        "occupationalCategory": "27-2022.00"
+                    }
+                ]
             },
             {
                 "@type": "Book",
@@ -117,85 +265,54 @@
                     "@id": "https://amandaharnett.com/#person"
                 },
                 "bookFormat": "Hardcover",
-                "genre": "Children's Literature",
+                "genre": ["Children's Literature", "Picture Book", "Self-Esteem", "Friendship"],
                 "audience": {
-                    "@type": "Audience",
-                    "audienceType": "Children ages 2-8"
+                    "@type": "PeopleAudience",
+                    "suggestedMinAge": 2,
+                    "suggestedMaxAge": 8,
+                    "audienceType": "Children"
                 },
-                "description": "A heartwarming winter tale about friendship, confidence, and kindness. Part of a series teaching confidence and inner psychology to children.",
-                "url": "https://piggy-and-kay.vercel.app"
-            },
-            {
-                "@type": "SportsEvent",
-                "name": "AVP Long Beach Open 2026",
-                "startDate": "2026-02-15",
-                "endDate": "2026-02-18",
-                "location": {
-                    "@type": "Place",
-                    "name": "Long Beach, California",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Long Beach",
-                        "addressRegion": "CA",
-                        "addressCountry": "US"
-                    }
-                },
-                "sport": "Beach Volleyball",
-                "competitor": {
-                    "@id": "https://amandaharnett.com/#person"
+                "description": "A heartwarming winter tale about friendship, confidence, and kindness. Written by professional beach volleyball player Amanda Harnett, this children's book teaches confidence and inner psychology through engaging storytelling. First in an expanding series.",
+                "url": "https://piggy-and-kay.vercel.app",
+                "inLanguage": "en",
+                "isPartOf": {
+                    "@type": "BookSeries",
+                    "name": "Piggy & Kay Series"
                 }
             },
             {
                 "@type": "SportsEvent",
-                "name": "FIVB Mexico City Elite 2026",
-                "startDate": "2026-02-22",
-                "endDate": "2026-02-25",
+                "name": "2019 Lima Pan American Games - Beach Volleyball",
+                "startDate": "2019-07-26",
+                "endDate": "2019-08-11",
                 "location": {
                     "@type": "Place",
-                    "name": "Mexico City, Mexico"
+                    "name": "Lima, Peru"
                 },
                 "sport": "Beach Volleyball",
                 "competitor": {
                     "@id": "https://amandaharnett.com/#person"
-                }
-            },
-            {
-                "@type": "SportsEvent",
-                "name": "AVP Austin Challenger 2026",
-                "startDate": "2026-03-08",
-                "endDate": "2026-03-10",
-                "location": {
-                    "@type": "Place",
-                    "name": "Austin, Texas"
                 },
-                "sport": "Beach Volleyball",
-                "competitor": {
-                    "@id": "https://amandaharnett.com/#person"
-                }
-            },
-            {
-                "@type": "SportsEvent",
-                "name": "FIVB Gstaad Elite 2026",
-                "startDate": "2026-05-24",
-                "endDate": "2026-05-27",
-                "location": {
-                    "@type": "Place",
-                    "name": "Gstaad, Switzerland"
-                },
-                "sport": "Beach Volleyball",
-                "competitor": {
-                    "@id": "https://amandaharnett.com/#person"
-                }
+                "description": "Amanda Harnett represented Team Canada in beach volleyball at the Lima 2019 Pan American Games"
             },
             {
                 "@type": "FAQPage",
+                "@id": "https://amandaharnett.com/#faq",
                 "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Who is Amanda Harnett?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Amanda Harnett is a Canadian professional beach volleyball player born in 1997 in Burlington, Ontario. She represents Team Canada on the AVP Pro Series, FIVB World Tour, and NORCECA circuits. Amanda is a University of Toronto graduate, author of the children's book 'Piggy & Kay: A Winter Sparkle', and is pursuing Olympic qualification for LA 2028 and Brisbane 2032."
+                        }
+                    },
                     {
                         "@type": "Question",
                         "name": "What tours does Amanda Harnett compete on?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Amanda competes on the AVP Pro Series, FIVB Beach Volleyball World Tour, and NORCECA championships."
+                            "text": "Amanda competes on the AVP Pro Series (partnering with Hannah Frohling), FIVB Beach Volleyball World Tour, and NORCECA championships. On the AVP she partners with American player Hannah Frohling, while for FIVB and Olympic competition she plays with Canadian partners."
                         }
                     },
                     {
@@ -203,7 +320,7 @@
                         "name": "Is Amanda Harnett going to the Olympics?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Amanda is actively pursuing Olympic qualification for Team Canada, with goals set for both the LA 2028 and Brisbane 2032 Olympic Games."
+                            "text": "Amanda Harnett is actively pursuing Olympic qualification for Team Canada in beach volleyball. She competed at the 2019 Lima Pan American Games and has goals set for both the Los Angeles 2028 and Brisbane 2032 Olympic Games."
                         }
                     },
                     {
@@ -211,7 +328,15 @@
                         "name": "Where is Amanda Harnett from?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Amanda is from Canada and currently trains in Los Angeles, California."
+                            "text": "Amanda Harnett is from Burlington, Ontario, Canada, just outside Toronto. She is a graduate of the University of Toronto and currently trains in Los Angeles, California."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Who is Amanda Harnett's beach volleyball partner?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "On the AVP Pro Series, Amanda Harnett partners with Hannah Frohling, a former Pepperdine University player from the United States. For FIVB World Tour and Olympic qualification events, Amanda partners with Canadian athletes as per international competition rules requiring same-nationality teams."
                         }
                     },
                     {
@@ -219,7 +344,7 @@
                         "name": "Does Amanda Harnett offer coaching?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Yes, Amanda offers one-on-one coaching sessions and digital training programs including a 12-week Jump Training Program."
+                            "text": "Yes, Amanda offers one-on-one coaching sessions and digital training programs including a comprehensive 12-week Jump Training Program designed to improve vertical leap and explosive power for volleyball players."
                         }
                     },
                     {
@@ -227,14 +352,381 @@
                         "name": "What book did Amanda Harnett write?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Amanda authored 'Piggy & Kay: A Winter Sparkle', a children's book for ages 2-8 that teaches confidence and inner psychology through heartwarming stories."
+                            "text": "Amanda authored 'Piggy & Kay: A Winter Sparkle', a children's book for ages 2-8 that teaches confidence and inner psychology through heartwarming stories about friendship and kindness. It is the first book in an expanding Piggy & Kay series."
                         }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How tall is Amanda Harnett?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Amanda Harnett is 5 feet 9 inches (175 cm) tall."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What are Amanda Harnett's biggest achievements?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Amanda's notable achievements include representing Team Canada at the 2019 Lima Pan American Games in beach volleyball, competing on the AVP Pro Series and FIVB World Tour, being a member of the Canadian National Beach Volleyball Team, and authoring a children's book series."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Where did Amanda Harnett go to college?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Amanda Harnett attended the University of Toronto in Canada for her post-secondary education."
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "Service",
+                "name": "Amanda Harnett Volleyball Coaching",
+                "provider": {
+                    "@id": "https://amandaharnett.com/#person"
+                },
+                "serviceType": "Sports Coaching",
+                "description": "Professional beach volleyball coaching and training programs from Team Canada athlete Amanda Harnett",
+                "offers": [
+                    {
+                        "@type": "Offer",
+                        "name": "1-on-1 Coaching Session",
+                        "description": "Personalized beach volleyball technique analysis and improvement"
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "12-Week Jump Training Program",
+                        "description": "Comprehensive vertical leap and explosive power training program"
+                    }
+                ]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://amandaharnett.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "About Amanda Harnett",
+                        "item": "https://amandaharnett.com/#about"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Tournament Schedule",
+                        "item": "https://amandaharnett.com/#schedule"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": "Coaching & Training",
+                        "item": "https://amandaharnett.com/#shop"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 5,
+                        "name": "Partners & Sponsors",
+                        "item": "https://amandaharnett.com/#partners"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 6,
+                        "name": "Contact",
+                        "item": "https://amandaharnett.com/#contact"
                     }
                 ]
             }
         ]
     }
     </script>
+    
+    <!-- Speakable Schema for Voice Search / AEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Amanda Harnett - Canadian Professional Beach Volleyball Player",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".hero-lead", ".about-text", ".section-subtitle"]
+        },
+        "url": "https://amandaharnett.com"
+    }
+    </script>
+    
+    <!-- Agent-Optimized Product/Service Schema (AgentEO) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-coaching",
+                "name": "Professional Beach Volleyball Coaching with Amanda Harnett",
+                "description": "One-on-one personalized beach volleyball coaching sessions with Canadian professional athlete and Team Canada member Amanda Harnett. Includes technique analysis, skill development, game strategy, and personalized improvement plans. Available in-person (Los Angeles) or virtually.",
+                "category": "Sports Coaching",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett Athletics"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "priceSpecification": {
+                        "@type": "PriceSpecification",
+                        "priceCurrency": "USD",
+                        "eligibleTransactionVolume": {
+                            "@type": "PriceSpecification",
+                            "description": "Contact for pricing"
+                        }
+                    },
+                    "seller": {
+                        "@id": "https://amandaharnett.com/#person"
+                    },
+                    "url": "https://amandaharnett.com/#contact",
+                    "potentialAction": {
+                        "@type": "ContactAction",
+                        "target": "https://amandaharnett.com/#contact",
+                        "description": "Contact Amanda for coaching session booking"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Volleyball players, athletes, fitness enthusiasts"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-jump-program",
+                "name": "12-Week Jump Training Program",
+                "description": "Comprehensive digital training program designed by professional beach volleyball player Amanda Harnett to increase vertical jump height, explosive power, and athletic performance. Includes video tutorials, workout schedules, and progress tracking.",
+                "category": "Digital Training Program",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett Athletics"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "price": "99",
+                    "priceCurrency": "USD",
+                    "url": "https://amandaharnett.com/#shop",
+                    "potentialAction": {
+                        "@type": "BuyAction",
+                        "target": "https://amandaharnett.com/#shop"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Volleyball players, basketball players, athletes seeking vertical improvement"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-book",
+                "name": "Piggy & Kay: A Winter Sparkle",
+                "description": "Heartwarming children's picture book about friendship, confidence, and kindness. Written by professional athlete and author Amanda Harnett. Ages 2-8. First book in the Piggy & Kay series.",
+                "category": "Children's Book",
+                "author": {
+                    "@id": "https://amandaharnett.com/#person"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/PreOrder",
+                    "priceSpecification": {
+                        "@type": "PriceSpecification",
+                        "priceCurrency": "USD"
+                    },
+                    "url": "https://piggy-and-kay.vercel.app",
+                    "potentialAction": {
+                        "@type": "BuyAction",
+                        "target": "https://piggy-and-kay.vercel.app",
+                        "description": "Pre-order Piggy & Kay: A Winter Sparkle"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "suggestedMinAge": 2,
+                    "suggestedMaxAge": 8,
+                    "audienceType": "Children, Parents, Educators, Gift buyers"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-collectibles",
+                "name": "Amanda Harnett Digital Collectibles",
+                "description": "Official digital collectibles and sports memorabilia from Canadian professional beach volleyball player Amanda Harnett. Available on Zora blockchain platform.",
+                "category": "Digital Collectibles",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://zora.co/@amandaharnett",
+                    "potentialAction": {
+                        "@type": "ViewAction",
+                        "target": "https://zora.co/@amandaharnett",
+                        "description": "View and collect Amanda Harnett digital collectibles"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Collectors, Sports memorabilia enthusiasts, Web3 users, Fans"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-ab-program",
+                "name": "Core & Ab Training Program",
+                "description": "Professional athlete-designed ab and core strengthening program by Amanda Harnett. Includes exercises for stability, strength, and definition. Perfect for athletes and fitness enthusiasts seeking a strong foundation.",
+                "category": "Digital Training Program",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett Athletics"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "price": "79",
+                    "priceCurrency": "USD",
+                    "url": "https://amandaharnett.com/#shop",
+                    "potentialAction": {
+                        "@type": "BuyAction",
+                        "target": "https://amandaharnett.com/#shop"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Athletes, fitness enthusiasts, core strength seekers"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-legs-program",
+                "name": "Legs & Glutes Power Program",
+                "description": "Complete lower body training program by Amanda Harnett focusing on leg strength, glute development, and explosive power. Designed for athletic performance and aesthetics.",
+                "category": "Digital Training Program",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett Athletics"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "price": "89",
+                    "priceCurrency": "USD",
+                    "url": "https://amandaharnett.com/#shop",
+                    "potentialAction": {
+                        "@type": "BuyAction",
+                        "target": "https://amandaharnett.com/#shop"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Athletes, fitness enthusiasts, lower body strength seekers"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-signed-volleyball",
+                "name": "Amanda Harnett Signed Volleyball",
+                "description": "Official volleyball personally signed by Canadian professional beach volleyball player Amanda Harnett. Includes certificate of authenticity. Premium collectible for dedicated fans.",
+                "category": "Sports Memorabilia",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/LimitedAvailability",
+                    "price": "800",
+                    "priceCurrency": "USD",
+                    "url": "https://amandaharnett.com/#shop",
+                    "potentialAction": {
+                        "@type": "BuyAction",
+                        "target": "https://amandaharnett.com/#shop"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Collectors, Sports memorabilia enthusiasts, Volleyball fans"
+                }
+            },
+            {
+                "@type": "Product",
+                "@id": "https://amandaharnett.com/#product-signed-jersey",
+                "name": "Amanda Harnett Signed Jersey",
+                "description": "Official jersey personally signed by Canadian professional beach volleyball player Amanda Harnett. Includes certificate of authenticity. Premium collectible for dedicated fans.",
+                "category": "Sports Memorabilia",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Amanda Harnett"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/LimitedAvailability",
+                    "price": "1000",
+                    "priceCurrency": "USD",
+                    "url": "https://amandaharnett.com/#shop",
+                    "potentialAction": {
+                        "@type": "BuyAction",
+                        "target": "https://amandaharnett.com/#shop"
+                    }
+                },
+                "audience": {
+                    "@type": "PeopleAudience",
+                    "audienceType": "Collectors, Sports memorabilia enthusiasts, Volleyball fans"
+                }
+            },
+            {
+                "@type": "DonateAction",
+                "@id": "https://amandaharnett.com/#donate-action",
+                "name": "Support Amanda Harnett's Olympic Journey",
+                "description": "Support Canadian professional beach volleyball player Amanda Harnett's path to the 2028 and 2032 Olympics. As an independent athlete, Amanda self-funds her training, travel, and competition costs. Donations accepted via multiple cryptocurrencies including USDC, Bitcoin, Ethereum, Solana, and more via x402 protocol.",
+                "agent": {
+                    "@id": "https://amandaharnett.com/#person"
+                },
+                "recipient": {
+                    "@id": "https://amandaharnett.com/#person"
+                },
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://amandaharnett.com/#donate",
+                    "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]
+                },
+                "potentialAction": {
+                    "@type": "PayAction",
+                    "target": "https://amandaharnett.com/#donate"
+                }
+            },
+            {
+                "@type": "ContactPoint",
+                "@id": "https://amandaharnett.com/#contact-point",
+                "contactType": "Business Inquiries",
+                "url": "https://amandaharnett.com/#contact",
+                "availableLanguage": "English",
+                "areaServed": "Worldwide",
+                "potentialAction": {
+                    "@type": "ContactAction",
+                    "target": "https://amandaharnett.com/#contact"
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Agent Discovery Manifest Reference -->
+    <link rel="alternate" type="application/json" href="/agents.json" title="Agent Manifest">
+    <link rel="alternate" type="application/json" href="/ai.json" title="AI Policy">
 </head>
 <body>
     <!-- Preloader -->
@@ -245,32 +737,36 @@
         </div>
     </div>
 
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home" class="logo-text">AH</a>
+                <a href="#home" class="logo-text" aria-label="Amanda Harnett - Home">AH</a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#schedule" class="nav-link">Schedule</a></li>
-                <li><a href="#blog" class="nav-link">Blog</a></li>
-                <li><a href="#books" class="nav-link">Books</a></li>
-                <li><a href="#on-court" class="nav-link">On Court</a></li>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#home" class="nav-link" role="menuitem">Home</a></li>
+                <li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
+                <li role="none"><a href="#schedule" class="nav-link" role="menuitem">Schedule</a></li>
+                <li role="none"><a href="#blog" class="nav-link" role="menuitem">Blog</a></li>
+                <li role="none"><a href="#books" class="nav-link" role="menuitem">Books</a></li>
+                <li role="none"><a href="#on-court" class="nav-link" role="menuitem">On Court</a></li>
                 <li><a href="#off-court" class="nav-link">Off Court</a></li>
-                <li><a href="#shop" class="nav-link">Shop</a></li>
-                <li><a href="#partners" class="nav-link">Partners</a></li>
+                <li role="none"><a href="#shop" class="nav-link" role="menuitem">Shop</a></li>
+                <li role="none"><a href="#partners" class="nav-link" role="menuitem">Partners</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section with Premium Morphing Reveal -->
+    <main id="main-content">
     <section id="home" class="hero">
         <div class="hero-scroll-container">
         <div class="hero-container">
@@ -281,6 +777,8 @@
                     src="assets/hero/AmandaHarnettTeamCanada.JPG" 
                     alt="Amanda Harnett - Professional Beach Volleyball Player" 
                     class="hero-img hero-base"
+                    fetchpriority="high"
+                    decoding="async"
                 />
                 
                 <!-- SVG Mask for Calm Wave Reveal (overlay on top of base) -->
@@ -429,12 +927,13 @@
         <!-- Newsletter Signup in Hero -->
         <div class="hero-newsletter">
             <p>Join Amanda's Community</p>
-            <div id="beehiv-signup" class="newsletter-form">
+            <form id="beehiv-signup" class="newsletter-form" aria-label="Newsletter signup">
                 <!-- Beehiv signup form will be embedded here -->
-                <input type="email" placeholder="Enter your email" class="newsletter-input">
-                <button class="newsletter-btn">Subscribe</button>
-                <p class="newsletter-note">Get updates on tournaments, books, and exclusive content</p>
-            </div>
+                <label for="hero-email" class="visually-hidden">Email address</label>
+                <input type="email" id="hero-email" placeholder="Enter your email" class="newsletter-input" required aria-describedby="hero-newsletter-note">
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+                <p id="hero-newsletter-note" class="newsletter-note">Get updates on tournaments, books, and exclusive content</p>
+            </form>
         </div>
     </section>
 
@@ -952,7 +1451,7 @@
             <div class="parallax-track" id="parallaxTrack">
                 <div class="parallax-slide" data-title="Defensive Skills">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaDigging.png" alt="Amanda digging" class="parallax-img">
+                        <img src="assets/gallery/AmandaDigging.png" alt="Amanda digging" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Defensive Skills</span>
@@ -961,7 +1460,7 @@
                 </div>
                 <div class="parallax-slide" data-title="International Competition">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaDivingInternational3.png" alt="Amanda diving" class="parallax-img">
+                        <img src="assets/gallery/AmandaDivingInternational3.png" alt="Amanda diving" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">International Competition</span>
@@ -970,7 +1469,7 @@
                 </div>
                 <div class="parallax-slide" data-title="FIVB World Tour">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaDivingInternationalComp.JPG" alt="Amanda in international match" class="parallax-img">
+                        <img src="assets/gallery/AmandaDivingInternationalComp.JPG" alt="Amanda in international match" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">FIVB World Tour</span>
@@ -979,7 +1478,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Tournament Action">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaDivingInternationalComp2.JPG" alt="Amanda competing" class="parallax-img">
+                        <img src="assets/gallery/AmandaDivingInternationalComp2.JPG" alt="Amanda competing" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Tournament Action</span>
@@ -988,7 +1487,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Jump Float Serve">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaJumpFloat.png" alt="Amanda floating" class="parallax-img">
+                        <img src="assets/gallery/AmandaJumpFloat.png" alt="Amanda floating" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Jump Float Serve</span>
@@ -997,7 +1496,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Powerful Serve">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaJumpServe.png" alt="Amanda serving" class="parallax-img">
+                        <img src="assets/gallery/AmandaJumpServe.png" alt="Amanda serving" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Powerful Serve</span>
@@ -1006,7 +1505,7 @@
                 </div>
                 <div class="parallax-slide" data-title="AVP Pro Series">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaJumpServeAVP.png" alt="Amanda AVP serve" class="parallax-img">
+                        <img src="assets/gallery/AmandaJumpServeAVP.png" alt="Amanda AVP serve" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">AVP Pro Series</span>
@@ -1015,7 +1514,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Setting Technique">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaPassing.png" alt="Amanda passing" class="parallax-img">
+                        <img src="assets/gallery/AmandaPassing.png" alt="Amanda passing" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Setting Technique</span>
@@ -1024,7 +1523,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Training Focus">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaPractice.png" alt="Amanda practice" class="parallax-img">
+                        <img src="assets/gallery/AmandaPractice.png" alt="Amanda practice" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Training Focus</span>
@@ -1033,7 +1532,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Court Presence">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/AmandaServePrep.jpg" alt="Amanda serve prep" class="parallax-img">
+                        <img src="assets/gallery/AmandaServePrep.jpg" alt="Amanda serve prep" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Court Presence</span>
@@ -1042,7 +1541,7 @@
                 </div>
                 <div class="parallax-slide" data-title="Peak Performance">
                     <div class="slide-image-wrapper">
-                        <img src="assets/gallery/IMG_7160.JPG" alt="Amanda action shot" class="parallax-img">
+                        <img src="assets/gallery/IMG_7160.JPG" alt="Amanda action shot" class="parallax-img" loading="lazy" decoding="async">
                     </div>
                     <div class="slide-overlay">
                         <span class="slide-title">Peak Performance</span>
@@ -1154,7 +1653,7 @@
             <div class="books-grid">
                 <div class="book-card">
                     <div class="book-cover">
-                        <img src="assets/books/PiggyKayWS_Cover.jpeg" alt="Piggy and Kay: A Winter Sparkle" class="book-img">
+                        <img src="assets/books/PiggyKayWS_Cover.jpeg" alt="Piggy and Kay: A Winter Sparkle" class="book-img" loading="lazy" decoding="async">
                     </div>
                     <h3>Piggy & Kay</h3>
                     <p class="book-series">A Winter Sparkle</p>
@@ -1185,7 +1684,7 @@
         <div class="dual-container">
             <div class="dual-item">
                 <div class="dual-image">
-                    <img src="assets/lifestyle/AmandaOnCourt.png" alt="Amanda playing volleyball" class="dual-img">
+                    <img src="assets/lifestyle/AmandaOnCourt.png" alt="Amanda playing volleyball" class="dual-img" loading="lazy" decoding="async">
                 </div>
                 <div class="dual-content">
                     <h2 class="dual-title">On Court</h2>
@@ -1204,7 +1703,7 @@
                     <a href="#" class="dual-link">Behind the Scenes →</a>
                 </div>
                 <div class="dual-image">
-                    <img src="assets/lifestyle/AmandaOffCourt.jpeg" alt="Amanda off court" class="dual-img">
+                    <img src="assets/lifestyle/AmandaOffCourt.jpeg" alt="Amanda off court" class="dual-img" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -1377,7 +1876,7 @@
                 <div class="partners-grid affiliations">
                     <div class="partner-card affiliation-card">
                         <div class="partner-logo">
-                            <img src="assets/partners/Team-Canada-Logo.png" alt="Team Canada" class="sponsor-img">
+                            <img src="assets/partners/Team-Canada-Logo.png" alt="Team Canada" class="sponsor-img" loading="lazy" decoding="async">
                         </div>
                         <h4>Team Canada</h4>
                         <p class="partner-role">Canadian Olympic Committee</p>
@@ -1386,7 +1885,7 @@
                     </div>
                     <div class="partner-card affiliation-card">
                         <div class="partner-logo">
-                            <img src="assets/partners/Volleyball-Canada-Logo.png" alt="Volleyball Canada" class="sponsor-img">
+                            <img src="assets/partners/Volleyball-Canada-Logo.png" alt="Volleyball Canada" class="sponsor-img" loading="lazy" decoding="async">
                         </div>
                         <h4>Volleyball Canada</h4>
                         <p class="partner-role">National Sport Governing Body</p>
@@ -1402,7 +1901,7 @@
                 <div class="partners-grid platinum">
                     <div class="partner-card">
                         <div class="partner-logo">
-                            <img src="assets/partners/Monarch-Large.svg" alt="Monarch Athletic Club" class="sponsor-img">
+                            <img src="assets/partners/Monarch-Large.svg" alt="Monarch Athletic Club" class="sponsor-img" loading="lazy" decoding="async">
                         </div>
                         <h4>Monarch Athletic Club</h4>
                         <p class="partner-role">Official Wellness Partner</p>
@@ -1622,20 +2121,22 @@
     </section>
 
     <!-- Newsletter Section in Footer -->
-    <section class="footer-newsletter">
+    <section class="footer-newsletter" aria-labelledby="newsletter-heading">
         <div class="footer-newsletter-content">
-            <h3>Stay Updated</h3>
+            <h3 id="newsletter-heading">Stay Updated</h3>
             <p>Subscribe to receive tournament updates, book releases, and exclusive content from Amanda.</p>
-            <div id="beehiv-footer-signup" class="newsletter-form newsletter-footer-form">
+            <form id="beehiv-footer-signup" class="newsletter-form newsletter-footer-form" aria-label="Footer newsletter signup">
                 <!-- Beehiv signup form will be embedded here -->
-                <input type="email" placeholder="Enter your email" class="newsletter-input">
-                <button class="newsletter-btn">Subscribe</button>
-            </div>
+                <label for="footer-email" class="visually-hidden">Email address</label>
+                <input type="email" id="footer-email" placeholder="Enter your email" class="newsletter-input" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-container">
             <div class="footer-content">
                 <h3>Amanda Harnett</h3>
@@ -1664,6 +2165,6 @@
         <p class="progress-label">explored</p>
     </div>
 
-    <script src="script.js?v=21"></script>
+    <script src="script.js?v=22" defer></script>
 </body>
 </html>

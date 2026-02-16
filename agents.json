@@ -1,0 +1,395 @@
+{
+  "name": "Amanda Harnett Official Website",
+  "description": "Agent-accessible manifest for Amanda Harnett - Canadian Professional Beach Volleyball Player, Coach, and Author",
+  "version": "2.0.0",
+  "lastUpdated": "2026-02-15",
+  "owner": {
+    "name": "Amanda Harnett",
+    "type": "Person",
+    "profession": ["Professional Athlete", "Author", "Coach"],
+    "nationality": "Canadian"
+  },
+  
+  "capabilities": {
+    "services": true,
+    "products": true,
+    "collectibles": true,
+    "physicalMerchandise": true,
+    "donations": true,
+    "cryptoPayments": true,
+    "x402Payments": true,
+    "contact": true,
+    "scheduling": false,
+    "directPurchase": true,
+    "apiAccess": false
+  },
+
+  "donations": {
+    "enabled": true,
+    "description": "Support Amanda Harnett's Olympic journey and athletic career through direct donations. Amanda is an independent athlete self-funding her path to the 2028 and 2032 Olympics.",
+    "taxStatus": {
+      "note": "Contact for tax deduction eligibility information",
+      "type": "inquiry"
+    },
+    "x402Protocol": true,
+    "acceptedPaymentMethods": [
+      {
+        "method": "USDC",
+        "networks": ["Ethereum", "Base", "Solana"],
+        "addresses": {
+          "ethereum": "PLACEHOLDER_ETH_USDC_ADDRESS",
+          "base": "PLACEHOLDER_BASE_USDC_ADDRESS",
+          "solana": "PLACEHOLDER_SOL_USDC_ADDRESS"
+        }
+      },
+      {
+        "method": "Bitcoin",
+        "network": "Bitcoin",
+        "address": "PLACEHOLDER_BTC_ADDRESS"
+      },
+      {
+        "method": "Ethereum",
+        "network": "Ethereum",
+        "address": "PLACEHOLDER_ETH_ADDRESS"
+      },
+      {
+        "method": "Solana",
+        "network": "Solana",
+        "address": "PLACEHOLDER_SOL_ADDRESS"
+      },
+      {
+        "method": "Sui",
+        "network": "Sui",
+        "address": "PLACEHOLDER_SUI_ADDRESS"
+      },
+      {
+        "method": "Monad",
+        "network": "Monad",
+        "address": "PLACEHOLDER_MONAD_ADDRESS"
+      },
+      {
+        "method": "Base",
+        "network": "Base",
+        "address": "PLACEHOLDER_BASE_ADDRESS"
+      },
+      {
+        "method": "Hedera",
+        "network": "Hedera",
+        "address": "PLACEHOLDER_HEDERA_ADDRESS"
+      }
+    ],
+    "donationTiers": [
+      {
+        "name": "Supporter",
+        "minAmount": 10,
+        "currency": "USD",
+        "perks": ["Thank you message", "Newsletter subscription"]
+      },
+      {
+        "name": "Fan",
+        "minAmount": 50,
+        "currency": "USD",
+        "perks": ["Personalized thank you video", "Name on supporter wall"]
+      },
+      {
+        "name": "Champion",
+        "minAmount": 250,
+        "currency": "USD",
+        "perks": ["Exclusive updates", "Signed digital collectible"]
+      },
+      {
+        "name": "Olympic Sponsor",
+        "minAmount": 1000,
+        "currency": "USD",
+        "perks": ["VIP meet and greet opportunity", "Signed merchandise", "Recognition as official supporter"]
+      }
+    ],
+    "actionUrl": "https://amandaharnett.com/#donate",
+    "actionType": "DonateAction",
+    "keywords": ["athlete donation", "Olympic funding", "sports sponsorship", "crypto donation", "support athlete", "tax deductible donation"]
+  },
+
+  "services": [
+    {
+      "id": "coaching-1on1",
+      "name": "1-on-1 Volleyball Coaching Session",
+      "category": ["Sports Coaching", "Fitness", "Volleyball Training"],
+      "description": "Personalized beach volleyball coaching session with professional Team Canada athlete Amanda Harnett. Includes technique analysis, skill development, and personalized feedback.",
+      "provider": "Amanda Harnett",
+      "targetAudience": ["Volleyball players", "Athletes", "Beginners to advanced"],
+      "deliveryMethod": "In-person (Los Angeles area) or Virtual",
+      "pricing": {
+        "currency": "USD",
+        "type": "inquiry",
+        "note": "Contact for pricing and availability"
+      },
+      "cryptoPayments": true,
+      "actionUrl": "https://amandaharnett.com/#contact",
+      "actionType": "ContactAction",
+      "keywords": ["volleyball coaching", "beach volleyball lessons", "professional athlete coach", "Team Canada coach"]
+    },
+    {
+      "id": "athlete-partnership",
+      "name": "Brand Partnership / Sponsorship",
+      "category": ["Sports Marketing", "Athlete Endorsement", "Brand Partnership"],
+      "description": "Partnership opportunities with Canadian professional beach volleyball player Amanda Harnett. Includes brand ambassadorship, social media promotion, event appearances, and product endorsements.",
+      "provider": "Amanda Harnett",
+      "targetAudience": ["Brands", "Sports companies", "Fitness brands", "Lifestyle brands"],
+      "audienceReach": {
+        "platforms": ["Instagram", "TikTok", "LinkedIn", "Website"],
+        "demographics": "18-45, fitness-focused, sports enthusiasts"
+      },
+      "pricing": {
+        "type": "inquiry",
+        "note": "Contact for partnership details"
+      },
+      "actionUrl": "https://amandaharnett.com/#contact",
+      "actionType": "ContactAction",
+      "keywords": ["athlete sponsorship", "brand ambassador", "sports influencer", "volleyball endorsement"]
+    }
+  ],
+
+  "fitnessPrograms": [
+    {
+      "id": "jump-training-program",
+      "name": "12-Week Jump Training Program",
+      "category": ["Fitness Program", "Athletic Training", "Digital Product", "Vertical Jump"],
+      "description": "Comprehensive 12-week digital training program designed to increase vertical jump, explosive power, and athletic performance. Created by professional beach volleyball player Amanda Harnett. Includes video tutorials, workout schedules, and progress tracking.",
+      "provider": "Amanda Harnett",
+      "targetAudience": ["Volleyball players", "Basketball players", "Athletes seeking vertical improvement"],
+      "deliveryMethod": "Digital download",
+      "pricing": {
+        "amount": 99,
+        "currency": "USD",
+        "range": "50-150"
+      },
+      "cryptoPayments": true,
+      "actionUrl": "https://amandaharnett.com/#shop",
+      "actionType": "BuyAction",
+      "keywords": ["jump training", "vertical leap program", "explosive power", "volleyball training program", "athletic performance", "plyometrics"]
+    },
+    {
+      "id": "ab-workouts-program",
+      "name": "Core & Ab Training Program",
+      "category": ["Fitness Program", "Core Training", "Digital Product", "Abs"],
+      "description": "Professional athlete-designed ab and core strengthening program. Includes exercises for stability, strength, and definition. Perfect for athletes and fitness enthusiasts looking to build a strong foundation.",
+      "provider": "Amanda Harnett",
+      "targetAudience": ["Athletes", "Fitness enthusiasts", "Core strength seekers"],
+      "deliveryMethod": "Digital download",
+      "pricing": {
+        "amount": 79,
+        "currency": "USD",
+        "range": "50-150"
+      },
+      "cryptoPayments": true,
+      "actionUrl": "https://amandaharnett.com/#shop",
+      "actionType": "BuyAction",
+      "keywords": ["ab workout", "core training", "abs program", "athlete abs", "core strength", "six pack workout"]
+    },
+    {
+      "id": "legs-glutes-program",
+      "name": "Legs & Glutes Power Program",
+      "category": ["Fitness Program", "Lower Body Training", "Digital Product", "Glutes", "Legs"],
+      "description": "Complete lower body training program focusing on leg strength, glute development, and explosive power. Designed by a professional beach volleyball player for athletic performance and aesthetics.",
+      "provider": "Amanda Harnett",
+      "targetAudience": ["Athletes", "Fitness enthusiasts", "Women seeking lower body strength"],
+      "deliveryMethod": "Digital download",
+      "pricing": {
+        "amount": 89,
+        "currency": "USD",
+        "range": "50-150"
+      },
+      "cryptoPayments": true,
+      "actionUrl": "https://amandaharnett.com/#shop",
+      "actionType": "BuyAction",
+      "keywords": ["legs workout", "glutes program", "lower body training", "booty workout", "leg strength", "athletic legs"]
+    }
+  ],
+
+  "products": [
+    {
+      "id": "book-piggy-kay-winter",
+      "name": "Piggy & Kay: A Winter Sparkle",
+      "category": ["Children's Book", "Picture Book", "Educational"],
+      "description": "A heartwarming children's book about friendship, confidence, and kindness. Written by professional athlete Amanda Harnett. Suitable for ages 2-8. First in an expanding series.",
+      "creator": "Amanda Harnett",
+      "format": "Hardcover",
+      "targetAudience": {
+        "ageRange": "2-8 years",
+        "type": ["Children", "Parents", "Gift buyers", "Educators"]
+      },
+      "themes": ["Friendship", "Confidence", "Kindness", "Self-esteem"],
+      "series": "Piggy & Kay Series",
+      "seriesPosition": 1,
+      "availability": "Pre-order",
+      "cryptoPayments": true,
+      "actionUrl": "https://piggy-and-kay.vercel.app",
+      "actionType": "BuyAction",
+      "keywords": ["children's book", "picture book", "friendship book", "confidence for kids", "athlete author"]
+    }
+  ],
+
+  "physicalCollectibles": [
+    {
+      "id": "signed-volleyball",
+      "name": "Amanda Harnett Signed Volleyball",
+      "category": ["Sports Memorabilia", "Signed Collectible", "Volleyball", "Physical Product"],
+      "description": "Official volleyball personally signed by Canadian professional beach volleyball player Amanda Harnett. Includes certificate of authenticity. Perfect for collectors and fans.",
+      "creator": "Amanda Harnett",
+      "type": "Physical",
+      "authentication": "Certificate of Authenticity included",
+      "pricing": {
+        "amount": 800,
+        "currency": "USD"
+      },
+      "cryptoPayments": true,
+      "availability": "Limited",
+      "shipping": "Worldwide",
+      "actionUrl": "https://amandaharnett.com/#shop",
+      "actionType": "BuyAction",
+      "keywords": ["signed volleyball", "athlete autograph", "sports memorabilia", "volleyball collectible", "Team Canada"]
+    },
+    {
+      "id": "signed-jersey",
+      "name": "Amanda Harnett Signed Jersey",
+      "category": ["Sports Memorabilia", "Signed Collectible", "Jersey", "Physical Product"],
+      "description": "Official jersey personally signed by Canadian professional beach volleyball player Amanda Harnett. Includes certificate of authenticity. Premium collectible for dedicated fans.",
+      "creator": "Amanda Harnett",
+      "type": "Physical",
+      "authentication": "Certificate of Authenticity included",
+      "pricing": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "cryptoPayments": true,
+      "availability": "Limited",
+      "shipping": "Worldwide",
+      "actionUrl": "https://amandaharnett.com/#shop",
+      "actionType": "BuyAction",
+      "keywords": ["signed jersey", "athlete autograph", "sports memorabilia", "jersey collectible", "Team Canada"]
+    }
+  ],
+
+  "digitalCollectibles": [
+    {
+      "id": "zora-collection",
+      "name": "Amanda Harnett Zora Collection",
+      "category": ["Digital Collectibles", "NFT", "Athlete Memorabilia"],
+      "description": "Official digital collectibles and memorabilia from Canadian professional beach volleyball player Amanda Harnett on Zora.",
+      "platform": "Zora",
+      "blockchain": "Base/Ethereum",
+      "creator": "Amanda Harnett",
+      "targetAudience": ["Collectors", "Sports memorabilia enthusiasts", "Web3 users", "Fans"],
+      "actionUrl": "https://zora.co/@amandaharnett",
+      "actionType": "ViewAction",
+      "keywords": ["athlete NFT", "sports collectibles", "digital memorabilia", "volleyball NFT", "Zora"]
+    },
+    {
+      "id": "nft-collection-future",
+      "name": "Amanda Harnett NFT Collection",
+      "category": ["Digital Collectibles", "NFT", "Athlete Memorabilia"],
+      "description": "Upcoming official NFT collection from Canadian professional beach volleyball player Amanda Harnett. Multiple blockchain support coming soon.",
+      "platforms": ["Coming Soon"],
+      "blockchains": ["Ethereum", "Solana", "Base", "Sui"],
+      "creator": "Amanda Harnett",
+      "status": "Coming Soon",
+      "targetAudience": ["Collectors", "Sports memorabilia enthusiasts", "Web3 users", "Fans"],
+      "actionUrl": "https://amandaharnett.com/#collectibles",
+      "actionType": "ViewAction",
+      "keywords": ["athlete NFT", "sports NFT", "digital collectibles", "volleyball NFT", "multi-chain NFT"]
+    }
+  ],
+
+  "athleteData": {
+    "name": "Amanda Harnett",
+    "sport": "Beach Volleyball",
+    "nationality": "Canada",
+    "birthYear": 1997,
+    "height": "5'9\" (175 cm)",
+    "hometown": "Burlington, Ontario, Canada",
+    "trainingBase": "Los Angeles, California, USA",
+    "education": "University of Toronto",
+    "currentPartner": {
+      "avp": "Hannah Frohling (USA)",
+      "fivb": "Canadian partner (varies)"
+    },
+    "tours": ["AVP Pro Series", "FIVB World Tour", "NORCECA"],
+    "teams": ["Team Canada Beach Volleyball"],
+    "notableAchievements": [
+      "2019 Lima Pan American Games - Team Canada",
+      "AVP Pro Series competitor",
+      "FIVB World Tour participant",
+      "Canadian National Team member"
+    ],
+    "olympicGoals": ["Los Angeles 2028", "Brisbane 2032"],
+    "externalProfiles": {
+      "fivb": "https://www.fivb.com/players/players-database/player/156177",
+      "olympicCanada": "https://olympic.ca/team-canada/amanda-harnett/",
+      "volleyballCanada": "https://volleyball.ca/en/athletes/amanda-harnett",
+      "bvbinfo": "http://www.bvbinfo.com/player.asp?ID=16617",
+      "volleybox": "https://women.volleybox.net/amanda-harnett-p22895/beach_tournaments",
+      "cbva": "https://cbva.com/profile/28179"
+    }
+  },
+
+  "fitnessAndWellness": {
+    "partnerOrganization": {
+      "name": "Monarch Athletic Club",
+      "type": "Official Wellness Partner",
+      "description": "Premier medically-driven luxury fitness and wellness destination. Integrates personalized training, physical therapy, nutrition, and diagnostic health services.",
+      "url": "https://monarchclubs.com/",
+      "services": ["Personalized training", "Physical therapy", "Nutrition", "Diagnostic health", "Longevity programs"]
+    },
+    "coachingAvailable": true,
+    "trainingProgramsAvailable": true,
+    "programsOffered": ["Jump Training ($99)", "Ab/Core Training ($79)", "Legs & Glutes ($89)"]
+  },
+
+  "paymentMethods": {
+    "fiat": ["USD", "CAD"],
+    "crypto": {
+      "accepted": true,
+      "x402Protocol": true,
+      "x402Endpoint": "https://amandaharnett.com/.well-known/x402",
+      "currencies": ["USDC", "Bitcoin", "Ethereum", "Solana", "Sui", "Monad", "Base (ETH)", "Hedera"],
+      "note": "Crypto payments accepted for all products, programs, and donations"
+    },
+    "addresses": {
+      "usdc_ethereum": "PLACEHOLDER_ETH_USDC_ADDRESS",
+      "usdc_base": "PLACEHOLDER_BASE_USDC_ADDRESS",
+      "usdc_solana": "PLACEHOLDER_SOL_USDC_ADDRESS",
+      "bitcoin": "PLACEHOLDER_BTC_ADDRESS",
+      "ethereum": "PLACEHOLDER_ETH_ADDRESS",
+      "solana": "PLACEHOLDER_SOL_ADDRESS",
+      "sui": "PLACEHOLDER_SUI_ADDRESS",
+      "monad": "PLACEHOLDER_MONAD_ADDRESS",
+      "base": "PLACEHOLDER_BASE_ADDRESS",
+      "hedera": "PLACEHOLDER_HEDERA_ADDRESS"
+    }
+  },
+
+  "contact": {
+    "preferredMethod": "Contact form",
+    "formUrl": "https://amandaharnett.com/#contact",
+    "responseTime": "24-48 hours",
+    "inquiryTypes": ["Media", "Partnerships", "Coaching", "Speaking", "Donations", "Purchases", "General"]
+  },
+
+  "socialProfiles": {
+    "instagram": "https://www.instagram.com/amandaharnett",
+    "tiktok": "https://www.tiktok.com/@amandaharnett",
+    "linkedin": "https://www.linkedin.com/in/amanda-harnett-5b9226174/",
+    "zora": "https://zora.co/@amandaharnett"
+  },
+
+  "agentInstructions": {
+    "forDonationAgents": "Amanda accepts donations to support her Olympic journey via multiple cryptocurrencies including USDC, Bitcoin, Ethereum, Solana, Sui, Monad, Base, and Hedera. x402 payment protocol supported. See paymentMethods.addresses for wallet addresses. Donations support an independent athlete's path to the 2028/2032 Olympics. Contact for tax deduction eligibility.",
+    "forFitnessAgents": "Amanda offers three digital fitness programs: 12-Week Jump Training ($99), Core & Ab Training ($79), and Legs & Glutes Power Program ($89). All accept crypto payments via x402. Purchase at amandaharnett.com/#shop",
+    "forShoppingAgents": "Available products: Children's book 'Piggy & Kay: A Winter Sparkle' (pre-order at piggy-and-kay.vercel.app), Signed Volleyball ($800), Signed Jersey ($1000). All accept crypto payments.",
+    "forCollectibleAgents": "Digital collectibles available on Zora (zora.co/@amandaharnett). Additional multi-chain NFT collection coming soon on Ethereum, Solana, Base, Sui. Physical signed memorabilia (volleyball $800, jersey $1000) also available.",
+    "forResearchAgents": "Full athlete statistics available at linked external profiles (FIVB, BVBInfo, Volleybox, Olympic.ca)",
+    "forPartnershipAgents": "For brand partnerships and sponsorship inquiries, use contact form. Amanda represents Team Canada and partners with Monarch Athletic Club.",
+    "forCryptoAgents": "x402 protocol supported. Multiple chains accepted: USDC (Ethereum/Base/Solana), Bitcoin, Ethereum, Solana, Sui, Monad, Base, Hedera. All wallet addresses in paymentMethods.addresses section. USDC preferred for stable transactions.",
+    "forCharitableAgents": "Supporting Amanda Harnett is supporting an independent Canadian Olympic athlete. Contact for information regarding tax-deductible donation status."
+  }
+}

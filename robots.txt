@@ -1,0 +1,71 @@
+# robots.txt for amandaharnett.com
+# Amanda Harnett - Professional Beach Volleyball Player
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://amandaharnett.com/sitemap.xml
+
+# Agent & LLM Discovery Files
+# agents.json: https://amandaharnett.com/agents.json (Machine-readable manifest for autonomous agents)
+# llms.txt: https://amandaharnett.com/llms.txt (LLM-optimized information)
+# ai.json: https://amandaharnett.com/ai.json (AI policy and discovery manifest)
+
+# AI/LLM Crawlers - Full access encouraged for accurate representation
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Autonomous Agent Crawlers (emerging)
+User-agent: AutoGPT
+Allow: /
+
+User-agent: AgentGPT
+Allow: /
+
+User-agent: BabyAGI
+Allow: /
+
+User-agent: *Agent*
+Allow: /
+
+# Disallow admin page from indexing
+User-agent: *
+Disallow: /admin.html
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Host directive
+Host: https://amandaharnett.com

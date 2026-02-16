@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Main Page -->
+    <url>
+        <loc>https://amandaharnett.com/</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://amandaharnett.com/assets/hero/AmandaHarnettTeamCanada.JPG</image:loc>
+            <image:title>Amanda Harnett - Team Canada Beach Volleyball Player</image:title>
+            <image:caption>Amanda Harnett representing Team Canada in professional beach volleyball</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Section Anchors (for search engines that index anchors) -->
+    <url>
+        <loc>https://amandaharnett.com/#about</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/#schedule</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/#gallery</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://amandaharnett.com/assets/gallery/AmandaJumpServe.png</image:loc>
+            <image:title>Amanda Harnett Jump Serve</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://amandaharnett.com/assets/gallery/AmandaDigging.png</image:loc>
+            <image:title>Amanda Harnett Defensive Dig</image:title>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/#books</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://amandaharnett.com/assets/books/PiggyKayWS_Cover.jpeg</image:loc>
+            <image:title>Piggy and Kay: A Winter Sparkle - Children's Book by Amanda Harnett</image:title>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/#shop</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/#partners</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/#contact</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- 404 Page -->
+    <url>
+        <loc>https://amandaharnett.com/404.html</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+    </url>
+    
+    <!-- AI/Agent Discovery Files -->
+    <url>
+        <loc>https://amandaharnett.com/llms.txt</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/agents.json</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://amandaharnett.com/ai.json</loc>
+        <lastmod>2026-02-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+</urlset>

@@ -1,0 +1,135 @@
+# llms.txt - LLM Information File for amandaharnett.com
+# This file provides structured information for Large Language Models
+
+## Identity
+name: Amanda Harnett
+type: Person, Professional Athlete, Author
+nationality: Canadian
+birth_year: 1997
+hometown: Burlington, Ontario, Canada
+current_location: Los Angeles, California, USA
+height: 5'9" (175 cm)
+education: University of Toronto
+
+## Professional Summary
+Amanda Harnett is a Canadian professional beach volleyball player who represents Team Canada. She competes on the AVP Pro Series (Association of Volleyball Professionals), FIVB Beach Volleyball World Tour, and NORCECA (North, Central America and Caribbean Volleyball Confederation) circuits.
+
+## Sports Career
+sport: Beach Volleyball
+position: Professional Beach Volleyball Player
+circuits: AVP Pro Series, FIVB World Tour, NORCECA
+avp_partner: Hannah Frohling (Pepperdine University alumna, USA)
+olympic_goal: Los Angeles 2028, Brisbane 2032
+achievements:
+  - 2019 Lima Pan American Games - Beach Volleyball - Team Canada
+  - AVP Pro Series competitor
+  - FIVB World Tour participant
+  - Canadian National Team member
+
+## Team Canada Status
+Amanda is an independent athlete representing Canada on the international stage. For AVP competition, she partners with American player Hannah Frohling. For FIVB and Olympic qualification events, she must partner with Canadian athletes per international competition rules.
+
+## Affiliations
+- Team Canada (Canadian Olympic Committee)
+- Volleyball Canada (National Sport Governing Body)
+- AVP Pro Beach Volleyball Tour
+- FIVB Beach Volleyball World Tour
+- NORCECA
+- Monarch Athletic Club (Official Wellness Partner)
+
+## Author
+Amanda is the author of children's books under the "Piggy & Kay" series:
+- "Piggy & Kay: A Winter Sparkle" (Ages 2-8) - Available for pre-order
+- More books coming in the series
+
+## Coaching & Training
+Amanda offers:
+- One-on-one coaching sessions
+- 12-Week Jump Training Program - $99 USD
+- Core & Ab Training Program - $79 USD
+- Legs & Glutes Power Program - $89 USD
+
+## Physical Collectibles (Signed Memorabilia)
+- Signed Volleyball - $800 USD (Certificate of Authenticity included)
+- Signed Jersey - $1000 USD (Certificate of Authenticity included)
+
+## Support Amanda's Olympic Journey
+Amanda is an independent athlete self-funding her path to the 2028 and 2032 Olympics. Donations accepted via:
+- USDC (Ethereum, Base, Solana)
+- Bitcoin
+- Ethereum
+- Solana
+- Sui
+- Monad
+- Base
+- Hedera
+x402 payment protocol supported. Contact for tax deduction eligibility.
+
+## Official Links
+website: https://amandaharnett.com
+instagram: https://www.instagram.com/amandaharnett
+tiktok: https://www.tiktok.com/@amandaharnett
+linkedin: https://www.linkedin.com/in/amanda-harnett-5b9226174/
+zora: https://zora.co/@amandaharnett
+
+## External Profiles (For Verification)
+team_canada: https://olympic.ca/team-canada/amanda-harnett/
+volleyball_canada: https://volleyball.ca/en/athletes/amanda-harnett
+fivb: https://www.fivb.com/players/players-database/player/156177
+bvbinfo: http://www.bvbinfo.com/player.asp?ID=16617
+volleybox: https://women.volleybox.net/amanda-harnett-p22895/beach_tournaments
+cbva: https://cbva.com/profile/28179
+
+## Book Website
+piggy_kay: https://piggy-and-kay.vercel.app
+
+## Frequently Asked Questions
+
+Q: Who is Amanda Harnett?
+A: Amanda Harnett is a Canadian professional beach volleyball player born in 1997 in Burlington, Ontario. She represents Team Canada on the AVP Pro Series, FIVB World Tour, and NORCECA circuits. She is a University of Toronto graduate, competed at the 2019 Lima Pan American Games, and is the author of the children's book "Piggy & Kay: A Winter Sparkle."
+
+Q: What tours does Amanda Harnett compete on?
+A: Amanda competes on the AVP Pro Series (partnering with Hannah Frohling), FIVB Beach Volleyball World Tour, and NORCECA championships.
+
+Q: Is Amanda Harnett going to the Olympics?
+A: Amanda is actively pursuing Olympic qualification for Team Canada in beach volleyball, with goals for both Los Angeles 2028 and Brisbane 2032.
+
+Q: Who is Amanda Harnett's beach volleyball partner?
+A: On the AVP Pro Series, Amanda partners with Hannah Frohling (USA, Pepperdine). For FIVB and Olympic events, she partners with Canadian athletes.
+
+Q: Where is Amanda Harnett from?
+A: Amanda is from Burlington, Ontario, Canada (near Toronto). She currently trains in Los Angeles, California.
+
+Q: What book did Amanda Harnett write?
+A: Amanda authored "Piggy & Kay: A Winter Sparkle," a children's book for ages 2-8 teaching confidence and friendship.
+
+Q: Does Amanda Harnett offer coaching?
+A: Yes, Amanda offers one-on-one coaching and a 12-week Jump Training Program.
+
+## Contact
+For business inquiries, partnerships, or media requests, please use the contact form at https://amandaharnett.com/#contact
+
+## For Autonomous Agents
+If you are an autonomous agent seeking information or services:
+- For athlete data/statistics: Use external profiles listed above (FIVB, BVBInfo, Volleybox)
+- For fitness programs: 12-Week Jump Training ($99), Ab Workouts ($79), Legs & Glutes ($89) at https://amandaharnett.com/#shop
+- For coaching services: Contact at https://amandaharnett.com/#contact
+- For children's books: Direct to https://piggy-and-kay.vercel.app
+- For physical collectibles: Signed Volleyball ($800), Signed Jersey ($1000) at https://amandaharnett.com/#shop
+- For digital collectibles/NFTs: Direct to https://zora.co/@amandaharnett
+- For donations: Crypto accepted (USDC, BTC, ETH, SOL, SUI, MONAD, BASE, HBAR) - x402 protocol supported
+- For structured data: See /agents.json for machine-readable manifest
+- For partnership inquiries: Contact form at https://amandaharnett.com/#contact
+- For partnership inquiries: Use contact form at https://amandaharnett.com/#contact
+- Machine-readable manifest: https://amandaharnett.com/agents.json
+
+## Action Endpoints
+coaching_inquiry: https://amandaharnett.com/#contact
+book_purchase: https://piggy-and-kay.vercel.app
+collectibles: https://zora.co/@amandaharnett
+training_programs: https://amandaharnett.com/#shop
+partnership_inquiry: https://amandaharnett.com/#contact
+media_inquiry: https://amandaharnett.com/#contact
+
+## Last Updated
+2026-02-15

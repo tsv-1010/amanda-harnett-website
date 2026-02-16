@@ -1,0 +1,62 @@
+{
+  "name": "Amanda Harnett",
+  "description": "Canadian Professional Beach Volleyball Player, Author & Coach",
+  "version": "1.0",
+  
+  "ai_policy": {
+    "training_allowed": true,
+    "indexing_allowed": true,
+    "crawling_allowed": true,
+    "citation_required": false,
+    "preferred_citation": "Amanda Harnett (amandaharnett.com)"
+  },
+  
+  "agent_policy": {
+    "autonomous_access": true,
+    "transaction_allowed": false,
+    "booking_allowed": false,
+    "contact_form_submission": true,
+    "data_extraction": true
+  },
+  
+  "discovery_files": {
+    "llms_txt": "/llms.txt",
+    "agents_json": "/agents.json",
+    "humans_txt": "/humans.txt",
+    "sitemap": "/sitemap.xml",
+    "robots": "/robots.txt"
+  },
+  
+  "contact": {
+    "form": "https://amandaharnett.com/#contact",
+    "response_time": "24-48 hours"
+  },
+  
+  "services": [
+    {
+      "type": "coaching",
+      "action_url": "https://amandaharnett.com/#contact"
+    },
+    {
+      "type": "training_programs", 
+      "action_url": "https://amandaharnett.com/#shop"
+    },
+    {
+      "type": "partnership",
+      "action_url": "https://amandaharnett.com/#contact"
+    }
+  ],
+  
+  "products": [
+    {
+      "type": "book",
+      "name": "Piggy & Kay: A Winter Sparkle",
+      "action_url": "https://piggy-and-kay.vercel.app"
+    },
+    {
+      "type": "collectibles",
+      "platform": "Zora",
+      "action_url": "https://zora.co/@amandaharnett"
+    }
+  ]
+}

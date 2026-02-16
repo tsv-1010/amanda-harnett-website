@@ -169,13 +169,15 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
 hamburger?.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
+    const isExpanded = navMenu?.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
 });
 
 // Close menu when link is clicked
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu?.classList.remove('active');
+        hamburger?.setAttribute('aria-expanded', 'false');
     });
 });
 

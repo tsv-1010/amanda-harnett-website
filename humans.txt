@@ -1,0 +1,18 @@
+/* TEAM */
+Athlete & Creator: Amanda Harnett
+Site: https://amandaharnett.com
+Location: Burlington, Ontario, Canada / Los Angeles, California, USA
+
+/* SITE */
+Last update: 2026-02-15
+Language: English
+Standards: HTML5, CSS3, JavaScript ES6+
+Components: Vanilla JS, CSS Custom Properties, JSON-LD Schema
+Software: VS Code, Git, Vercel
+
+/* THANKS */
+Team Canada Beach Volleyball
+Volleyball Canada
+AVP Pro Tour
+FIVB World Tour
+Monarch Athletic Club
