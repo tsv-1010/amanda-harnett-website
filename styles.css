@@ -3092,11 +3092,13 @@ p {
 .sponsorship-opportunities {
     padding: 5rem 2rem;
     background: var(--white);
+    overflow: visible;
 }
 
 .sponsorship-container {
     max-width: 1200px;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .sponsorship-container .section-title {
@@ -4767,33 +4769,35 @@ p {
 .card-deck-wrapper {
     position: relative;
     width: 100%;
-    min-height: 480px;
+    min-height: 500px;
     margin: 3rem 0;
     perspective: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible;
 }
 
 .card-deck {
     position: relative;
-    width: 320px;
+    width: 100%;
+    max-width: 900px;
     height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .deck-card {
     position: absolute;
-    width: 320px;
+    width: 280px;
     height: auto;
-    min-height: 380px;
-    left: 50%;
-    top: 50%;
-    margin-left: -160px;
-    margin-top: -190px;
+    min-height: 360px;
+    top: 0;
     background: white;
     border: 1px solid rgba(200, 160, 140, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1.75rem;
+    padding: 1.5rem;
     cursor: pointer;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -4802,30 +4806,35 @@ p {
     will-change: transform, z-index, box-shadow;
 }
 
-/* Initial stacked state - all cards centered */
+/* Horizontal fan spread - cards positioned left to right */
 .deck-card[data-card-index="0"] {
     z-index: 5;
-    transform: rotate(-8deg) translateX(-180px);
+    left: calc(50% - 320px);
+    transform: rotate(-6deg);
 }
 
 .deck-card[data-card-index="1"] {
     z-index: 4;
-    transform: rotate(-4deg) translateX(-90px);
+    left: calc(50% - 200px);
+    transform: rotate(-3deg);
 }
 
 .deck-card[data-card-index="2"] {
-    z-index: 3;
-    transform: rotate(0deg) translateX(0px);
+    z-index: 6;
+    left: calc(50% - 140px);
+    transform: rotate(0deg);
 }
 
 .deck-card[data-card-index="3"] {
-    z-index: 2;
-    transform: rotate(4deg) translateX(90px);
+    z-index: 4;
+    left: calc(50% - 80px);
+    transform: rotate(3deg);
 }
 
 .deck-card[data-card-index="4"] {
-    z-index: 1;
-    transform: rotate(8deg) translateX(180px);
+    z-index: 5;
+    left: calc(50% + 40px);
+    transform: rotate(6deg);
 }
 
 /* Hover state - slide card up and bring to front */
@@ -5003,53 +5012,70 @@ p {
 /* Responsive Card Deck - Horizontal Fan */
 @media (max-width: 1200px) {
     .deck-card {
-        width: 280px;
-        margin-left: -140px;
-        padding: 1.5rem;
+        width: 260px;
+        padding: 1.25rem;
     }
     
     .deck-card[data-card-index="0"] {
-        transform: rotate(-7deg) translateX(-150px);
+        left: calc(50% - 280px);
     }
     
     .deck-card[data-card-index="1"] {
-        transform: rotate(-3.5deg) translateX(-75px);
+        left: calc(50% - 170px);
+    }
+    
+    .deck-card[data-card-index="2"] {
+        left: calc(50% - 130px);
     }
     
     .deck-card[data-card-index="3"] {
-        transform: rotate(3.5deg) translateX(75px);
+        left: calc(50% - 90px);
     }
     
     .deck-card[data-card-index="4"] {
-        transform: rotate(7deg) translateX(150px);
+        left: calc(50% + 20px);
     }
 }
 
 @media (max-width: 900px) {
     .card-deck-wrapper {
-        min-height: 520px;
+        min-height: 480px;
+        overflow-x: auto;
+        padding: 0 2rem;
+    }
+    
+    .card-deck {
+        min-width: 700px;
     }
     
     .deck-card {
-        width: 260px;
-        margin-left: -130px;
-        min-height: 360px;
+        width: 240px;
+        min-height: 340px;
+        padding: 1.25rem;
     }
     
     .deck-card[data-card-index="0"] {
-        transform: rotate(-6deg) translateX(-120px);
+        left: calc(50% - 260px);
+        transform: rotate(-5deg);
     }
     
     .deck-card[data-card-index="1"] {
-        transform: rotate(-3deg) translateX(-60px);
+        left: calc(50% - 160px);
+        transform: rotate(-2.5deg);
+    }
+    
+    .deck-card[data-card-index="2"] {
+        left: calc(50% - 120px);
     }
     
     .deck-card[data-card-index="3"] {
-        transform: rotate(3deg) translateX(60px);
+        left: calc(50% - 80px);
+        transform: rotate(2.5deg);
     }
     
     .deck-card[data-card-index="4"] {
-        transform: rotate(6deg) translateX(120px);
+        left: calc(50% + 20px);
+        transform: rotate(5deg);
     }
     
     .sponsorship-tier-title {
@@ -5063,40 +5089,34 @@ p {
 
 @media (max-width: 768px) {
     .card-deck-wrapper {
-        min-height: 480px;
+        min-height: auto;
         margin: 2rem 0;
+        overflow: visible;
+        padding: 0;
     }
     
     .card-deck {
+        position: relative;
         width: 100%;
-        max-width: 300px;
+        min-width: unset;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
     }
     
     .deck-card {
-        width: 240px;
-        margin-left: -120px;
-        min-height: 340px;
-        padding: 1.25rem;
-    }
-    
-    .deck-card[data-card-index="0"] {
-        transform: rotate(-5deg) translateX(-80px);
-    }
-    
-    .deck-card[data-card-index="1"] {
-        transform: rotate(-2.5deg) translateX(-40px);
-    }
-    
-    .deck-card[data-card-index="3"] {
-        transform: rotate(2.5deg) translateX(40px);
-    }
-    
-    .deck-card[data-card-index="4"] {
-        transform: rotate(5deg) translateX(80px);
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        left: 0 !important;
+        transform: none !important;
+        padding: 1.5rem;
     }
     
     .deck-card:hover {
-        transform: translateY(-60px) rotate(0deg) scale(1.03) !important;
+        transform: scale(1.02) !important;
     }
     
     .partnership-buttons {
@@ -5108,53 +5128,11 @@ p {
     }
     
     .sponsorship-tier-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     
     .sponsorship-features li {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .card-deck-wrapper {
-        min-height: 420px;
-    }
-    
-    .deck-card {
-        width: 200px;
-        margin-left: -100px;
-        min-height: 300px;
-        padding: 1rem;
-    }
-    
-    .deck-card[data-card-index="0"] {
-        transform: rotate(-4deg) translateX(-50px);
-    }
-    
-    .deck-card[data-card-index="1"] {
-        transform: rotate(-2deg) translateX(-25px);
-    }
-    
-    .deck-card[data-card-index="3"] {
-        transform: rotate(2deg) translateX(25px);
-    }
-    
-    .deck-card[data-card-index="4"] {
-        transform: rotate(4deg) translateX(50px);
-    }
-    
-    .sponsorship-tier-title {
-        font-size: 0.95rem;
-    }
-    
-    .sponsorship-scope {
-        font-size: 0.8rem;
-    }
-    
-    .sponsorship-features li {
-        font-size: 0.75rem;
-        padding-left: 1.2rem;
+        font-size: 0.9rem;
     }
 }
 
