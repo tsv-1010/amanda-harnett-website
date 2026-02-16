@@ -248,6 +248,26 @@ p {
     transform-origin: center top;
 }
 
+/* Disable scroll effect on mobile for performance */
+@media (max-width: 767px) {
+    .hero-scroll-container {
+        transform: scale(1) !important;
+        border-radius: 0 !important;
+        transition: none;
+        will-change: auto;
+    }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .hero-scroll-container {
+        transform: scale(1) !important;
+        border-radius: 0 !important;
+        transition: none;
+        will-change: auto;
+    }
+}
+
 .hero::before {
     content: '';
     position: absolute;
@@ -566,62 +586,104 @@ p {
     }
 }
 
-/* Scroll Indicator */
-.scroll-indicator {
-    position: absolute;
+/* Performance Progress Ring */
+.progress-ring-container {
+    position: fixed;
     bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    animation: bounce 2s infinite;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.mouse {
-    width: 26px;
-    height: 40px;
-    border: 2px solid var(--sand);
-    border-radius: 13px;
-    position: relative;
-    margin: 0 auto 10px;
+.progress-ring-container:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
-.mouse::after {
-    content: '';
+.progress-ring-container.completed {
+    animation: pulseComplete 0.6s ease;
+}
+
+@keyframes pulseComplete {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.progress-ring {
+    width: 60px;
+    height: 60px;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: rgba(212, 165, 116, 0.2);
+    stroke-width: 4;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: var(--sand);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 163.36; /* 2 * PI * 26 */
+    stroke-dashoffset: 163.36;
+    transition: stroke-dashoffset 0.15s ease-out;
+}
+
+.progress-ring-container.completed .progress-ring-fill {
+    stroke: var(--blush);
+}
+
+.progress-percent {
     position: absolute;
-    top: 8px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    height: 8px;
-    background: var(--sand);
-    border-radius: 2px;
-    animation: scroll 1.5s infinite;
+    transform: translate(-50%, -50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sand);
+    margin-top: -8px;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(-50%) translateY(10px);
-        opacity: 0;
-    }
+.progress-ring-container.completed .progress-percent {
+    color: var(--blush);
 }
 
-@keyframes bounce {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-}
-
-.scroll-indicator p {
-    font-size: 0.85rem;
+.progress-label {
+    font-size: 0.65rem;
     color: var(--sand);
     letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    opacity: 0.8;
+}
+
+/* Hide on very small screens */
+@media (max-width: 480px) {
+    .progress-ring-container {
+        bottom: 1rem;
+        right: 1rem;
+    }
+    
+    .progress-ring {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .progress-percent {
+        font-size: 0.65rem;
+    }
+    
+    .progress-label {
+        display: none;
+    }
 }
 
 /* Stats Section */

@@ -15,12 +15,25 @@ window.addEventListener('load', () => {
 
 // ==========================================
 // Radius on Scroll Effect - Hero Section
+// Desktop only - disabled on mobile for performance
 // ==========================================
 (function initRadiusOnScroll() {
     const heroScrollContainer = document.querySelector('.hero-scroll-container');
     const hero = document.querySelector('.hero');
     
     if (!heroScrollContainer || !hero) return;
+    
+    // Check if mobile or reduced motion preference
+    const isMobile = () => window.innerWidth < 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Disable effect on mobile or if user prefers reduced motion
+    if (prefersReducedMotion) {
+        heroScrollContainer.style.setProperty('--hero-scale', 1);
+        heroScrollContainer.style.setProperty('--hero-radius', '0px');
+        console.log('Radius on Scroll disabled (reduced motion preference)');
+        return;
+    }
     
     // Configuration
     const config = {
@@ -32,8 +45,17 @@ window.addEventListener('load', () => {
     };
     
     let ticking = false;
+    let isEnabled = !isMobile();
     
     function updateScrollEffect() {
+        // Skip if mobile
+        if (!isEnabled) {
+            heroScrollContainer.style.setProperty('--hero-scale', 1);
+            heroScrollContainer.style.setProperty('--hero-radius', '0px');
+            ticking = false;
+            return;
+        }
+        
         const scrollY = window.scrollY;
         const heroTop = hero.offsetTop - 70; // Account for navbar
         const scrollInHero = Math.max(0, scrollY - heroTop);
@@ -62,11 +84,84 @@ window.addEventListener('load', () => {
         }
     }
     
+    // Handle resize - enable/disable based on viewport
+    function onResize() {
+        const wasMobile = !isEnabled;
+        isEnabled = !isMobile();
+        
+        // If transitioning to/from mobile, update immediately
+        if (wasMobile !== !isEnabled) {
+            updateScrollEffect();
+        }
+    }
+    
     // Initialize
     updateScrollEffect();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
     
-    console.log('Radius on Scroll effect initialized');
+    console.log(`Radius on Scroll initialized (${isEnabled ? 'enabled' : 'disabled on mobile'})`);
+})();
+
+// ==========================================
+// Performance Progress Ring
+// ==========================================
+(function initProgressRing() {
+    const container = document.getElementById('progressRing');
+    if (!container) return;
+    
+    const ring = container.querySelector('.progress-ring-fill');
+    const percentText = container.querySelector('.progress-percent');
+    
+    if (!ring || !percentText) return;
+    
+    const circumference = 2 * Math.PI * 26; // r = 26
+    let ticking = false;
+    let hasCompleted = false;
+    
+    function updateProgress() {
+        // Calculate scroll progress
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollY = window.scrollY;
+        const progress = Math.min(scrollY / scrollHeight, 1);
+        const percent = Math.round(progress * 100);
+        
+        // Update ring
+        const offset = circumference - (progress * circumference);
+        ring.style.strokeDashoffset = offset;
+        
+        // Update text
+        percentText.textContent = `${percent}%`;
+        
+        // Add completed class when 100%
+        if (percent >= 100 && !hasCompleted) {
+            container.classList.add('completed');
+            hasCompleted = true;
+        } else if (percent < 100 && hasCompleted) {
+            container.classList.remove('completed');
+            hasCompleted = false;
+        }
+        
+        ticking = false;
+    }
+    
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateProgress);
+            ticking = true;
+        }
+    }
+    
+    // Click to scroll to top
+    container.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Initialize
+    updateProgress();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    console.log('Progress ring initialized');
 })();
 
 // Mobile Menu Toggle

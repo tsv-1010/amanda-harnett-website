@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amanda Harnett | Professional Beach Volleyball Player</title>
-    <link rel="stylesheet" href="styles.css?v=25">
+    <link rel="stylesheet" href="styles.css?v=28">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -435,10 +435,6 @@
                 <button class="newsletter-btn">Subscribe</button>
                 <p class="newsletter-note">Get updates on tournaments, books, and exclusive content</p>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <p>Scroll to explore</p>
         </div>
     </section>
 
@@ -1658,6 +1654,16 @@
         </div>
     </footer>
 
-    <script src="script.js?v=19"></script>
+    <!-- Performance Progress Ring (fixed position) -->
+    <div class="progress-ring-container" id="progressRing">
+        <svg class="progress-ring" viewBox="0 0 60 60">
+            <circle class="progress-ring-bg" cx="30" cy="30" r="26"/>
+            <circle class="progress-ring-fill" cx="30" cy="30" r="26"/>
+        </svg>
+        <span class="progress-percent">0%</span>
+        <p class="progress-label">explored</p>
+    </div>
+
+    <script src="script.js?v=21"></script>
 </body>
 </html>
