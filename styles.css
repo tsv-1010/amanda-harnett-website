@@ -3113,88 +3113,166 @@ p {
     margin-bottom: 3rem;
 }
 
+/* OLD SPONSORSHIP TIERS - DEPRECATED (now using card-deck system)
 .sponsorship-tiers {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-lg);
 }
+*/
 
+/* Base sponsorship-card styles - overridden by .deck-card for card spread */
 .sponsorship-card {
     background: var(--white);
-    border: 2px solid var(--sand-light);
+    border: 1px solid rgba(200, 160, 140, 0.3);
     border-radius: var(--radius-md);
-    padding: 2.5rem 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-.sponsorship-card::before {
+/* Deck card specific overrides - these take precedence */
+.sponsorship-card.deck-card {
+    position: absolute;
+    width: 280px;
+    min-height: 360px;
+    top: 0;
+    background: white;
+    border: 1px solid rgba(200, 160, 140, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center bottom;
+    will-change: transform, z-index, box-shadow;
+}
+
+/* Horizontal fan spread positions */
+.sponsorship-card.deck-card[data-card-index="0"] {
+    z-index: 5;
+    left: calc(50% - 320px);
+    transform: rotate(-6deg);
+}
+
+.sponsorship-card.deck-card[data-card-index="1"] {
+    z-index: 4;
+    left: calc(50% - 200px);
+    transform: rotate(-3deg);
+}
+
+.sponsorship-card.deck-card[data-card-index="2"] {
+    z-index: 6;
+    left: calc(50% - 140px);
+    transform: rotate(0deg);
+}
+
+.sponsorship-card.deck-card[data-card-index="3"] {
+    z-index: 4;
+    left: calc(50% - 80px);
+    transform: rotate(3deg);
+}
+
+.sponsorship-card.deck-card[data-card-index="4"] {
+    z-index: 5;
+    left: calc(50% + 40px);
+    transform: rotate(6deg);
+}
+
+/* Hover state - slide card up */
+.sponsorship-card.deck-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 20px 48px rgba(212, 165, 155, 0.35);
+    transform: translateY(-80px) rotate(0deg) scale(1.05) !important;
+    z-index: 100 !important;
+}
+
+.sponsorship-card.deck-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--sand) 0%, var(--blush) 100%);
+    background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.sponsorship-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    border-color: var(--blush);
+.sponsorship-card.deck-card:hover::before {
+    transform: scaleX(1);
 }
 
-.sponsorship-card.featured {
-    border-color: var(--blush);
-    transform: scale(1.05);
-    box-shadow: 0 12px 32px rgba(232, 155, 155, 0.2);
+.sponsorship-card.deck-card.featured {
+    border-color: var(--color-secondary);
+    box-shadow: 0 6px 24px rgba(212, 165, 155, 0.25);
 }
 
 .badge {
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    background: linear-gradient(135deg, var(--blush) 0%, var(--blush-dark) 100%);
-    color: var(--white);
-    padding: 0.5rem 3rem;
-    font-weight: 600;
-    font-size: 0.8rem;
-    transform: rotate(45deg);
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(232, 155, 155, 0.3);
+    display: inline-block;
+    background: var(--color-secondary);
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
 }
 
 .sponsorship-tier-title {
-    font-size: 1.4rem;
-    color: var(--black);
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.sponsorship-card.deck-card:hover .sponsorship-tier-title {
+    color: var(--color-secondary);
 }
 
 .sponsorship-scope {
-    color: var(--sand-dark);
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-    font-style: italic;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+    font-weight: 500;
 }
 
 .sponsorship-features {
     list-style: none;
-    margin-bottom: 2rem;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     flex-grow: 1;
 }
 
 .sponsorship-features li {
-    padding: 0.6rem 0;
-    color: var(--gray-dark);
-    font-size: 0.95rem;
-    border-bottom: 1px solid var(--sand-light);
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    border-bottom: none;
 }
 
-.sponsorship-features li:last-child {
-    border-bottom: none;
+.sponsorship-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: 700;
+    transition: transform 0.3s ease;
+}
+
+.sponsorship-card.deck-card:hover .sponsorship-features li::before {
+    transform: scale(1.2);
 }
 
 .sponsorship-cta {
@@ -4752,8 +4830,7 @@ p {
 }
 
 /* ==========================================
-   SPONSORSHIP CARD DECK SPREAD ANIMATION
-   Horizontal fan spread from left to right
+   CARD DECK WRAPPER & CONTAINER
    ========================================== */
 
 @keyframes deckSpread {
@@ -4788,152 +4865,10 @@ p {
     align-items: center;
 }
 
-.deck-card {
-    position: absolute;
-    width: 280px;
-    height: auto;
-    min-height: 360px;
-    top: 0;
-    background: white;
-    border: 1px solid rgba(200, 160, 140, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform-origin: center bottom;
-    will-change: transform, z-index, box-shadow;
-}
-
-/* Horizontal fan spread - cards positioned left to right */
-.deck-card[data-card-index="0"] {
-    z-index: 5;
-    left: calc(50% - 320px);
-    transform: rotate(-6deg);
-}
-
-.deck-card[data-card-index="1"] {
-    z-index: 4;
-    left: calc(50% - 200px);
-    transform: rotate(-3deg);
-}
-
-.deck-card[data-card-index="2"] {
-    z-index: 6;
-    left: calc(50% - 140px);
-    transform: rotate(0deg);
-}
-
-.deck-card[data-card-index="3"] {
-    z-index: 4;
-    left: calc(50% - 80px);
-    transform: rotate(3deg);
-}
-
-.deck-card[data-card-index="4"] {
-    z-index: 5;
-    left: calc(50% + 40px);
-    transform: rotate(6deg);
-}
-
-/* Hover state - slide card up and bring to front */
-.deck-card:hover {
-    border-color: var(--color-secondary);
-    box-shadow: 0 20px 48px rgba(212, 165, 155, 0.35);
-    transform: translateY(-80px) rotate(0deg) scale(1.05) !important;
-    z-index: 100 !important;
-}
-
-.deck-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.deck-card:hover::before {
-    transform: scaleX(1);
-}
-
-.deck-card.featured {
-    border-color: var(--color-secondary);
-    box-shadow: 0 6px 24px rgba(212, 165, 155, 0.25);
-}
-
-.badge {
-    display: inline-block;
-    background: var(--color-secondary);
-    color: white;
-    padding: 0.35rem 0.75rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.75rem;
-}
-
 .card-inner {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-}
-
-.sponsorship-tier-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin: 0;
-    transition: color 0.3s ease;
-}
-
-.deck-card:hover .sponsorship-tier-title {
-    color: var(--color-secondary);
-}
-
-.sponsorship-scope {
-    font-size: 0.9rem;
-    color: var(--color-text-secondary);
-    margin: 0;
-    font-weight: 500;
-}
-
-.sponsorship-features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex-grow: 1;
-}
-
-.sponsorship-features li {
-    padding-left: 1.5rem;
-    position: relative;
-    font-size: 0.9rem;
-    color: var(--color-text);
-    line-height: 1.5;
-}
-
-.sponsorship-features li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--color-secondary);
-    font-weight: 700;
-    transition: transform 0.3s ease;
-}
-
-.deck-card:hover .sponsorship-features li::before {
-    transform: scale(1.2);
 }
 
 /* Partnership CTA Section - On-Brand Styling */
@@ -5011,28 +4946,28 @@ p {
 
 /* Responsive Card Deck - Horizontal Fan */
 @media (max-width: 1200px) {
-    .deck-card {
+    .sponsorship-card.deck-card {
         width: 260px;
         padding: 1.25rem;
     }
     
-    .deck-card[data-card-index="0"] {
+    .sponsorship-card.deck-card[data-card-index="0"] {
         left: calc(50% - 280px);
     }
     
-    .deck-card[data-card-index="1"] {
+    .sponsorship-card.deck-card[data-card-index="1"] {
         left: calc(50% - 170px);
     }
     
-    .deck-card[data-card-index="2"] {
+    .sponsorship-card.deck-card[data-card-index="2"] {
         left: calc(50% - 130px);
     }
     
-    .deck-card[data-card-index="3"] {
+    .sponsorship-card.deck-card[data-card-index="3"] {
         left: calc(50% - 90px);
     }
     
-    .deck-card[data-card-index="4"] {
+    .sponsorship-card.deck-card[data-card-index="4"] {
         left: calc(50% + 20px);
     }
 }
@@ -5048,32 +4983,32 @@ p {
         min-width: 700px;
     }
     
-    .deck-card {
+    .sponsorship-card.deck-card {
         width: 240px;
         min-height: 340px;
         padding: 1.25rem;
     }
     
-    .deck-card[data-card-index="0"] {
+    .sponsorship-card.deck-card[data-card-index="0"] {
         left: calc(50% - 260px);
         transform: rotate(-5deg);
     }
     
-    .deck-card[data-card-index="1"] {
+    .sponsorship-card.deck-card[data-card-index="1"] {
         left: calc(50% - 160px);
         transform: rotate(-2.5deg);
     }
     
-    .deck-card[data-card-index="2"] {
+    .sponsorship-card.deck-card[data-card-index="2"] {
         left: calc(50% - 120px);
     }
     
-    .deck-card[data-card-index="3"] {
+    .sponsorship-card.deck-card[data-card-index="3"] {
         left: calc(50% - 80px);
         transform: rotate(2.5deg);
     }
     
-    .deck-card[data-card-index="4"] {
+    .sponsorship-card.deck-card[data-card-index="4"] {
         left: calc(50% + 20px);
         transform: rotate(5deg);
     }
@@ -5106,7 +5041,7 @@ p {
         padding: 0 1rem;
     }
     
-    .deck-card {
+    .sponsorship-card.deck-card {
         position: relative;
         width: 100%;
         min-height: auto;
@@ -5115,7 +5050,7 @@ p {
         padding: 1.5rem;
     }
     
-    .deck-card:hover {
+    .sponsorship-card.deck-card:hover {
         transform: scale(1.02) !important;
     }
     
