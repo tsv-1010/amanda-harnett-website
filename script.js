@@ -1635,8 +1635,8 @@ console.log('Conversion tracking initialized');
     
     // Try to load image with intelligent extension detection
     function loadImage() {
-        // Try PNG first, then JPG
-        const extensions = ['png', 'jpg', 'jpeg', 'webp'];
+        // Try JPEG first (since that's what's being used), then others
+        const extensions = ['jpeg', 'jpg', 'png', 'webp'];
         let loadedExtension = null;
         
         function tryNextExtension(index) {
