@@ -13,6 +13,62 @@ window.addEventListener('load', () => {
     }
 });
 
+// ==========================================
+// Radius on Scroll Effect - Hero Section
+// ==========================================
+(function initRadiusOnScroll() {
+    const heroScrollContainer = document.querySelector('.hero-scroll-container');
+    const hero = document.querySelector('.hero');
+    
+    if (!heroScrollContainer || !hero) return;
+    
+    // Configuration
+    const config = {
+        startScale: 0.92,      // Starting scale (zoomed out slightly)
+        endScale: 1,           // End scale (full size)
+        startRadius: 24,       // Starting border radius in px
+        endRadius: 0,          // End border radius in px
+        scrollDistance: 400    // Pixels to scroll for full effect
+    };
+    
+    let ticking = false;
+    
+    function updateScrollEffect() {
+        const scrollY = window.scrollY;
+        const heroTop = hero.offsetTop - 70; // Account for navbar
+        const scrollInHero = Math.max(0, scrollY - heroTop);
+        
+        // Calculate progress (0 to 1)
+        const progress = Math.min(scrollInHero / config.scrollDistance, 1);
+        
+        // Ease the progress for smoother feel
+        const eased = 1 - Math.pow(1 - progress, 3);
+        
+        // Calculate current values
+        const currentScale = config.startScale + (config.endScale - config.startScale) * eased;
+        const currentRadius = config.startRadius - (config.startRadius - config.endRadius) * eased;
+        
+        // Apply to CSS custom properties
+        heroScrollContainer.style.setProperty('--hero-scale', currentScale);
+        heroScrollContainer.style.setProperty('--hero-radius', `${currentRadius}px`);
+        
+        ticking = false;
+    }
+    
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffect);
+            ticking = true;
+        }
+    }
+    
+    // Initialize
+    updateScrollEffect();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    console.log('Radius on Scroll effect initialized');
+})();
+
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -1089,4 +1145,238 @@ console.log('Conversion tracking initialized');
     observer.observe(tracker);
     
     console.log('Journey tracker initialized');
+})();
+
+// ==========================================
+// Reel Carousel
+// ==========================================
+(function initReelCarousel() {
+    const track = document.querySelector('.reel-track');
+    const items = document.querySelectorAll('.reel-item');
+    const prevBtn = document.querySelector('.reel-nav-prev');
+    const nextBtn = document.querySelector('.reel-nav-next');
+    const dots = document.querySelectorAll('.reel-dot');
+    
+    if (!track || items.length === 0) return;
+    
+    const totalItems = items.length;
+    let currentIndex = 0;
+    let isPlaying = false;
+    let activeVideo = null;
+    let autoplayInterval = null;
+    let isPaused = false;
+    let isAnimating = false;
+    
+    // Calculate position relative to current index (for infinite loop)
+    function getRelativePosition(index) {
+        let diff = index - currentIndex;
+        
+        // Wrap around for infinite loop effect
+        if (diff > totalItems / 2) {
+            diff -= totalItems;
+        } else if (diff < -totalItems / 2) {
+            diff += totalItems;
+        }
+        
+        return diff;
+    }
+    
+    // Update carousel positions
+    function updateCarousel() {
+        items.forEach((item, index) => {
+            // Remove all position classes
+            item.classList.remove('pos-0', 'pos-1', 'pos--1', 'pos-2', 'pos--2', 'pos-3', 'pos--3', 'pos-4', 'pos--4', 'hidden');
+            
+            const position = getRelativePosition(index);
+            
+            // Assign position class based on relative position
+            if (position === 0) {
+                item.classList.add('pos-0');
+            } else if (position === 1) {
+                item.classList.add('pos-1');
+            } else if (position === -1) {
+                item.classList.add('pos--1');
+            } else if (position === 2) {
+                item.classList.add('pos-2');
+            } else if (position === -2) {
+                item.classList.add('pos--2');
+            } else if (position === 3) {
+                item.classList.add('pos-3');
+            } else if (position === -3) {
+                item.classList.add('pos--3');
+            } else if (position === 4 || position === -4) {
+                item.classList.add(position > 0 ? 'pos-4' : 'pos--4');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Stop any playing video when switching
+        if (activeVideo) {
+            activeVideo.pause();
+            activeVideo.closest('.reel-item')?.classList.remove('playing');
+            activeVideo = null;
+            isPlaying = false;
+        }
+    }
+    
+    function goToSlide(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        // Wrap index for infinite loop
+        currentIndex = ((index % totalItems) + totalItems) % totalItems;
+        updateCarousel();
+        
+        setTimeout(() => {
+            isAnimating = false;
+        }, 600);
+    }
+    
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+    
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+    
+    // Navigation events
+    prevBtn?.addEventListener('click', () => {
+        prevSlide();
+        resetAutoplay();
+    });
+    
+    nextBtn?.addEventListener('click', () => {
+        nextSlide();
+        resetAutoplay();
+    });
+    
+    // Dot navigation
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.dataset.index);
+            goToSlide(index);
+            resetAutoplay();
+        });
+    });
+    
+    // Click on reel to play/pause or navigate
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const index = parseInt(item.dataset.index);
+            const position = getRelativePosition(index);
+            
+            // If clicking non-center item, navigate to it
+            if (position !== 0) {
+                goToSlide(index);
+                resetAutoplay();
+                return;
+            }
+            
+            // Toggle play/pause on center item
+            const video = item.querySelector('.reel-video');
+            if (!video) return;
+            
+            if (isPlaying && activeVideo === video) {
+                video.pause();
+                item.classList.remove('playing');
+                isPlaying = false;
+                activeVideo = null;
+            } else {
+                // Pause any other playing video
+                if (activeVideo && activeVideo !== video) {
+                    activeVideo.pause();
+                    activeVideo.closest('.reel-item')?.classList.remove('playing');
+                }
+                
+                video.play().then(() => {
+                    item.classList.add('playing');
+                    isPlaying = true;
+                    activeVideo = video;
+                }).catch(err => {
+                    console.log('Video play failed:', err);
+                });
+            }
+        });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        // Only respond if carousel is in viewport
+        const carouselRect = track.getBoundingClientRect();
+        const inViewport = carouselRect.top < window.innerHeight && carouselRect.bottom > 0;
+        
+        if (!inViewport) return;
+        
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            resetAutoplay();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            resetAutoplay();
+        }
+    });
+    
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            resetAutoplay();
+        }
+    }
+    
+    // Autoplay functionality
+    function startAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(() => {
+            if (!isPaused && !isPlaying) {
+                nextSlide();
+            }
+        }, 4000); // Change slide every 4 seconds
+    }
+    
+    function resetAutoplay() {
+        startAutoplay();
+    }
+    
+    // Pause autoplay on hover
+    const carouselWrapper = document.querySelector('.reel-carousel-wrapper');
+    carouselWrapper?.addEventListener('mouseenter', () => {
+        isPaused = true;
+    });
+    
+    carouselWrapper?.addEventListener('mouseleave', () => {
+        isPaused = false;
+    });
+    
+    // Initialize
+    updateCarousel();
+    startAutoplay();
+    
+    console.log('Reel carousel initialized with infinite loop');
 })();

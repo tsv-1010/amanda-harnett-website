@@ -234,6 +234,20 @@ p {
     overflow: hidden;
 }
 
+/* Radius on Scroll Effect - Inner container that scales */
+.hero-scroll-container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(var(--hero-scale, 0.92));
+    border-radius: var(--hero-radius, 24px);
+    transition: transform 0.1s ease-out, border-radius 0.1s ease-out;
+    will-change: transform, border-radius;
+    transform-origin: center top;
+}
+
 .hero::before {
     content: '';
     position: absolute;
@@ -1094,6 +1108,344 @@ p {
     transform: scaleX(1);
 }
 
+/* Reel Carousel */
+.reel-carousel-wrapper {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(212, 165, 116, 0.2);
+}
+
+.reel-carousel-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--sand);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.reel-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 3rem 0;
+    min-height: 500px;
+}
+
+.reel-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 420px;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+}
+
+.reel-item {
+    position: absolute;
+    width: 220px;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+/* Center/Active reel - front and center, large */
+.reel-item.pos-0 {
+    transform: translateX(0) translateZ(150px) scale(1.15);
+    opacity: 1;
+    filter: blur(0);
+    z-index: 50;
+}
+
+/* Adjacent reels - slightly overlapped, smaller */
+.reel-item.pos-1 {
+    transform: translateX(180px) translateZ(50px) scale(0.9) rotateY(-8deg);
+    opacity: 0.9;
+    filter: blur(0);
+    z-index: 40;
+}
+
+.reel-item.pos--1 {
+    transform: translateX(-180px) translateZ(50px) scale(0.9) rotateY(8deg);
+    opacity: 0.9;
+    filter: blur(0);
+    z-index: 40;
+}
+
+/* Second outer reels - more overlapped */
+.reel-item.pos-2 {
+    transform: translateX(300px) translateZ(-50px) scale(0.7) rotateY(-15deg);
+    opacity: 0.6;
+    filter: blur(1px);
+    z-index: 30;
+}
+
+.reel-item.pos--2 {
+    transform: translateX(-300px) translateZ(-50px) scale(0.7) rotateY(15deg);
+    opacity: 0.6;
+    filter: blur(1px);
+    z-index: 30;
+}
+
+/* Third outer reels - mostly hidden */
+.reel-item.pos-3 {
+    transform: translateX(380px) translateZ(-150px) scale(0.5) rotateY(-20deg);
+    opacity: 0.3;
+    filter: blur(2px);
+    z-index: 20;
+}
+
+.reel-item.pos--3 {
+    transform: translateX(-380px) translateZ(-150px) scale(0.5) rotateY(20deg);
+    opacity: 0.3;
+    filter: blur(2px);
+    z-index: 20;
+}
+
+/* Far reels - barely visible peeks */
+.reel-item.pos-4,
+.reel-item.pos--4 {
+    transform: translateX(420px) translateZ(-250px) scale(0.35);
+    opacity: 0.15;
+    filter: blur(3px);
+    z-index: 10;
+}
+
+.reel-item.pos--4 {
+    transform: translateX(-420px) translateZ(-250px) scale(0.35);
+}
+
+/* Hidden items (for infinite loop) */
+.reel-item.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.reel-video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9/16;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--sand-light) 0%, var(--blush-light) 100%);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.reel-item.pos-0 .reel-video-container {
+    box-shadow: 0 30px 80px rgba(212, 165, 116, 0.4);
+}
+
+.reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reel-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.reel-item.pos-0 .reel-play-overlay {
+    opacity: 0;
+}
+
+.reel-item.pos-0:hover .reel-play-overlay {
+    opacity: 1;
+}
+
+.reel-item.playing .reel-play-overlay {
+    opacity: 0;
+}
+
+.reel-caption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.reel-item.pos-0 .reel-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navigation arrows */
+.reel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--sand);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.reel-nav:hover {
+    background: var(--sand);
+    color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.reel-nav-prev {
+    left: 0;
+}
+
+.reel-nav-next {
+    right: 0;
+}
+
+/* Dot indicators */
+.reel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.reel-dot {
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: 50%;
+    background: var(--sand-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.reel-dot:hover {
+    background: var(--sand);
+}
+
+.reel-dot.active {
+    background: var(--sand);
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* Responsive reel carousel */
+@media (max-width: 768px) {
+    .reel-carousel {
+        padding: 1.5rem 0;
+        min-height: 400px;
+    }
+    
+    .reel-track {
+        height: 350px;
+    }
+    
+    .reel-item {
+        width: 160px;
+    }
+    
+    .reel-item.pos-0 {
+        transform: translateX(0) translateZ(100px) scale(1.1);
+    }
+    
+    .reel-item.pos-1 {
+        transform: translateX(130px) translateZ(30px) scale(0.8) rotateY(-8deg);
+    }
+    
+    .reel-item.pos--1 {
+        transform: translateX(-130px) translateZ(30px) scale(0.8) rotateY(8deg);
+    }
+    
+    .reel-item.pos-2 {
+        transform: translateX(210px) translateZ(-50px) scale(0.6) rotateY(-15deg);
+    }
+    
+    .reel-item.pos--2 {
+        transform: translateX(-210px) translateZ(-50px) scale(0.6) rotateY(15deg);
+    }
+    
+    .reel-item.pos-3,
+    .reel-item.pos--3,
+    .reel-item.pos-4,
+    .reel-item.pos--4 {
+        opacity: 0;
+    }
+    
+    .reel-nav {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .reel-nav svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reel-carousel {
+        min-height: 350px;
+    }
+    
+    .reel-track {
+        height: 300px;
+    }
+    
+    .reel-item {
+        width: 130px;
+    }
+    
+    .reel-item.pos-0 {
+        transform: translateX(0) translateZ(80px) scale(1.05);
+    }
+    
+    .reel-item.pos-1 {
+        transform: translateX(100px) translateZ(20px) scale(0.75) rotateY(-8deg);
+    }
+    
+    .reel-item.pos--1 {
+        transform: translateX(-100px) translateZ(20px) scale(0.75) rotateY(8deg);
+    }
+    
+    .reel-item.pos-2,
+    .reel-item.pos--2 {
+        opacity: 0.3;
+        transform: translateX(160px) translateZ(-30px) scale(0.5);
+    }
+    
+    .reel-item.pos--2 {
+        transform: translateX(-160px) translateZ(-30px) scale(0.5);
+    }
+    
+    .reel-carousel-title {
+        font-size: 1rem;
+    }
+    
+    .reel-nav {
+        width: 36px;
+        height: 36px;
+    }
+}
+
 /* Footer */
 .footer {
     background: var(--black);
@@ -1370,9 +1722,81 @@ p {
 .tier-title {
     font-size: 1.3rem;
     color: var(--sand);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-weight: 700;
+}
+
+.tier-description {
+    text-align: center;
+    color: var(--gray-dark);
+    font-size: 0.95rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+/* Affiliations Tier - Canadian Theme */
+.affiliations-tier {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.03) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(220, 38, 38, 0.03) 100%);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(220, 38, 38, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.affiliations-tier::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF0000, #FFFFFF, #FF0000);
+}
+
+.affiliations-tier .tier-title {
+    color: #C41E3A;
+}
+
+.partners-grid.affiliations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.affiliation-card {
+    border: 2px solid rgba(220, 38, 38, 0.2) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 250, 0.9) 100%) !important;
+}
+
+.affiliation-card:hover {
+    border-color: #C41E3A !important;
+    box-shadow: 0 10px 40px rgba(220, 38, 38, 0.15) !important;
+}
+
+.affiliation-card .partner-role {
+    color: #C41E3A;
+}
+
+.affiliation-card .partner-link {
+    color: #C41E3A;
+}
+
+.affiliation-card .partner-link:hover {
+    color: #8B0000;
+}
+
+/* League Partners Grid */
+.partners-grid.leagues {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.partners-grid.leagues .partner-card {
+    border: 1px solid var(--blush);
 }
 
 .partners-grid.platinum .partner-card {
@@ -2700,6 +3124,14 @@ p {
     .social-section {
         padding: 3rem 1.5rem;
     }
+    
+    .partners-grid.leagues {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .partners-grid.affiliations {
+        grid-template-columns: 1fr 1fr;
+    }
 
     .stats-container {
         grid-template-columns: 1fr 1fr;
@@ -2841,6 +3273,18 @@ p {
 
     .partners-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .partners-grid.affiliations {
+        grid-template-columns: 1fr;
+    }
+    
+    .partners-grid.leagues {
+        grid-template-columns: 1fr;
+    }
+    
+    .affiliations-tier {
+        padding: 2rem 1rem;
     }
 
     .books-grid {
