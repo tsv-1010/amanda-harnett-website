@@ -1753,3 +1753,57 @@ console.log('Conversion tracking initialized');
     
     console.log('Bento gallery initialized with', bentoItems.length, 'items');
 })();
+
+/* ============================================
+   SPONSORSHIP CARD SPREAD ANIMATION
+   Dynamic partner card selection interface
+   ============================================ */
+(function() {
+    const spreadCards = document.querySelectorAll('.spread-card');
+    const sponsorshipSection = document.querySelector('.sponsorship-opportunities');
+    
+    if (!spreadCards.length || !sponsorshipSection) {
+        console.log('Card spread section not found');
+        return;
+    }
+
+    // Handle card selection and state
+    spreadCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const cardId = this.getAttribute('data-card-id');
+            
+            // Remove selected state from all cards
+            spreadCards.forEach(c => {
+                c.classList.remove('card-selected');
+            });
+            
+            // Add selected state to clicked card
+            this.classList.add('card-selected');
+            
+            // Optional: highlight or do something with the selection
+            console.log('Selected partnership: ' + cardId);
+        });
+
+        // Remove selection on blur/click outside
+        card.addEventListener('blur', function() {
+            this.classList.remove('card-selected');
+        });
+    });
+
+    // Track when section enters viewport for future scroll trigger enhancements
+    const sponsorshipObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Section is now in view - cards animation already triggered by CSS
+                console.log('Sponsorship section in view');
+                sponsorshipObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    sponsorshipObserver.observe(sponsorshipSection);
+
+    console.log('Card spread system initialized with', spreadCards.length, 'partnership options');
+})();

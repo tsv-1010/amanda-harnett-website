@@ -4622,6 +4622,29 @@ p {
     font-weight: 600;
 }
 
+.faq-list {
+    padding: 1.5rem 0;
+    margin: 0;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.faq-list li {
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+    list-style: disc;
+}
+
+.faq-list li:last-child {
+    margin-bottom: 0;
+}
+
+.faq-list strong {
+    color: var(--color-secondary);
+    font-weight: 600;
+}
+
 /* Footer CTA */
 .faq-footer {
     text-align: center;
@@ -4727,6 +4750,286 @@ p {
 }
 
 /* ==========================================
+   SPONSORSHIP CARD SPREAD ANIMATION
+   Dynamic partner card selection interface
+   ========================================== */
+
+@keyframes cardFanOut {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cardSlideUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(var(--slide-distance, -100px));
+    }
+}
+
+@keyframes cardExpand {
+    from {
+        max-height: 400px;
+    }
+    to {
+        max-height: 600px;
+    }
+}
+
+.sponsorship-spread {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.spread-card {
+    position: relative;
+    background: white;
+    border: 1px solid rgba(200, 160, 140, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+    opacity: 0;
+    animation: cardFanOut 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform-origin: center bottom;
+}
+
+.spread-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.spread-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.spread-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.spread-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.spread-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.spread-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.spread-card:hover::before {
+    transform: scaleX(1);
+}
+
+.spread-card:hover {
+    border-color: rgba(200, 160, 140, 0.6);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+}
+
+.spread-card.featured {
+    border-color: var(--color-secondary);
+    box-shadow: 0 8px 24px rgba(212, 165, 155, 0.2);
+}
+
+.spread-card.featured:hover {
+    box-shadow: 0 16px 40px rgba(212, 165, 155, 0.3);
+}
+
+.spread-card.card-selected {
+    border-color: var(--color-secondary);
+    background: linear-gradient(135deg, rgba(255, 240, 235, 0.4), rgba(255, 182, 193, 0.2));
+    box-shadow: 0 20px 48px rgba(212, 165, 155, 0.3);
+    transform: scale(1.02);
+}
+
+.spread-card .badge {
+    display: inline-block;
+    background: var(--color-secondary);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sponsorship-tier-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.spread-card:hover .sponsorship-tier-title {
+    color: var(--color-secondary);
+}
+
+.sponsorship-scope {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    font-weight: 500;
+}
+
+.sponsorship-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1;
+}
+
+.sponsorship-features li {
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.sponsorship-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: 700;
+    transition: transform 0.3s ease;
+}
+
+.spread-card:hover .sponsorship-features li::before {
+    transform: scale(1.2);
+}
+
+/* Partnership CTA Section */
+.partnership-cta-section {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(255, 240, 235, 0.3), rgba(255, 182, 193, 0.15));
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(212, 165, 155, 0.3);
+}
+
+.partnership-cta-section h3 {
+    font-size: 1.8rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+}
+
+.partnership-cta-section p {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+.partnership-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.partnership-buttons .cta-btn {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.partnership-buttons .cta-btn.primary {
+    background: var(--color-secondary);
+    color: white;
+    border: 2px solid var(--color-secondary);
+}
+
+.partnership-buttons .cta-btn.primary:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 165, 155, 0.3);
+}
+
+.partnership-buttons .cta-btn.secondary {
+    background: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+}
+
+.partnership-buttons .cta-btn.secondary:hover {
+    background: var(--color-secondary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive Card Spread */
+@media (max-width: 1024px) {
+    .sponsorship-spread {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .spread-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sponsorship-spread {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .spread-card {
+        padding: 1.5rem;
+    }
+    
+    .partnership-buttons {
+        flex-direction: column;
+    }
+    
+    .partnership-buttons .cta-btn {
+        width: 100%;
+    }
+}
+
+/* ==========================================
    PREFERS REDUCED MOTION - ACCESSIBILITY
    Respects user's motion preferences
    ========================================== */
@@ -4774,6 +5077,20 @@ p {
     }
 
     .faq-question svg {
+        transform: none !important;
+    }
+
+    /* Disable card spread animations */
+    .spread-card {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+
+    .spread-card::before {
+        display: none;
+    }
+
+    .spread-card:hover {
         transform: none !important;
     }
     
