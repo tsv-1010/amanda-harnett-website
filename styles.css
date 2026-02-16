@@ -4750,82 +4750,160 @@ p {
 }
 
 /* ==========================================
-   SPONSORSHIP CARD SPREAD ANIMATION
-   Dynamic partner card selection interface
+   SPONSORSHIP CARD DECK SPREAD ANIMATION
+   Overlapping cards that fan out and slide
    ========================================== */
 
-@keyframes cardFanOut {
-    from {
+@keyframes deckSpread {
+    0% {
         opacity: 0;
-        transform: translateY(20px) scale(0.95);
+        transform: translateY(30px);
     }
-    to {
+    100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes cardSlideUp {
-    from {
         transform: translateY(0);
     }
-    to {
-        transform: translateY(var(--slide-distance, -100px));
-    }
 }
 
-@keyframes cardExpand {
+@keyframes slideToTop {
     from {
-        max-height: 400px;
+        transform: translateY(0) scale(1);
+        z-index: 10;
     }
     to {
-        max-height: 600px;
+        transform: translateY(-60px) scale(1.02);
+        z-index: 100;
     }
 }
 
-.sponsorship-spread {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-    padding: 2rem 0;
+@keyframes cardHoverRotate {
+    0% {
+        transform: rotateY(0deg) translateZ(0);
+    }
+    100% {
+        transform: rotateY(2deg) translateZ(20px);
+    }
 }
 
-.spread-card {
+.card-deck-wrapper {
     position: relative;
+    height: 500px;
+    margin: 3rem 0;
+    perspective: 1000px;
+}
+
+.card-deck {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.deck-card {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     background: white;
     border: 1px solid rgba(200, 160, 140, 0.3);
     border-radius: var(--radius-lg);
     padding: 2rem;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: deckSpread 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    will-change: transform, z-index, box-shadow;
+}
+
+/* Initial stacked position */
+.deck-card {
+    top: 0;
     opacity: 0;
-    animation: cardFanOut 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    transform-origin: center bottom;
+    transform: translateY(24px) translateX(-2px) scale(0.98);
 }
 
-.spread-card:nth-child(1) {
+.deck-card[data-card-index="0"] {
+    animation-delay: 0.0s;
+    z-index: 5;
+    top: 0;
+}
+
+.deck-card[data-card-index="1"] {
     animation-delay: 0.1s;
+    z-index: 4;
+    top: 8px;
+    transform: translateY(24px) translateX(0px) scale(0.97);
 }
 
-.spread-card:nth-child(2) {
+.deck-card[data-card-index="2"] {
     animation-delay: 0.2s;
+    z-index: 3;
+    top: 16px;
+    transform: translateY(24px) translateX(2px) scale(0.96);
 }
 
-.spread-card:nth-child(3) {
+.deck-card[data-card-index="3"] {
     animation-delay: 0.3s;
+    z-index: 2;
+    top: 24px;
+    transform: translateY(24px) translateX(4px) scale(0.95);
 }
 
-.spread-card:nth-child(4) {
+.deck-card[data-card-index="4"] {
     animation-delay: 0.4s;
+    z-index: 1;
+    top: 32px;
+    transform: translateY(24px) translateX(6px) scale(0.94);
 }
 
-.spread-card:nth-child(5) {
-    animation-delay: 0.5s;
+/* Spread state - cards fan out */
+.card-deck.spread-active .deck-card {
+    transform: none;
+    opacity: 1;
 }
 
-.spread-card::before {
+.card-deck.spread-active .deck-card[data-card-index="0"] {
+    top: 0;
+    opacity: 1;
+    z-index: 5;
+}
+
+.card-deck.spread-active .deck-card[data-card-index="1"] {
+    top: 50px;
+    opacity: 1;
+    z-index: 4;
+}
+
+.card-deck.spread-active .deck-card[data-card-index="2"] {
+    top: 100px;
+    opacity: 1;
+    z-index: 3;
+}
+
+.card-deck.spread-active .deck-card[data-card-index="3"] {
+    top: 150px;
+    opacity: 1;
+    z-index: 2;
+}
+
+.card-deck.spread-active .deck-card[data-card-index="4"] {
+    top: 200px;
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Hover state - slide card to top */
+.deck-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 12px 32px rgba(212, 165, 155, 0.25);
+    transform: translateY(-60px) scale(1.02) !important;
+    z-index: 200 !important;
+}
+
+.deck-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -4838,33 +4916,16 @@ p {
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.spread-card:hover::before {
+.deck-card:hover::before {
     transform: scaleX(1);
 }
 
-.spread-card:hover {
-    border-color: rgba(200, 160, 140, 0.6);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    transform: translateY(-8px);
-}
-
-.spread-card.featured {
+.deck-card.featured {
     border-color: var(--color-secondary);
-    box-shadow: 0 8px 24px rgba(212, 165, 155, 0.2);
+    box-shadow: 0 6px 20px rgba(212, 165, 155, 0.2);
 }
 
-.spread-card.featured:hover {
-    box-shadow: 0 16px 40px rgba(212, 165, 155, 0.3);
-}
-
-.spread-card.card-selected {
-    border-color: var(--color-secondary);
-    background: linear-gradient(135deg, rgba(255, 240, 235, 0.4), rgba(255, 182, 193, 0.2));
-    box-shadow: 0 20px 48px rgba(212, 165, 155, 0.3);
-    transform: scale(1.02);
-}
-
-.spread-card .badge {
+.badge {
     display: inline-block;
     background: var(--color-secondary);
     color: white;
@@ -4891,7 +4952,7 @@ p {
     transition: color 0.3s ease;
 }
 
-.spread-card:hover .sponsorship-tier-title {
+.deck-card:hover .sponsorship-tier-title {
     color: var(--color-secondary);
 }
 
@@ -4929,17 +4990,18 @@ p {
     transition: transform 0.3s ease;
 }
 
-.spread-card:hover .sponsorship-features li::before {
+.deck-card:hover .sponsorship-features li::before {
     transform: scale(1.2);
 }
 
-/* Partnership CTA Section */
+/* Partnership CTA Section - Enhanced Styling */
 .partnership-cta-section {
     text-align: center;
     padding: 3rem 2rem;
     background: linear-gradient(135deg, rgba(255, 240, 235, 0.3), rgba(255, 182, 193, 0.15));
     border-radius: var(--radius-lg);
     border: 1px solid rgba(212, 165, 155, 0.3);
+    margin-top: 3rem;
 }
 
 .partnership-cta-section h3 {
@@ -4967,57 +5029,98 @@ p {
 }
 
 .partnership-buttons .cta-btn {
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     font-weight: 600;
+    font-size: 1rem;
     border-radius: var(--radius-md);
+    border: 2px solid transparent;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .partnership-buttons .cta-btn.primary {
     background: var(--color-secondary);
     color: white;
-    border: 2px solid var(--color-secondary);
+    border-color: var(--color-secondary);
 }
 
 .partnership-buttons .cta-btn.primary:hover {
     background: var(--color-primary);
     border-color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 165, 155, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(212, 165, 155, 0.35);
 }
 
-.partnership-buttons .cta-btn.secondary {
-    background: transparent;
-    color: var(--color-secondary);
-    border: 2px solid var(--color-secondary);
-}
-
-.partnership-buttons .cta-btn.secondary:hover {
-    background: var(--color-secondary);
+.partnership-buttons .cta-btn.accent {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
     color: white;
-    transform: translateY(-2px);
+    border-color: #2c3e50;
 }
 
-/* Responsive Card Spread */
+.partnership-buttons .cta-btn.accent:hover {
+    background: linear-gradient(135deg, #1a252f, #2c3e50);
+    border-color: #1a252f;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(44, 62, 80, 0.3);
+}
+
+/* Responsive Card Deck */
 @media (max-width: 1024px) {
-    .sponsorship-spread {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.5rem;
+    .card-deck-wrapper {
+        height: 550px;
     }
     
-    .spread-card {
-        padding: 1.5rem;
+    .card-deck.spread-active .deck-card[data-card-index="1"] {
+        top: 55px;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="2"] {
+        top: 110px;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="3"] {
+        top: 165px;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="4"] {
+        top: 220px;
     }
 }
 
 @media (max-width: 768px) {
-    .sponsorship-spread {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    .card-deck-wrapper {
+        height: 600px;
     }
     
-    .spread-card {
+    .card-deck {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .deck-card {
         padding: 1.5rem;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="0"] {
+        top: 0;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="1"] {
+        top: 60px;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="2"] {
+        top: 120px;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="3"] {
+        top: 180px;
+    }
+    
+    .card-deck.spread-active .deck-card[data-card-index="4"] {
+        top: 240px;
     }
     
     .partnership-buttons {
@@ -5026,6 +5129,10 @@ p {
     
     .partnership-buttons .cta-btn {
         width: 100%;
+    }
+    
+    .sponsorship-tier-title {
+        font-size: 1.1rem;
     }
 }
 
@@ -5080,17 +5187,21 @@ p {
         transform: none !important;
     }
 
-    /* Disable card spread animations */
-    .spread-card {
+    /* Disable deck card animations */
+    .deck-card {
         animation: none !important;
         opacity: 1 !important;
     }
 
-    .spread-card::before {
+    .deck-card::before {
         display: none;
     }
 
-    .spread-card:hover {
+    .deck-card:hover {
+        transform: none !important;
+    }
+
+    .card-deck.spread-active .deck-card {
         transform: none !important;
     }
     

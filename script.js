@@ -1755,55 +1755,68 @@ console.log('Conversion tracking initialized');
 })();
 
 /* ============================================
-   SPONSORSHIP CARD SPREAD ANIMATION
-   Dynamic partner card selection interface
+   CARD DECK SPREAD ANIMATION SYSTEM
+   Overlapping cards that fan out and slide
    ============================================ */
 (function() {
-    const spreadCards = document.querySelectorAll('.spread-card');
+    const cardDeck = document.querySelector('.card-deck');
+    const deckCards = document.querySelectorAll('.deck-card');
     const sponsorshipSection = document.querySelector('.sponsorship-opportunities');
     
-    if (!spreadCards.length || !sponsorshipSection) {
-        console.log('Card spread section not found');
+    if (!cardDeck || !deckCards.length || !sponsorshipSection) {
+        console.log('Card deck system not found');
         return;
     }
 
-    // Handle card selection and state
-    spreadCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const cardId = this.getAttribute('data-card-id');
-            
-            // Remove selected state from all cards
-            spreadCards.forEach(c => {
-                c.classList.remove('card-selected');
-            });
-            
-            // Add selected state to clicked card
-            this.classList.add('card-selected');
-            
-            // Optional: highlight or do something with the selection
-            console.log('Selected partnership: ' + cardId);
-        });
+    let isSpread = false;
+    let selectedCard = null;
 
-        // Remove selection on blur/click outside
-        card.addEventListener('blur', function() {
-            this.classList.remove('card-selected');
-        });
-    });
-
-    // Track when section enters viewport for future scroll trigger enhancements
-    const sponsorshipObserver = new IntersectionObserver((entries) => {
+    // Trigger spread animation when section comes into view
+    const deckObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Section is now in view - cards animation already triggered by CSS
-                console.log('Sponsorship section in view');
-                sponsorshipObserver.unobserve(entry.target);
+            if (entry.isIntersecting && !isSpread) {
+                // Activate spread after a brief delay for animation effect
+                setTimeout(() => {
+                    cardDeck.classList.add('spread-active');
+                    isSpread = true;
+                    console.log('Card deck spread activated');
+                }, 200);
+                deckObserver.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.3
     });
 
-    sponsorshipObserver.observe(sponsorshipSection);
+    deckObserver.observe(cardDeck);
 
-    console.log('Card spread system initialized with', spreadCards.length, 'partnership options');
+    // Handle card hover - bring to front
+    deckCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Remove previous selection
+            if (selectedCard && selectedCard !== this) {
+                selectedCard.style.zIndex = '';
+            }
+            // Bring current card to front
+            this.style.zIndex = '300';
+            selectedCard = this;
+        });
+
+        card.addEventListener('mouseleave', function() {
+            // Reset z-index positioning
+            this.style.zIndex = '';
+            selectedCard = null;
+        });
+
+        // Click handler for selection
+        card.addEventListener('click', function() {
+            const cardId = this.getAttribute('data-card-id');
+            console.log('Selected partnership card: ' + cardId);
+            
+            // Optional: You could add logic here to open a modal or perform an action
+            // For now, the hover effect handles the slide-to-top
+        });
+    });
+
+    console.log('Card deck spread system initialized with', deckCards.length, 'cards');
 })();
