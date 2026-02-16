@@ -3126,7 +3126,7 @@ p {
     flex: 1 1 200px;
     min-width: 200px;
     max-width: 280px;
-    height: 380px;
+    height: 420px;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -3165,11 +3165,12 @@ p {
 .flip-card-front {
     background: var(--white);
     border: 1px solid rgba(200, 160, 140, 0.3);
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
 }
 
 .flip-card-front::before {
@@ -3235,12 +3236,13 @@ p {
 .flip-hint {
     display: block;
     margin-top: auto;
-    padding-top: 1rem;
-    font-size: 0.75rem;
+    padding-top: 0.75rem;
+    font-size: 0.7rem;
     color: var(--color-text-secondary);
     opacity: 0.6;
     text-align: center;
     transition: opacity 0.3s ease;
+    flex-shrink: 0;
 }
 
 .sponsorship-card:hover .flip-hint {
@@ -3252,21 +3254,23 @@ p {
     display: inline-block;
     background: var(--color-secondary);
     color: white;
-    padding: 0.35rem 0.75rem;
+    padding: 0.25rem 0.6rem;
     border-radius: var(--radius-sm);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    align-self: flex-start;
 }
 
 .sponsorship-tier-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--color-text);
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.4rem 0;
     transition: color 0.3s ease;
+    line-height: 1.3;
 }
 
 .sponsorship-card.deck-card:hover .sponsorship-tier-title {
@@ -3275,9 +3279,10 @@ p {
 
 .sponsorship-scope {
     color: var(--color-text-secondary);
-    font-size: 0.9rem;
-    margin: 0 0 1rem 0;
+    font-size: 0.8rem;
+    margin: 0 0 0.75rem 0;
     font-weight: 500;
+    line-height: 1.4;
 }
 
 .sponsorship-features {
@@ -3286,16 +3291,17 @@ p {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem;
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .sponsorship-features li {
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
     position: relative;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--color-text);
-    line-height: 1.5;
+    line-height: 1.4;
     border-bottom: none;
 }
 
@@ -4896,8 +4902,9 @@ p {
 .card-inner {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Partnership CTA Section - Ultra Premium Styling */
@@ -5062,7 +5069,19 @@ p {
         flex: 1 1 180px;
         min-width: 180px;
         max-width: 260px;
-        height: 360px;
+        height: 400px;
+    }
+    
+    .flip-card-front {
+        padding: 1rem;
+    }
+    
+    .sponsorship-tier-title {
+        font-size: 1rem;
+    }
+    
+    .sponsorship-features li {
+        font-size: 0.75rem;
     }
 }
 
@@ -5074,15 +5093,15 @@ p {
     .sponsorship-card {
         flex: 1 1 220px;
         max-width: 300px;
-        height: 350px;
+        height: 380px;
     }
     
     .sponsorship-tier-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .sponsorship-features li {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 }
 
@@ -5101,8 +5120,20 @@ p {
     .sponsorship-card {
         width: 100%;
         max-width: 350px;
-        height: 320px;
+        height: auto;
+        min-height: 320px;
         flex: none;
+    }
+    
+    .flip-card-inner {
+        min-height: 320px;
+    }
+    
+    .flip-card-front,
+    .flip-card-back {
+        position: relative;
+        height: auto;
+        min-height: 320px;
     }
     
     .flip-card-front {
