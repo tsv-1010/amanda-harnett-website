@@ -1754,4 +1754,40 @@ console.log('Conversion tracking initialized');
     console.log('Bento gallery initialized with', bentoItems.length, 'items');
 })();
 
-/* Partnership cards now use simple CSS flexbox - no JS needed */
+/* ============================================
+   PARTNERSHIP CARD FLIP ANIMATION
+   Click to flip cards revealing Amanda photos
+   ============================================ */
+(function() {
+    const flipCards = document.querySelectorAll('.sponsorship-card.flip-card');
+    
+    if (!flipCards.length) {
+        console.log('No flip cards found');
+        return;
+    }
+
+    flipCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Toggle flipped class
+            this.classList.toggle('flipped');
+            
+            // Log which card was flipped
+            const category = this.getAttribute('data-category');
+            console.log('Card flipped:', category, this.classList.contains('flipped') ? '(showing back)' : '(showing front)');
+        });
+
+        // Keyboard accessibility - flip on Enter or Space
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', 'Click to flip card and see Amanda');
+        
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.classList.toggle('flipped');
+            }
+        });
+    });
+
+    console.log('Partnership flip cards initialized with', flipCards.length, 'cards');
+})();
