@@ -470,282 +470,164 @@ document.querySelectorAll('.product-btn.affiliate-link').forEach(link => {
 });
 
 // ============================================
-// CALMING OCEAN SWELL REVEAL EFFECT
+// ORGANIC BLOB REVEAL - Framer-style
 // ============================================
-// Smooth, flowing waves like watching the tide - peaceful and meditative
+// Uses SVG clip-path with organic noise edges for fluid blob reveal
 
-const maskPath = document.querySelector('.mask-path');
-const signatureStrokes = document.querySelectorAll('.signature-stroke');
 const heroContainer = document.querySelector('.hero-image-container');
-const heroSection = document.querySelector('.hero');
+const heroReveal = document.querySelector('.hero-reveal');
 
-if (maskPath && heroContainer) {
-    // State variables
-    let mouseX = 400;
-    let mouseY = 300;
-    let scrollProgress = 0;
+if (heroContainer && heroReveal) {
+    // Create inline SVG for clip-path
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('width', '0');
+    svg.setAttribute('height', '0');
+    svg.style.position = 'absolute';
+    svg.innerHTML = `
+        <defs>
+            <clipPath id="blobClip" clipPathUnits="objectBoundingBox">
+                <path id="blobPath" d="M0,0"/>
+            </clipPath>
+        </defs>
+    `;
+    document.body.appendChild(svg);
+    
+    const blobPath = document.getElementById('blobPath');
+    
+    // State - all in normalized 0-1 coordinates
+    let mouseX = -1, mouseY = -1;
+    let targetX = -1, targetY = -1;
+    let blobRadius = 0;
+    let targetRadius = 0;
+    let isHovering = false;
     let time = 0;
-    let isMouseOver = false;
+    let containerWidth = 1, containerHeight = 1;
     
-    // Sand cursor particles (gentle, sparse)
-    const sandParticles = [];
+    // Trail for motion blur
+    const trail = [];
+    const TRAIL_SIZE = 6;
     
-    // Track mouse movement over hero
-    heroContainer.addEventListener('mousemove', (e) => {
-        isMouseOver = true;
+    // Cache container dimensions
+    function updateDimensions() {
         const rect = heroContainer.getBoundingClientRect();
-        mouseX = ((e.clientX - rect.left) / rect.width) * 800;
-        mouseY = ((e.clientY - rect.top) / rect.height) * 600;
+        containerWidth = rect.width;
+        containerHeight = rect.height;
+    }
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    
+    // Organic noise function
+    function noise(angle, t) {
+        return Math.sin(angle * 3 + t) * 0.15 +
+               Math.sin(angle * 5 - t * 1.3) * 0.1 +
+               Math.sin(angle * 7 + t * 0.7) * 0.08 +
+               Math.sin(angle * 2 - t * 0.5) * 0.12;
+    }
+    
+    // Generate organic blob SVG path (normalized 0-1 coordinates)
+    function generateBlobPath(cx, cy, r, t) {
+        if (r < 0.001) return 'M0,0';
         
-        // Spawn gentle sand particles occasionally
-        if (Math.random() > 0.7) {
-            spawnSandParticles(mouseX, mouseY);
+        const points = [];
+        const segments = 48;
+        
+        for (let i = 0; i < segments; i++) {
+            const angle = (i / segments) * Math.PI * 2;
+            const n = noise(angle, t);
+            const radius = r * (1 + n);
+            
+            // Account for aspect ratio
+            const aspectRatio = containerHeight / containerWidth;
+            const px = cx + Math.cos(angle) * radius;
+            const py = cy + Math.sin(angle) * radius * aspectRatio;
+            
+            points.push({ x: Math.max(0, Math.min(1, px)), y: Math.max(0, Math.min(1, py)) });
+        }
+        
+        // Create smooth bezier path
+        let path = `M${points[0].x.toFixed(4)},${points[0].y.toFixed(4)}`;
+        
+        for (let i = 0; i < points.length; i++) {
+            const p0 = points[(i - 1 + points.length) % points.length];
+            const p1 = points[i];
+            const p2 = points[(i + 1) % points.length];
+            const p3 = points[(i + 2) % points.length];
+            
+            // Catmull-Rom to Bezier conversion for smooth curves
+            const cp1x = p1.x + (p2.x - p0.x) / 6;
+            const cp1y = p1.y + (p2.y - p0.y) / 6;
+            const cp2x = p2.x - (p3.x - p1.x) / 6;
+            const cp2y = p2.y - (p3.y - p1.y) / 6;
+            
+            path += ` C${cp1x.toFixed(4)},${cp1y.toFixed(4)} ${cp2x.toFixed(4)},${cp2y.toFixed(4)} ${p2.x.toFixed(4)},${p2.y.toFixed(4)}`;
+        }
+        
+        path += 'Z';
+        return path;
+    }
+    
+    // Mouse tracking - INSTANT, normalized coordinates
+    heroContainer.addEventListener('mousemove', (e) => {
+        const rect = heroContainer.getBoundingClientRect();
+        targetX = (e.clientX - rect.left) / rect.width;
+        targetY = (e.clientY - rect.top) / rect.height;
+    });
+    
+    heroContainer.addEventListener('mouseenter', (e) => {
+        updateDimensions();
+        const rect = heroContainer.getBoundingClientRect();
+        targetX = (e.clientX - rect.left) / rect.width;
+        targetY = (e.clientY - rect.top) / rect.height;
+        mouseX = targetX;
+        mouseY = targetY;
+        isHovering = true;
+        targetRadius = 0.18; // 18% of container width
+        
+        // Initialize trail
+        trail.length = 0;
+        for (let i = 0; i < TRAIL_SIZE; i++) {
+            trail.push({ x: targetX, y: targetY });
         }
     });
     
     heroContainer.addEventListener('mouseleave', () => {
-        isMouseOver = false;
+        isHovering = false;
+        targetRadius = 0;
     });
     
-    // Spawn gentle sand particles (sparse, calming)
-    function spawnSandParticles(x, y) {
-        const particleCount = 2;
-        for (let i = 0; i < particleCount; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const speed = 0.5 + Math.random() * 1;
-            const lifetime = 1 + Math.random() * 1;
-            
-            sandParticles.push({
-                x: x,
-                y: y,
-                vx: Math.cos(angle) * speed,
-                vy: Math.sin(angle) * speed,
-                lifetime: lifetime,
-                age: 0,
-                size: 2 + Math.random() * 2,
-                type: 'sand'
-            });
-        }
-    }
-    
-    // Update sand particles
-    function updateSandParticles(deltaTime) {
-        for (let i = sandParticles.length - 1; i >= 0; i--) {
-            const p = sandParticles[i];
-            p.age += deltaTime;
-            p.x += p.vx * deltaTime * 30;
-            p.y += p.vy * deltaTime * 30;
-            
-            if (p.age >= p.lifetime) {
-                sandParticles.splice(i, 1);
-            }
-        }
-    }
-    
-    // Track scroll
-    let scrollY = 0;
-    window.addEventListener('scroll', () => {
-        scrollY = window.scrollY;
-        const heroHeight = heroSection.offsetHeight;
-        scrollProgress = Math.min(scrollY / (heroHeight * 0.75), 1);
+    // Animation loop
+    function animate() {
+        // INSTANT position tracking (0.92 = nearly 1:1)
+        mouseX += (targetX - mouseX) * 0.92;
+        mouseY += (targetY - mouseY) * 0.92;
         
-        if (scrollProgress > 0.4 && scrollProgress < 0.7) {
-            triggerSignatureAnimation(scrollProgress);
-        }
-    });
-    
-    // SMOOTH FLOWING WAVE PATH GENERATOR
-    // Creates calming tide effect - washes up from bottom to top, then retreats
-    function generateCalmWavePath(time) {
-        const W = 800;
-        const H = 600;
-        const RES = 80;
+        // Fast radius animation
+        blobRadius += (targetRadius - blobRadius) * 0.35;
         
-        // TIDE CYCLE: Full wash up and retreat
-        // Total cycle: 16 seconds (8s up, 8s down)
-        const TIDE_CYCLE = 16;
-        const cycleTime = time % TIDE_CYCLE;
-        const halfCycle = TIDE_CYCLE / 2;
+        // Update trail
+        trail.unshift({ x: mouseX, y: mouseY });
+        if (trail.length > TRAIL_SIZE) trail.pop();
         
-        let tideProgress;
-        if (cycleTime < halfCycle) {
-            // WASH IN: Bottom to top (0 to 1)
-            // Ease-out: fast start, slows as it reaches peak
-            const t = cycleTime / halfCycle;
-            tideProgress = 1 - Math.pow(1 - t, 2.5);
+        time += 0.1;
+        
+        // Generate and apply blob path
+        if (blobRadius > 0.001 || isHovering) {
+            const path = generateBlobPath(mouseX, mouseY, blobRadius, time);
+            blobPath.setAttribute('d', path);
+            heroReveal.style.clipPath = 'url(#blobClip)';
+            heroReveal.style.opacity = '1';
         } else {
-            // RETREAT: Top to bottom (1 to 0)
-            // Ease-in: slow start, speeds up as it pulls back
-            const t = (cycleTime - halfCycle) / halfCycle;
-            tideProgress = 1 - Math.pow(t, 2);
+            heroReveal.style.opacity = '0';
         }
         
-        // Map tideProgress to Y position
-        // 0% progress = bottom (H), 100% progress = top (0)
-        // Add small margin so wave never fully disappears or covers everything
-        const minY = 30;   // Highest point (near top, ~95% reveal)
-        const maxY = H - 30; // Lowest point (near bottom, ~5% reveal)
-        const baseY = maxY - (maxY - minY) * tideProgress;
-        
-        const edgePoints = [];
-        
-        for (let i = 0; i <= RES; i++) {
-            const t = i / RES;
-            const x = t * W;
-            
-            // Layer 1: Primary gentle swell (very slow, large amplitude)
-            const swell1 = Math.sin(t * Math.PI * 1.5 + time * 0.12) * 35;
-            
-            // Layer 2: Secondary slower wave (offset phase)
-            const swell2 = Math.sin(t * Math.PI * 2.2 + time * 0.08 + 1.5) * 20;
-            
-            // Layer 3: Subtle third harmonic (adds organic feel without choppiness)
-            const swell3 = Math.sin(t * Math.PI * 3.5 + time * 0.15 + 0.8) * 10;
-            
-            // Combine base tide position with wave undulation
-            let waveY = baseY + swell1 + swell2 + swell3;
-            
-            // Gentle mouse interaction - wave slightly bulges toward cursor
-            if (isMouseOver) {
-                const dx = x - mouseX;
-                const dy = waveY - mouseY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 200) {
-                    const influence = Math.pow(1 - dist / 200, 2) * 40;
-                    waveY -= influence; // Pull wave edge toward mouse
-                }
-            }
-            
-            // Clamp to bounds
-            waveY = Math.max(10, Math.min(H - 10, waveY));
-            
-            edgePoints.push({ x, y: waveY });
-        }
-        
-        // Build smooth path with bezier curves for flowing edge
-        let path = `M${edgePoints[0].x},${edgePoints[0].y}`;
-        
-        // Use smooth cubic beziers for the wave edge
-        for (let i = 1; i < edgePoints.length - 1; i++) {
-            const prev = edgePoints[i - 1];
-            const curr = edgePoints[i];
-            const next = edgePoints[i + 1];
-            
-            // Calculate smooth control points
-            const cp1x = curr.x - (next.x - prev.x) * 0.15;
-            const cp1y = curr.y - (next.y - prev.y) * 0.15;
-            const cp2x = curr.x + (next.x - prev.x) * 0.15;
-            const cp2y = curr.y + (next.y - prev.y) * 0.15;
-            
-            path += ` S${cp1x},${cp1y} ${curr.x},${curr.y}`;
-        }
-        
-        // Complete to last edge point
-        const last = edgePoints[edgePoints.length - 1];
-        path += ` L${last.x},${last.y}`;
-        
-        // Close path along bottom
-        path += ` L${W},${H + 10}`;
-        path += ` L0,${H + 10}`;
-        path += ' Z';
-        
-        return path;
+        requestAnimationFrame(animate);
     }
     
-    // Animate signature on scroll
-    function triggerSignatureAnimation(progress) {
-        signatureStrokes.forEach((stroke, index) => {
-            const delay = index * 0.3;
-            const relativeProgress = (progress - 0.4 - delay) * 3;
-            
-            if (relativeProgress >= 0 && relativeProgress <= 1) {
-                const dashoffset = 1000 * (1 - relativeProgress);
-                stroke.style.strokeDashoffset = dashoffset;
-                stroke.style.opacity = Math.min(relativeProgress * 2, 1);
-                
-                if (relativeProgress === 1) {
-                    stroke.style.animation = 'fadeOut 1s ease-out forwards';
-                }
-            } else if (relativeProgress > 1) {
-                stroke.style.strokeDashoffset = 0;
-                stroke.style.opacity = 0;
-            }
-        });
-    }
-    
-    // Create sand particle canvas overlay
-    const canvas = document.createElement('canvas');
-    canvas.style.position = 'absolute';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '4';
-    heroContainer.appendChild(canvas);
-    
-    const ctx = canvas.getContext('2d');
-    
-    function resizeCanvas() {
-        const rect = heroContainer.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-    }
-    
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
-    // Draw sand particles on canvas (gentle, sparse)
-    function drawSandParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        sandParticles.forEach(p => {
-            const opacity = 1 - (p.age / p.lifetime);
-            const canvasX = (p.x / 800) * canvas.width;
-            const canvasY = (p.y / 600) * canvas.height;
-            
-            // Gentle sand particles
-            ctx.fillStyle = `rgba(212, 165, 116, ${opacity * 0.6})`;
-            ctx.beginPath();
-            ctx.arc(canvasX, canvasY, p.size * opacity, 0, Math.PI * 2);
-            ctx.fill();
-        });
-    }
-    
-    // Animate the calm wave reveal and particles
-    let lastTime = Date.now();
-    function updateMaskPath() {
-        const now = Date.now();
-        const deltaTime = (now - lastTime) / 1000;
-        lastTime = now;
-        
-        time += 0.016;
-        
-        // Update particles (no wave spawning needed - continuous flow)
-        updateSandParticles(deltaTime);
-        drawSandParticles();
-        
-        // Generate smooth flowing wave path
-        const newPath = generateCalmWavePath(time);
-        
-        maskPath.setAttribute('d', newPath);
-        
-        requestAnimationFrame(updateMaskPath);
-    }
-    
-    // Start animation loop
-    updateMaskPath();
-    
-    // Add fade-out keyframe for signature
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
+    // Start
+    animate();
+    console.log('Organic blob reveal initialized');
 }
-
-console.log('Conversion tracking initialized');
 
 console.log('Conversion tracking initialized');
 

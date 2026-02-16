@@ -851,7 +851,7 @@
     <section id="home" class="hero">
         <div class="hero-scroll-container">
         <div class="hero-container">
-            <!-- Base Image Container -->
+            <!-- Hero Image Container with Cursor Spotlight Reveal -->
             <div class="hero-image-container">
                 <!-- Base Image (Professional - always visible) -->
                 <img 
@@ -862,52 +862,18 @@
                     decoding="async"
                 />
                 
-                <!-- SVG Mask for Calm Wave Reveal (overlay on top of base) -->
-                <svg class="hero-mask-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <!-- Soft edge filter - subtle blur for smooth wave -->
-                        <filter id="softEdge" x="-2%" y="-2%" width="104%" height="104%">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
-                        </filter>
-                        
-                        <!-- Mask: black = hidden, white path = revealed -->
-                        <mask id="revealMask">
-                            <rect width="800" height="600" fill="black"/>
-                            <!-- Smooth flowing wave path - JS animates this -->
-                            <path class="mask-path" d="M0,0 L0,0 Z" fill="white" filter="url(#softEdge)"/>
-                        </mask>
-                    </defs>
-                    
-                    <!-- Overlay Image with mask (Game Mode - reveals through ocean waves) -->
-                    <image 
-                        class="reveal-overlay-img" 
-                        href="assets/hero/PlacebolderGlasses.jpg" 
-                        width="800" 
-                        height="600" 
-                        preserveAspectRatio="xMidYMid slice"
-                        mask="url(#revealMask)"
-                    />
-                </svg>
+                <!-- Reveal Image (follows cursor spotlight) -->
+                <img 
+                    src="assets/hero/PlacebolderGlasses.jpg" 
+                    alt="Amanda Harnett - Game Mode" 
+                    class="hero-img hero-reveal"
+                    decoding="async"
+                />
                 
-                <!-- Signature SVG (animates on scroll) -->
-                <svg class="signature-overlay" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                        <style>
-                            .signature-stroke {
-                                fill: none;
-                                stroke: rgba(212, 165, 116, 0.9);
-                                stroke-width: 3;
-                                stroke-linecap: round;
-                                stroke-linejoin: round;
-                                stroke-dasharray: 1000;
-                                stroke-dashoffset: 1000;
-                            }
-                        </style>
-                    </defs>
-                    <!-- Placeholder signature path - will be replaced with actual SVG -->
-                    <path class="signature-stroke" d="M50,100 Q100,50 150,100 Q180,150 160,200 Q140,250 100,260 Q60,270 40,220"/>
-                    <path class="signature-stroke" d="M180,100 Q200,80 220,100 L220,230" style="stroke-dasharray: 500; stroke-dashoffset: 500;"/>
-                </svg>
+                <!-- Hover hint -->
+                <div class="hero-hover-hint">
+                    <span>Hover to reveal</span>
+                </div>
             </div>
 
             <div class="hero-text">
