@@ -1548,23 +1548,155 @@ console.log('Conversion tracking initialized');
     
     if (!scrollTrack) return;
     
-    // Pause/play animation on hover
+    // Filter out hidden items and get only visible ones
+    const allItems = Array.from(scrollTrack.querySelectorAll('.partner-logo-item'));
+    const visibleItems = allItems.filter(item => item.getAttribute('data-select') !== 'false');
+    
+    if (visibleItems.length === 0) return;
+    
+    // Clone visible items to create infinite effect
+    const clonedItems = visibleItems.map(item => item.cloneNode(true));
+    clonedItems.forEach(clone => {
+        scrollTrack.appendChild(clone);
+    });
+    
+    // Additional clones for smoother transitions
+    const additionalClones = visibleItems.map(item => item.cloneNode(true));
+    additionalClones.forEach(clone => {
+        scrollTrack.appendChild(clone);
+    });
+    
+    // Calculate width of one set
+    let trackWidth = 0;
+    visibleItems.forEach(item => {
+        trackWidth += item.offsetWidth + 48; // 48px = 3rem gap
+    });
+    
+    let translateX = 0;
+    let isPaused = false;
+    const speed = 30; // pixels per second
+    let lastTime = Date.now();
+    let animationId = null;
+    
+    function animate() {
+        const now = Date.now();
+        const deltaTime = (now - lastTime) / 1000;
+        lastTime = now;
+        
+        if (!isPaused) {
+            translateX -= speed * deltaTime;
+            
+            // Reset to beginning when scrolled past first set
+            if (Math.abs(translateX) >= trackWidth) {
+                translateX = 0;
+            }
+        }
+        
+        scrollTrack.style.transform = `translateX(${translateX}px)`;
+        animationId = requestAnimationFrame(animate);
+    }
+    
+    // Pause on hover
     scrollTrack.addEventListener('mouseenter', () => {
-        scrollTrack.style.animationPlayState = 'paused';
+        isPaused = true;
     });
     
     scrollTrack.addEventListener('mouseleave', () => {
-        scrollTrack.style.animationPlayState = 'running';
+        isPaused = false;
+        lastTime = Date.now();
     });
     
-    // Mobile: pause on touch
+    // Pause on touch
     scrollTrack.addEventListener('touchstart', () => {
-        scrollTrack.style.animationPlayState = 'paused';
+        isPaused = true;
     });
     
     scrollTrack.addEventListener('touchend', () => {
-        scrollTrack.style.animationPlayState = 'running';
+        isPaused = false;
+        lastTime = Date.now();
     });
     
-    console.log('Partner logo scroll initialized');
+    // Start animation
+    animate();
+    
+    console.log('Partner logo scroll initialized with', visibleItems.length, 'partners');
+})();
+
+/* ==========================================
+   ABOUT IMAGE LOADER & FOCUS ON SCROLL
+   Loads Amanda-Harnett-Blue image & blur/focus effect
+   ========================================== */
+(function initAboutImage() {
+    const focusElement = document.querySelector('.about-image.focus-on-scroll');
+    const imgElement = focusElement?.querySelector('.about-img');
+    const basePath = focusElement?.getAttribute('data-image-src');
+    
+    if (!focusElement || !imgElement || !basePath) return;
+    
+    // Try to load image with intelligent extension detection
+    function loadImage() {
+        // Try PNG first, then JPG
+        const extensions = ['png', 'jpg', 'jpeg', 'webp'];
+        let loadedExtension = null;
+        
+        function tryNextExtension(index) {
+            if (index >= extensions.length) {
+                console.warn('Could not load image:', basePath);
+                return;
+            }
+            
+            const ext = extensions[index];
+            const imagePath = `${basePath}.${ext}`;
+            const testImg = new Image();
+            
+            testImg.onload = () => {
+                imgElement.src = imagePath;
+                console.log('Image loaded:', imagePath);
+                initFocusOnScroll();
+            };
+            
+            testImg.onerror = () => {
+                tryNextExtension(index + 1);
+            };
+            
+            testImg.src = imagePath;
+        }
+        
+        tryNextExtension(0);
+    }
+    
+    function initFocusOnScroll() {
+        // Create Intersection Observer to track when image is in viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const scrollProgress = entry.intersectionRatio; // 0 to 1
+                
+                // Calculate blur amount based on scroll position
+                // When fully in view (ratio = 1), no blur
+                // When partially out of view (ratio < 1), increase blur
+                const blurAmount = Math.max(0, (1 - scrollProgress) * 15);
+                const brightnessAmount = 0.9 + (scrollProgress * 0.1); // 0.9 to 1.0
+                
+                focusElement.style.filter = `blur(${blurAmount}px) brightness(${brightnessAmount})`;
+                
+                // Update classes for styling
+                if (scrollProgress > 0.7) {
+                    focusElement.classList.remove('blur');
+                    focusElement.classList.add('focused');
+                } else {
+                    focusElement.classList.remove('focused');
+                    focusElement.classList.add('blur');
+                }
+            });
+        }, {
+            threshold: [0, 0.25, 0.5, 0.75, 1]
+        });
+        
+        observer.observe(focusElement);
+    }
+    
+    // Load the image
+    loadImage();
+    
+    console.log('About image initialized');
 })();

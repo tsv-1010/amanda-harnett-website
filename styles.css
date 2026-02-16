@@ -1278,6 +1278,42 @@ p {
     border-radius: 50%;
 }
 
+.about-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-image {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 3/4;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 100px;
+}
+
+.about-image.focus-on-scroll {
+    transition: filter 0.3s ease;
+}
+
+.about-image.focus-on-scroll.blur {
+    filter: blur(8px) brightness(0.9);
+}
+
+.about-image.focus-on-scroll.focused {
+    filter: blur(0px) brightness(1);
+}
+
+.about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .about-image .image-placeholder {
     aspect-ratio: 3/4;
     position: sticky;
@@ -3296,6 +3332,16 @@ p {
         grid-template-columns: 1fr;
     }
 
+    .about-image-wrapper {
+        margin: 2rem 0;
+    }
+
+    .about-image {
+        max-width: 100%;
+        position: relative;
+        top: 0;
+    }
+
     .about-image .image-placeholder {
         position: relative;
         top: 0;
@@ -4096,11 +4142,9 @@ p {
     width: fit-content;
     gap: 3rem;
     padding: 0 1rem;
-    animation: scrollLogos 40s linear infinite;
 }
 
 .partner-scroll-track:hover {
-    animation-play-state: paused;
     cursor: default;
 }
 
@@ -4113,6 +4157,10 @@ p {
     width: auto;
 }
 
+.partner-logo-item[data-select="false"] {
+    display: none;
+}
+
 .partner-logo-item img {
     max-height: 100%;
     max-width: 150px;
@@ -4121,20 +4169,12 @@ p {
     object-fit: contain;
     opacity: 0.7;
     transition: opacity 0.3s ease;
+    filter: grayscale(100%) brightness(0.6);
 }
 
 .partner-scroll-track:hover .partner-logo-item img {
     opacity: 0.85;
-}
-
-/* Infinite scroll animation */
-@keyframes scrollLogos {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-100% / 2));
-    }
+    filter: grayscale(100%) brightness(0.75);
 }
 
 /* Responsive */
@@ -4154,15 +4194,6 @@ p {
 
     .partner-logo-item img {
         max-width: 120px;
-    }
-
-    @keyframes scrollLogos {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-100% / 2));
-        }
     }
 }
 
