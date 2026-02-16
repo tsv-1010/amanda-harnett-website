@@ -4074,6 +4074,118 @@ p {
 }
 
 /* ==========================================
+   PARTNER LOGOS SCROLL
+   Infinite scroll carousel of partner logos
+   ========================================== */
+.partner-scroll-section {
+    padding: 2.5rem 0;
+    background: white;
+    border-top: 1px solid rgba(200, 160, 140, 0.1);
+    border-bottom: 1px solid rgba(200, 160, 140, 0.1);
+    overflow: hidden;
+}
+
+.partner-scroll-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.partner-scroll-track {
+    display: flex;
+    width: fit-content;
+    gap: 3rem;
+    padding: 0 1rem;
+    animation: scrollLogos 40s linear infinite;
+}
+
+.partner-scroll-track:hover {
+    animation-play-state: paused;
+    cursor: default;
+}
+
+.partner-logo-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: auto;
+}
+
+.partner-logo-item img {
+    max-height: 100%;
+    max-width: 150px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.partner-scroll-track:hover .partner-logo-item img {
+    opacity: 0.85;
+}
+
+/* Infinite scroll animation */
+@keyframes scrollLogos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% / 2));
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .partner-scroll-section {
+        padding: 2rem 0;
+    }
+
+    .partner-scroll-track {
+        gap: 2rem;
+        padding: 0 0.75rem;
+    }
+
+    .partner-logo-item {
+        height: 50px;
+    }
+
+    .partner-logo-item img {
+        max-width: 120px;
+    }
+
+    @keyframes scrollLogos {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% / 2));
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .partner-scroll-section {
+        padding: 1.5rem 0;
+    }
+
+    .partner-scroll-track {
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .partner-logo-item {
+        height: 40px;
+    }
+
+    .partner-logo-item img {
+        max-width: 100px;
+    }
+}
+
+/* ==========================================
    PARTNERSHIP FAQ SECTION
    Brand collaboration & partnership inquiries
    ========================================== */

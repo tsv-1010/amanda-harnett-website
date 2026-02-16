@@ -1538,3 +1538,33 @@ console.log('Conversion tracking initialized');
     
     console.log('FAQ accordion initialized');
 })();
+
+/* ==========================================
+   PARTNER LOGO SCROLL
+   Smooth infinite scroll with pause on hover
+   ========================================== */
+(function initPartnerScroll() {
+    const scrollTrack = document.querySelector('.partner-scroll-track');
+    
+    if (!scrollTrack) return;
+    
+    // Pause/play animation on hover
+    scrollTrack.addEventListener('mouseenter', () => {
+        scrollTrack.style.animationPlayState = 'paused';
+    });
+    
+    scrollTrack.addEventListener('mouseleave', () => {
+        scrollTrack.style.animationPlayState = 'running';
+    });
+    
+    // Mobile: pause on touch
+    scrollTrack.addEventListener('touchstart', () => {
+        scrollTrack.style.animationPlayState = 'paused';
+    });
+    
+    scrollTrack.addEventListener('touchend', () => {
+        scrollTrack.style.animationPlayState = 'running';
+    });
+    
+    console.log('Partner logo scroll initialized');
+})();
