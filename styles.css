@@ -930,13 +930,13 @@ p {
     border: 1px solid rgba(212, 165, 116, 0.2);
     border-radius: var(--radius-lg);
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .stat-card:hover {
     border-color: var(--sand);
     box-shadow: 0 10px 30px rgba(212, 165, 116, 0.15);
-    transform: translateY(-5px);
+    animation: cardHover 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .stat-card h3 {
@@ -1316,13 +1316,13 @@ p {
     background: var(--white);
     border: 1px solid rgba(212, 165, 116, 0.2);
     border-radius: var(--radius-lg);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .partner-card:hover {
     border-color: var(--blush);
     box-shadow: 0 10px 30px rgba(232, 155, 155, 0.15);
-    transform: translateY(-5px);
+    animation: cardHover 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .partner-logo {
@@ -3238,7 +3238,7 @@ p {
     border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -3248,23 +3248,24 @@ p {
 .cta-btn.primary {
     background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
     color: var(--white);
+    box-shadow: 0 4px 12px rgba(212, 165, 116, 0.15);
 }
 
 .cta-btn.primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(212, 165, 116, 0.3);
+    animation: buttonLift 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .cta-btn.secondary {
     background: transparent;
     color: var(--sand);
     border: 2px solid var(--sand);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .cta-btn.secondary:hover {
     background: var(--sand);
     color: var(--white);
-    transform: translateY(-2px);
+    animation: buttonLift 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* Responsive Design */
@@ -3687,6 +3688,135 @@ p {
     50% { 
         opacity: 1;
         transform: scale(1.02);
+    }
+}
+
+/* ==========================================
+   SPRINT 6: MICRO-ANIMATIONS
+   ========================================== */
+
+/* Button Hover Lift */
+@keyframes buttonLift {
+    from {
+        transform: translateY(0);
+        box-shadow: 0 4px 12px rgba(212, 165, 116, 0.15);
+    }
+    to {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(212, 165, 116, 0.3);
+    }
+}
+
+/* Card Scale & Lift */
+@keyframes cardHover {
+    from {
+        transform: translateY(0) scale(1);
+    }
+    to {
+        transform: translateY(-8px) scale(1.02);
+    }
+}
+
+/* Link Underline Reveal */
+@keyframes underlineReveal {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Smooth Icon Rotate */
+@keyframes iconRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Staggered Fade In */
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Slide In From Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In From Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Glow Pulse */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(232, 155, 155, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 30px 10px rgba(232, 155, 155, 0.1);
+    }
+}
+
+/* Text Shimmer */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 
