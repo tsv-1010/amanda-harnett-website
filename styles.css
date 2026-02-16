@@ -3113,83 +3113,24 @@ p {
     margin-bottom: 3rem;
 }
 
-/* OLD SPONSORSHIP TIERS - DEPRECATED (now using card-deck system)
-.sponsorship-tiers {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-}
-*/
-
-/* Base sponsorship-card styles - overridden by .deck-card for card spread */
+/* Sponsorship Cards - Simple Flexbox Grid */
 .sponsorship-card {
     background: var(--white);
     border: 1px solid rgba(200, 160, 140, 0.3);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
-}
-
-/* Deck card specific overrides - these take precedence */
-.sponsorship-card.deck-card {
-    position: absolute;
-    width: 280px;
-    min-height: 360px;
-    top: 0;
-    background: white;
-    border: 1px solid rgba(200, 160, 140, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    cursor: pointer;
-    overflow: hidden;
+    flex: 1 1 200px;
+    min-width: 200px;
+    max-width: 280px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform-origin: center bottom;
-    will-change: transform, z-index, box-shadow;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Horizontal fan spread positions */
-.sponsorship-card.deck-card[data-card-index="0"] {
-    z-index: 5;
-    left: calc(50% - 320px);
-    transform: rotate(-6deg);
-}
-
-.sponsorship-card.deck-card[data-card-index="1"] {
-    z-index: 4;
-    left: calc(50% - 200px);
-    transform: rotate(-3deg);
-}
-
-.sponsorship-card.deck-card[data-card-index="2"] {
-    z-index: 6;
-    left: calc(50% - 140px);
-    transform: rotate(0deg);
-}
-
-.sponsorship-card.deck-card[data-card-index="3"] {
-    z-index: 4;
-    left: calc(50% - 80px);
-    transform: rotate(3deg);
-}
-
-.sponsorship-card.deck-card[data-card-index="4"] {
-    z-index: 5;
-    left: calc(50% + 40px);
-    transform: rotate(6deg);
-}
-
-/* Hover state - slide card up */
-.sponsorship-card.deck-card:hover {
-    border-color: var(--color-secondary);
-    box-shadow: 0 20px 48px rgba(212, 165, 155, 0.35);
-    transform: translateY(-80px) rotate(0deg) scale(1.05) !important;
-    z-index: 100 !important;
-}
-
-.sponsorship-card.deck-card::before {
+.sponsorship-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -3199,16 +3140,22 @@ p {
     background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.3s ease;
 }
 
-.sponsorship-card.deck-card:hover::before {
+.sponsorship-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(212, 165, 155, 0.25);
+    border-color: var(--color-secondary);
+}
+
+.sponsorship-card:hover::before {
     transform: scaleX(1);
 }
 
-.sponsorship-card.deck-card.featured {
+.sponsorship-card.featured {
     border-color: var(--color-secondary);
-    box-shadow: 0 6px 24px rgba(212, 165, 155, 0.25);
+    box-shadow: 0 6px 24px rgba(212, 165, 155, 0.2);
 }
 
 .badge {
@@ -4844,31 +4791,23 @@ p {
 }
 
 .card-deck-wrapper {
-    position: relative;
     width: 100%;
-    min-height: 500px;
-    margin: 3rem 0;
-    perspective: 1200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
+    margin: 2rem 0;
 }
 
 .card-deck {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: 420px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 .card-inner {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    height: 100%;
 }
 
 /* Partnership CTA Section - On-Brand Styling */
@@ -4944,73 +4883,23 @@ p {
     box-shadow: 0 12px 28px rgba(212, 165, 155, 0.25);
 }
 
-/* Responsive Card Deck - Horizontal Fan */
+/* Responsive Partnership Cards */
 @media (max-width: 1200px) {
-    .sponsorship-card.deck-card {
-        width: 260px;
-        padding: 1.25rem;
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="0"] {
-        left: calc(50% - 280px);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="1"] {
-        left: calc(50% - 170px);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="2"] {
-        left: calc(50% - 130px);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="3"] {
-        left: calc(50% - 90px);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="4"] {
-        left: calc(50% + 20px);
+    .sponsorship-card {
+        flex: 1 1 180px;
+        min-width: 180px;
+        max-width: 260px;
     }
 }
 
 @media (max-width: 900px) {
-    .card-deck-wrapper {
-        min-height: 480px;
-        overflow-x: auto;
-        padding: 0 2rem;
-    }
-    
     .card-deck {
-        min-width: 700px;
+        gap: 1rem;
     }
     
-    .sponsorship-card.deck-card {
-        width: 240px;
-        min-height: 340px;
-        padding: 1.25rem;
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="0"] {
-        left: calc(50% - 260px);
-        transform: rotate(-5deg);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="1"] {
-        left: calc(50% - 160px);
-        transform: rotate(-2.5deg);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="2"] {
-        left: calc(50% - 120px);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="3"] {
-        left: calc(50% - 80px);
-        transform: rotate(2.5deg);
-    }
-    
-    .sponsorship-card.deck-card[data-card-index="4"] {
-        left: calc(50% + 20px);
-        transform: rotate(5deg);
+    .sponsorship-card {
+        flex: 1 1 220px;
+        max-width: 300px;
     }
     
     .sponsorship-tier-title {
@@ -5023,35 +4912,21 @@ p {
 }
 
 @media (max-width: 768px) {
-    .card-deck-wrapper {
-        min-height: auto;
-        margin: 2rem 0;
-        overflow: visible;
-        padding: 0;
-    }
-    
     .card-deck {
-        position: relative;
-        width: 100%;
-        min-width: unset;
-        height: auto;
-        display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 1rem;
         padding: 0 1rem;
     }
     
-    .sponsorship-card.deck-card {
-        position: relative;
+    .sponsorship-card {
         width: 100%;
-        min-height: auto;
-        left: 0 !important;
-        transform: none !important;
-        padding: 1.5rem;
+        max-width: 400px;
+        flex: none;
     }
     
-    .sponsorship-card.deck-card:hover {
-        transform: scale(1.02) !important;
+    .sponsorship-card:hover {
+        transform: translateY(-4px);
     }
     
     .partnership-buttons {

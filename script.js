@@ -1754,38 +1754,4 @@ console.log('Conversion tracking initialized');
     console.log('Bento gallery initialized with', bentoItems.length, 'items');
 })();
 
-/* ============================================
-   CARD DECK SPREAD - Horizontal Fan Animation
-   Cards spread left to right, slide up on hover
-   ============================================ */
-(function() {
-    const cardDeck = document.querySelector('.card-deck');
-    const deckCards = document.querySelectorAll('.deck-card');
-    
-    if (!cardDeck || !deckCards.length) {
-        console.log('Card deck system not found');
-        return;
-    }
-
-    // Handle card hover - bring to front with higher z-index
-    deckCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            // Bring current card to front
-            this.style.zIndex = '100';
-        });
-
-        card.addEventListener('mouseleave', function() {
-            // Reset z-index to original based on card index
-            const index = parseInt(this.getAttribute('data-card-index'));
-            this.style.zIndex = 5 - index;
-        });
-
-        // Click handler for card selection
-        card.addEventListener('click', function() {
-            const cardId = this.getAttribute('data-card-id');
-            console.log('Selected partnership: ' + cardId);
-        });
-    });
-
-    console.log('Card deck horizontal spread initialized with', deckCards.length, 'cards');
-})();
+/* Partnership cards now use simple CSS flexbox - no JS needed */
