@@ -1700,3 +1700,56 @@ console.log('Conversion tracking initialized');
     
     console.log('About image initialized');
 })();
+
+/* ==========================================
+   BENTO GALLERY INTERACTIONS
+   Hover effects, stagger animations, micro-interactions
+   ========================================== */
+(function initBentoGallery() {
+    const bentoItems = document.querySelectorAll('.bento-item');
+    
+    if (!bentoItems.length) return;
+    
+    // Fade in animation on intersection
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const intersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                intersectionObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Initialize items with fade-in
+    bentoItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = `opacity 0.5s ease ${index * 0.05}s, transform 0.5s ease ${index * 0.05}s`;
+        intersectionObserver.observe(item);
+    });
+    
+    // Hover effect - blur background items
+    const bentoGrids = document.querySelectorAll('.bento-grid');
+    bentoGrids.forEach(grid => {
+        grid.addEventListener('mouseenter', function(e) {
+            const hoveredItem = e.target.closest('.bento-item');
+            if (!hoveredItem) return;
+        });
+        
+        grid.addEventListener('mouseleave', function() {
+            // Reset blur on all items
+            bentoItems.forEach(item => {
+                item.style.filter = 'blur(0px)';
+                item.style.opacity = '1';
+            });
+        });
+    });
+    
+    console.log('Bento gallery initialized with', bentoItems.length, 'items');
+})();
