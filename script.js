@@ -1755,68 +1755,37 @@ console.log('Conversion tracking initialized');
 })();
 
 /* ============================================
-   CARD DECK SPREAD ANIMATION SYSTEM
-   Overlapping cards that fan out and slide
+   CARD DECK SPREAD - Horizontal Fan Animation
+   Cards spread left to right, slide up on hover
    ============================================ */
 (function() {
     const cardDeck = document.querySelector('.card-deck');
     const deckCards = document.querySelectorAll('.deck-card');
-    const sponsorshipSection = document.querySelector('.sponsorship-opportunities');
     
-    if (!cardDeck || !deckCards.length || !sponsorshipSection) {
+    if (!cardDeck || !deckCards.length) {
         console.log('Card deck system not found');
         return;
     }
 
-    let isSpread = false;
-    let selectedCard = null;
-
-    // Trigger spread animation when section comes into view
-    const deckObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !isSpread) {
-                // Activate spread after a brief delay for animation effect
-                setTimeout(() => {
-                    cardDeck.classList.add('spread-active');
-                    isSpread = true;
-                    console.log('Card deck spread activated');
-                }, 200);
-                deckObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.3
-    });
-
-    deckObserver.observe(cardDeck);
-
-    // Handle card hover - bring to front
+    // Handle card hover - bring to front with higher z-index
     deckCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            // Remove previous selection
-            if (selectedCard && selectedCard !== this) {
-                selectedCard.style.zIndex = '';
-            }
             // Bring current card to front
-            this.style.zIndex = '300';
-            selectedCard = this;
+            this.style.zIndex = '100';
         });
 
         card.addEventListener('mouseleave', function() {
-            // Reset z-index positioning
-            this.style.zIndex = '';
-            selectedCard = null;
+            // Reset z-index to original based on card index
+            const index = parseInt(this.getAttribute('data-card-index'));
+            this.style.zIndex = 5 - index;
         });
 
-        // Click handler for selection
+        // Click handler for card selection
         card.addEventListener('click', function() {
             const cardId = this.getAttribute('data-card-id');
-            console.log('Selected partnership card: ' + cardId);
-            
-            // Optional: You could add logic here to open a modal or perform an action
-            // For now, the hover effect handles the slide-to-top
+            console.log('Selected partnership: ' + cardId);
         });
     });
 
-    console.log('Card deck spread system initialized with', deckCards.length, 'cards');
+    console.log('Card deck horizontal spread initialized with', deckCards.length, 'cards');
 })();
