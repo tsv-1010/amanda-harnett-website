@@ -11,6 +11,27 @@
     --gray-light: #F5F5F5;
     --gray-dark: #1A1A1A;
     --accent: #E89B9B;
+    
+    /* Golden Ratio Design System (φ = 1.618) */
+    /* Spacing Scale - Fibonacci-inspired */
+    --space-xs: 0.5rem;      /* 8px */
+    --space-sm: 1rem;        /* 16px */
+    --space-md: 1.5rem;      /* 24px - Fibonacci */
+    --space-lg: 2.5rem;      /* 40px - Fibonacci */
+    --space-xl: 4rem;        /* 64px */
+    --space-2xl: 5rem;       /* 80px - standard section */
+    --space-3xl: 6.5rem;     /* 104px - large section */
+    
+    /* Border Radius - Fibonacci: 5, 8, 13, 21 */
+    --radius-sm: 5px;
+    --radius-md: 8px;
+    --radius-lg: 13px;
+    --radius-xl: 21px;
+    --radius-full: 9999px;
+    
+    /* Golden Ratio for proportions */
+    --golden: 1.618;
+    --golden-inverse: 0.618;
 }
 
 /* Preloader */
@@ -335,7 +356,7 @@ p {
     padding: 1.5rem;
     background: linear-gradient(135deg, var(--sand-light) 0%, var(--blush-light) 100%);
     border-left: 4px solid var(--sand);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .tagline {
@@ -392,7 +413,7 @@ p {
     width: 100%;
     max-width: 600px;
     aspect-ratio: 3/4;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
     animation: fadeIn 1.2s ease-out;
     background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
@@ -506,7 +527,7 @@ p {
     padding: 1.5rem;
     border-left: 3px solid var(--sand);
     background: rgba(212, 165, 116, 0.1);
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
 }
 
 .tagline {
@@ -689,7 +710,7 @@ p {
 /* Stats Section */
 .stats-section {
     background: linear-gradient(180deg, rgba(212, 165, 116, 0.05) 0%, transparent 100%);
-    padding: 4rem 2rem;
+    padding: var(--space-2xl) var(--space-lg);
 }
 
 .stats-container {
@@ -701,10 +722,10 @@ p {
 }
 
 .stat-card {
-    padding: 2rem;
+    padding: var(--space-lg);
     background: var(--white);
     border: 1px solid rgba(212, 165, 116, 0.2);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     text-align: center;
     transition: all 0.3s ease;
 }
@@ -826,7 +847,7 @@ p {
     height: 100%;
     margin: 0 15px;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     cursor: pointer;
 }
 
@@ -989,7 +1010,7 @@ p {
     max-width: 100%;
     max-height: 400px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .dual-image .image-placeholder {
@@ -998,7 +1019,7 @@ p {
 
 /* About Section */
 .about-section {
-    padding: 6rem 2rem;
+    padding: var(--space-3xl) var(--space-lg);
     background: linear-gradient(180deg, transparent 0%, rgba(212, 165, 116, 0.05) 100%);
 }
 
@@ -1010,7 +1031,7 @@ p {
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: var(--space-xl);
     align-items: start;
 }
 
@@ -1084,14 +1105,14 @@ p {
 .partners-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: var(--space-lg);
 }
 
 .partner-card {
-    padding: 2rem;
+    padding: var(--space-lg);
     background: var(--white);
     border: 1px solid rgba(212, 165, 116, 0.2);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     transition: all 0.3s ease;
 }
 
@@ -1105,7 +1126,7 @@ p {
     width: 100%;
     height: 100px;
     background: linear-gradient(135deg, var(--sand-light) 0%, var(--blush-light) 100%);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1292,7 +1313,7 @@ p {
     position: relative;
     width: 100%;
     aspect-ratio: 9/16;
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
     background: linear-gradient(135deg, var(--sand-light) 0%, var(--blush-light) 100%);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
@@ -1577,7 +1598,7 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
 }
 
 /* Hero Newsletter */
@@ -1601,16 +1622,16 @@ p {
     gap: 0.75rem;
     max-width: 400px;
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: var(--space-md);
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     border: 1px solid rgba(212, 165, 116, 0.2);
 }
 
 .newsletter-input {
     padding: 0.75rem 1rem;
     border: 1px solid var(--sand-light);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -1627,7 +1648,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
     color: var(--white);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1668,7 +1689,7 @@ p {
 
 .book-card {
     background: var(--white);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
@@ -1750,7 +1771,7 @@ p {
     color: var(--white);
     text-decoration: none;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1801,8 +1822,8 @@ p {
 /* Affiliations Tier - Canadian Theme */
 .affiliations-tier {
     background: linear-gradient(135deg, rgba(220, 38, 38, 0.03) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(220, 38, 38, 0.03) 100%);
-    padding: 3rem 2rem;
-    border-radius: 16px;
+    padding: var(--space-xl) var(--space-lg);
+    border-radius: var(--radius-xl);
     border: 1px solid rgba(220, 38, 38, 0.15);
     position: relative;
     overflow: hidden;
@@ -1825,7 +1846,7 @@ p {
 .partners-grid.affiliations {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: var(--space-lg);
 }
 
 .affiliation-card {
@@ -1923,10 +1944,10 @@ p {
 /* Sponsor Inquiry */
 .sponsor-inquiry {
     background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(232, 155, 155, 0.1) 100%);
-    padding: 3rem 2rem;
-    border-radius: 12px;
+    padding: var(--space-xl) var(--space-lg);
+    border-radius: var(--radius-lg);
     text-align: center;
-    margin-top: 4rem;
+    margin-top: var(--space-2xl);
 }
 
 .sponsor-inquiry h3 {
@@ -1947,7 +1968,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%);
     color: var(--white);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-weight: 600;
     transition: all 0.3s ease;
 }
@@ -2053,15 +2074,15 @@ p {
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
 }
 
 .product-card {
     background: var(--white);
     border: 1px solid var(--sand-light);
-    border-radius: 8px;
-    padding: 2rem;
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
@@ -2080,7 +2101,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
     color: var(--white);
     padding: 0.4rem 1rem;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     font-size: 0.8rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -2117,7 +2138,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
     color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2184,7 +2205,7 @@ p {
     background: var(--white);
     color: var(--sand);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2345,8 +2366,8 @@ p {
 .event-card {
     background: var(--white);
     border: 2px solid var(--sand-light);
-    border-radius: 8px;
-    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -2378,7 +2399,7 @@ p {
 .event-type {
     display: inline-block;
     padding: 0.3rem 0.8rem;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -2434,11 +2455,11 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
     padding: 1rem;
     background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
 }
 
 .legend-item {
@@ -2483,7 +2504,7 @@ p {
     margin-bottom: 0.75rem;
     padding: 0.5rem;
     background: rgba(0, 0, 0, 0.03);
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     border-left: 3px solid var(--sand-medium);
 }
 
@@ -2520,7 +2541,7 @@ p {
     letter-spacing: 0.1em;
     padding: 0.4rem 0.8rem;
     margin: -1.5rem -1.5rem 1rem -1.5rem;
-    border-radius: 8px 8px 0 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     text-align: center;
 }
 
@@ -2537,7 +2558,7 @@ p {
     margin-bottom: 1rem;
     padding: 0.6rem;
     background: var(--gray-light);
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
 }
 
 .destination-icon {
@@ -2564,7 +2585,7 @@ p {
     padding: 0.8rem;
     background: var(--gray-light);
     border: 1px dashed var(--sand-light);
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-size: 0.9rem;
     color: var(--gray-dark);
     text-align: center;
@@ -2578,7 +2599,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
     color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2617,7 +2638,7 @@ p {
     background: linear-gradient(135deg, var(--blush) 0%, var(--blush-light) 100%);
     color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2634,9 +2655,9 @@ p {
 
 .timeline-note {
     background: linear-gradient(135deg, rgba(232, 197, 160, 0.1) 0%, rgba(232, 155, 155, 0.1) 100%);
-    padding: 1.5rem;
+    padding: var(--space-md);
     border-left: 4px solid var(--sand);
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     color: var(--gray-dark);
     line-height: 1.6;
 }
@@ -2666,14 +2687,14 @@ p {
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
 }
 
 .blog-post {
     background: var(--white);
     border: 1px solid var(--sand-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -2711,7 +2732,7 @@ p {
     bottom: 1rem;
     left: 1rem;
     padding: 0.4rem 1rem;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--white);
@@ -2785,9 +2806,9 @@ p {
 
 .blog-cta {
     text-align: center;
-    padding: 2rem;
+    padding: var(--space-lg);
     background: linear-gradient(135deg, rgba(232, 197, 160, 0.1) 0%, rgba(232, 155, 155, 0.1) 100%);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .blog-cta p {
@@ -2802,7 +2823,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
     color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2842,13 +2863,13 @@ p {
 .sponsorship-tiers {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: var(--space-lg);
 }
 
 .sponsorship-card {
     background: var(--white);
     border: 2px solid var(--sand-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
@@ -2932,7 +2953,7 @@ p {
     background: linear-gradient(135deg, var(--sand) 0%, var(--sand-light) 100%);
     color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2967,10 +2988,10 @@ p {
 }
 
 .partnership-cta-section {
-    margin-top: 4rem;
-    padding: 3rem 2rem;
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl) var(--space-lg);
     background: linear-gradient(135deg, rgba(232, 197, 160, 0.15) 0%, rgba(232, 155, 155, 0.15) 100%);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     text-align: center;
 }
 
@@ -2999,7 +3020,7 @@ p {
 .cta-btn {
     padding: 1rem 2.5rem;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -3122,7 +3143,7 @@ p {
     .hero-image-container {
         max-width: 100%;
         aspect-ratio: 9/12;
-        border-radius: 15px;
+        border-radius: var(--radius-lg);
     }
 
     .signature-overlay {
@@ -3232,7 +3253,9 @@ p {
     }
 
     .timeline-scroll {
-        padding: 1rem 0;
+        padding: 10rem 0 2rem 0;
+        overflow-x: auto;
+        overflow-y: visible;
     }
 
     .timeline-events {
@@ -3452,9 +3475,9 @@ p {
 
 .journey-tracker {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin-top: 2rem;
+    border-radius: var(--radius-xl);
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
     width: 100%;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(10px);
@@ -3672,7 +3695,7 @@ p {
 @media (max-width: 480px) {
     .journey-tracker {
         padding: 1rem;
-        border-radius: 12px;
+        border-radius: var(--radius-lg);
     }
     
     .heatmap-months {
