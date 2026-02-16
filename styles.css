@@ -705,6 +705,16 @@ p {
     }
 }
 
+.hero-eyebrow {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 0.5rem;
+}
+
 .hero-title {
     margin-bottom: 0.5rem;
     color: var(--black);
@@ -1311,7 +1321,7 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
 }
 
 .about-image .image-placeholder {
