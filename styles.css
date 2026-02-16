@@ -4841,7 +4841,7 @@ p {
 
 .cta-badge {
     display: inline-block;
-    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: white;
     padding: 0.5rem 1.25rem;
     border-radius: 50px;
@@ -4850,6 +4850,7 @@ p {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(26, 26, 46, 0.25);
 }
 
 .partnership-cta-section h3 {
@@ -4871,11 +4872,11 @@ p {
 }
 
 .partnership-cta-section .cta-note {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    color: #666;
     margin-top: 1.5rem;
     margin-bottom: 0;
-    opacity: 0.8;
+    font-weight: 500;
 }
 
 .partnership-buttons {
@@ -4909,13 +4910,13 @@ p {
 }
 
 .partnership-buttons .cta-btn.primary {
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #c99a8e 50%, var(--color-primary) 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     background-size: 200% 200%;
     color: white;
     border-color: transparent;
     box-shadow: 
-        0 4px 16px rgba(212, 165, 155, 0.4),
-        0 2px 4px rgba(0, 0, 0, 0.1);
+        0 6px 20px rgba(26, 26, 46, 0.35),
+        0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .partnership-buttons .cta-btn.primary::before {
@@ -4925,7 +4926,7 @@ p {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.5s ease;
 }
 
@@ -4933,8 +4934,8 @@ p {
     background-position: 100% 100%;
     transform: translateY(-4px) scale(1.02);
     box-shadow: 
-        0 12px 32px rgba(212, 165, 155, 0.5),
-        0 4px 8px rgba(0, 0, 0, 0.12);
+        0 14px 36px rgba(26, 26, 46, 0.45),
+        0 6px 12px rgba(0, 0, 0, 0.18);
 }
 
 .partnership-buttons .cta-btn.primary:hover::before {
@@ -4947,18 +4948,18 @@ p {
 
 .partnership-buttons .cta-btn.accent {
     background: white;
-    color: var(--color-secondary);
-    border: 2px solid var(--color-secondary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    color: #1a1a2e;
+    border: 2px solid #1a1a2e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .partnership-buttons .cta-btn.accent:hover {
-    background: var(--color-secondary);
+    background: #1a1a2e;
     color: white;
     transform: translateY(-4px) scale(1.02);
     box-shadow: 
-        0 12px 32px rgba(212, 165, 155, 0.35),
-        0 4px 8px rgba(0, 0, 0, 0.1);
+        0 14px 36px rgba(26, 26, 46, 0.35),
+        0 6px 10px rgba(0, 0, 0, 0.12);
 }
 
 .partnership-buttons .cta-btn.accent:hover svg {
