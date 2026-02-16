@@ -1477,3 +1477,64 @@ console.log('Conversion tracking initialized');
     
     console.log('Reel carousel initialized with infinite loop');
 })();
+
+/* ==========================================
+   FAQ ACCORDION
+   Partnership FAQ section accordion functionality
+   ========================================== */
+(function initFAQAccordion() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    if (!faqQuestions.length) return;
+    
+    faqQuestions.forEach((button) => {
+        button.addEventListener('click', () => {
+            const answerId = button.getAttribute('aria-controls');
+            const answer = document.getElementById(answerId);
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            // Close all other FAQ items
+            faqQuestions.forEach((otherButton) => {
+                if (otherButton !== button) {
+                    otherButton.setAttribute('aria-expanded', 'false');
+                    const otherAnswerId = otherButton.getAttribute('aria-controls');
+                    const otherAnswer = document.getElementById(otherAnswerId);
+                    if (otherAnswer) {
+                        otherAnswer.setAttribute('hidden', '');
+                        otherAnswer.style.maxHeight = '0';
+                        otherAnswer.style.paddingTop = '0';
+                        otherAnswer.style.paddingBottom = '0';
+                    }
+                }
+            });
+            
+            // Toggle current FAQ item
+            const newState = !isExpanded;
+            button.setAttribute('aria-expanded', newState);
+            
+            if (newState) {
+                answer.removeAttribute('hidden');
+                // Calculate height based on content
+                const contentHeight = answer.scrollHeight;
+                answer.style.maxHeight = contentHeight + 'px';
+                answer.style.paddingTop = '1.5rem';
+                answer.style.paddingBottom = '1.5rem';
+            } else {
+                answer.setAttribute('hidden', '');
+                answer.style.maxHeight = '0';
+                answer.style.paddingTop = '0';
+                answer.style.paddingBottom = '0';
+            }
+        });
+        
+        // Keyboard accessibility - Enter/Space to toggle
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                button.click();
+            }
+        });
+    });
+    
+    console.log('FAQ accordion initialized');
+})();
