@@ -4571,14 +4571,14 @@ p {
     width: auto;
     height: auto;
     object-fit: contain;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    filter: grayscale(100%) brightness(0.6);
+    opacity: 0.75;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    filter: grayscale(100%) sepia(100%) brightness(0.85);
 }
 
 .partner-scroll-track:hover .partner-logo-item img {
-    opacity: 0.85;
-    filter: grayscale(100%) brightness(0.75);
+    opacity: 0.9;
+    filter: grayscale(100%) sepia(100%) brightness(0.95);
 }
 
 /* Responsive */
