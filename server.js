@@ -15,7 +15,9 @@ const MIME_TYPES = {
     '.json': 'application/json',
     '.mp4': 'video/mp4',
     '.webm': 'video/webm',
-    '.ogg': 'video/ogg'
+    '.ogg': 'video/ogg',
+    '.mov': 'video/quicktime',
+    '.m4v': 'video/mp4'
 };
 
 const server = http.createServer((req, res) => {
