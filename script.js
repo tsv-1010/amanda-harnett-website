@@ -1202,6 +1202,31 @@ console.log('Conversion tracking initialized');
             activeVideo = null;
             isPlaying = false;
         }
+        
+        // Auto-play the center reel (pos-0)
+        autoPlayCenterReel();
+    }
+    
+    // Auto-play the center reel when it comes into view
+    function autoPlayCenterReel() {
+        const centerItem = items[currentIndex];
+        if (!centerItem) return;
+        
+        const video = centerItem.querySelector('.reel-video');
+        if (!video) return;
+        
+        // Delay slightly to ensure video is ready after transition
+        setTimeout(() => {
+            if (video.paused) {
+                video.play().then(() => {
+                    centerItem.classList.add('playing');
+                    isPlaying = true;
+                    activeVideo = video;
+                }).catch(err => {
+                    console.log('Auto-play failed:', err);
+                });
+            }
+        }, 150);
     }
     
     function goToSlide(index) {
