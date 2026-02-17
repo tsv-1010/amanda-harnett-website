@@ -12,7 +12,10 @@ const MIME_TYPES = {
     '.png': 'image/png',
     '.gif': 'image/gif',
     '.svg': 'image/svg+xml',
-    '.json': 'application/json'
+    '.json': 'application/json',
+    '.mp4': 'video/mp4',
+    '.webm': 'video/webm',
+    '.ogg': 'video/ogg'
 };
 
 const server = http.createServer((req, res) => {
