@@ -1692,8 +1692,6 @@ console.log('Conversion tracking initialized');
             }
             half.addEventListener('click', () => activateHalf(half));
         });
-        
-        activateHalf(courtHalves[0]);
     }
     
     console.log('Bento gallery initialized with', bentoItems.length, 'items');
