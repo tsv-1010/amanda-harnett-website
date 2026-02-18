@@ -1940,6 +1940,12 @@ console.log('Conversion tracking initialized');
             artwork: null
         },
         {
+            title: 'Storytime Interlude',
+            artist: 'Pooh Reading Sample',
+            src: 'assets/music/winniethepooh_01_milne_64kb.mp3',
+            artwork: null
+        },
+        {
             title: 'Competition Mode',
             artist: 'Amanda\'s Playlist',
             src: 'assets/music/acoustictest.mp3',
@@ -1948,13 +1954,7 @@ console.log('Conversion tracking initialized');
         {
             title: 'Recovery Flow',
             artist: 'Amanda\'s Playlist',
-            src: 'assets/music/acoustictest.mp3',
-            artwork: null
-        },
-        {
-            title: 'Beach Day Energy',
-            artist: 'Amanda\'s Playlist',
-            src: 'assets/music/acoustictest.mp3',
+            src: 'assets/music/winniethepooh_01_milne_64kb.mp3',
             artwork: null
         },
         {
