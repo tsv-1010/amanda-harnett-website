@@ -1,17 +1,43 @@
 {
   "headers": [
     {
-      "source": "/assets/music/:path*",
+      "source": "/assets/music/(.*)\\.mp3",
       "headers": [
         {
           "key": "Content-Type",
           "value": "audio/mpeg"
-        },
+        }
+      ]
+    },
+    {
+      "source": "/assets/music/(.*)\\.wav",
+      "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
+          "key": "Content-Type",
+          "value": "audio/wav"
+        }
+      ]
+    },
+    {
+      "source": "/assets/music/(.*)\\.m4a",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "audio/mp4"
+        }
+      ]
+    },
+    {
+      "source": "/assets/music/(.*)\\.aac",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "audio/aac"
         }
       ]
     }
-  ]
+  ],
+  "env": {
+    "VERCEL_URL": "@vercel_url"
+  }
 }
