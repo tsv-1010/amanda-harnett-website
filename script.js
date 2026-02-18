@@ -1912,23 +1912,26 @@ console.log('Conversion tracking initialized');
 })();
 
 /* ==========================================
-   NOW PLAYING MUSIC PLAYER
-   Glassmorphic audio player with playlist
+   NOW PLAYING MUSIC VISUALIZER
+   Ambient visualizer with beat detection & playlist
    ========================================== */
-(function initMusicPlayer() {
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const prevBtn = document.getElementById('prevTrack');
-    const nextBtn = document.getElementById('nextTrack');
-    const trackTitle = document.getElementById('trackTitle');
-    const trackArtist = document.getElementById('trackArtist');
-    const progressFill = document.getElementById('progressFill');
-    const currentTimeEl = document.getElementById('currentTime');
-    const totalTimeEl = document.getElementById('totalTime');
+(function initMusicVisualizer() {
+    // DOM elements
+    const playPauseBtnViz = document.getElementById('playPauseViz');
+    const prevBtnViz = document.getElementById('prevTrackViz');
+    const nextBtnViz = document.getElementById('nextTrackViz');
+    const trackTitleViz = document.getElementById('trackTitleViz');
+    const trackArtistViz = document.getElementById('trackArtistViz');
+    const visualizerCanvas = document.getElementById('visualizerCanvas');
+    const visualizerFallback = document.getElementById('visualizerFallback');
+    const playlistToggle = document.getElementById('playlistToggle');
+    const playlistModal = document.getElementById('playlistModal');
+    const playlistCloseBtn = document.getElementById('playlistCloseBtn');
     const playlistContainer = document.getElementById('playlistTracks');
     
-    if (!playPauseBtn) return;
+    if (!playPauseBtnViz) return;
     
-    // Playlist configuration - update these with actual tracks
+    // Playlist configuration
     const playlist = [
         {
             title: 'Training Vibes',
@@ -1962,16 +1965,300 @@ console.log('Conversion tracking initialized');
         }
     ];
     
+    // Audio state
     let currentTrackIndex = 0;
     let isPlaying = false;
     let audio = new Audio();
     
-    // Format time as M:SS
-    function formatTime(seconds) {
-        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    // Web Audio API for beat detection  
+    let audioContext = null;
+    let analyser = null;
+    let dataArray = null;
+    let audioSource = null;
+    let animationFrameId = null;
+    
+    // Frequency data
+    let bassLevel = 0;
+    let midLevel = 0;
+    let highLevel = 0;
+    
+    // Visualization state
+    let currentVisualization = 'sunrise'; // will be set by time
+    
+    // Initialize Web Audio API
+    function initAudioContext() {
+        if (audioContext) return; // Already initialized
+        
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioContext = new AudioContext();
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            analyser.smoothingTimeConstant = 0.6;
+            
+            const bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+            
+            // Connect audio element to analyser
+            if (!audioSource) {
+                audioSource = audioContext.createMediaElementAudioSource(audio);
+                audioSource.connect(analyser);
+                analyser.connect(audioContext.destination);
+            }
+            
+            console.log('Audio context initialized for beat detection');
+            return true;
+        } catch (e) {
+            console.log('Web Audio API not available:', e);
+            return false;
+        }
+    }
+    
+    // Get frequency data from audio
+    function updateFrequencyData() {
+        if (!analyser || !dataArray) return;
+        
+        analyser.getByteFrequencyData(dataArray);
+        
+        // Extract bass (low frequencies: 0-20Hz)
+        const bassEnd = Math.floor((20 / 22050) * dataArray.length);
+        bassLevel = dataArray.slice(0, bassEnd).reduce((a, b) => a + b) / bassEnd / 255;
+        
+        // Extract mids (mid frequencies: 250-2000Hz)
+        const midStart = Math.floor((250 / 22050) * dataArray.length);
+        const midEnd = Math.floor((2000 / 22050) * dataArray.length);
+        midLevel = dataArray.slice(midStart, midEnd).reduce((a, b) => a + b) / (midEnd - midStart) / 255;
+        
+        // Extract highs (high frequencies: 3000+Hz)
+        const highStart = Math.floor((3000 / 22050) * dataArray.length);
+        highLevel = dataArray.slice(highStart).reduce((a, b) => a + b) / (dataArray.length - highStart) / 255;
+    }
+    
+    // Determine visualization based on time of day
+    function getVisualizationByTime() {
+        const hour = new Date().getHours();
+        
+        if (hour >= 5 && hour < 9) return 'sunrise';
+        else if (hour >= 9 && hour < 11) return 'waves';
+        else if (hour >= 11 && hour < 15) return 'sun';
+        else if (hour >= 15 && hour < 17) return 'waves';
+        else if (hour >= 17 && hour < 21) return 'sunset';
+        else return 'moon';
+    }
+    
+    // SVG Visualization: Sunrise
+    function drawSunrise() {
+        const svg = visualizerCanvas;
+        svg.innerHTML = '';
+        
+        // Rising sun circle with pulsing glow
+        const sunRadius = 40 + bassLevel * 15;
+        const sunY = 120 + (1 - midLevel) * 60; // moves up with mids
+        
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', '120');
+        circle.setAttribute('cy', sunY);
+        circle.setAttribute('r', sunRadius);
+        circle.setAttribute('fill', 'rgba(212, 165, 116, 0.8)');
+        circle.setAttribute('opacity', '0.9');
+        svg.appendChild(circle);
+        
+        // Glow effect responding to high frequencies
+        const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        glow.setAttribute('cx', '120');
+        glow.setAttribute('cy', sunY);
+        glow.setAttribute('r', sunRadius + (1 - highLevel) * 20);
+        glow.setAttribute('fill', 'none');
+        glow.setAttribute('stroke', 'rgba(212, 165, 116, 0.3)');
+        glow.setAttribute('stroke-width', '3');
+        glow.setAttribute('opacity', highLevel);
+        svg.appendChild(glow);
+    }
+    
+    // SVG Visualization: Waves
+    function drawWaves() {
+        const svg = visualizerCanvas;
+        svg.innerHTML = '';
+        
+        const waveHeight = 15 + bassLevel * 30;
+        const waveFreq = 0.05;
+        
+        // Draw 3 waves
+        for (let w = 0; w < 3; w++) {
+            let path = 'M 0 ' + (120 + w * 25);
+            
+            for (let x = 0; x < 240; x += 10) {
+                const y = 120 + w * 25 + Math.sin((x + w * 80) * waveFreq) * waveHeight;
+                path += ` L ${x} ${y}`;
+            }
+            
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            line.setAttribute('d', path);
+            line.setAttribute('stroke', w === 0 ? 'rgba(212, 165, 116, 0.8)' : 'rgba(232, 155, 155, 0.5)');
+            line.setAttribute('stroke-width', '2');
+            line.setAttribute('fill', 'none');
+            line.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(line);
+        }
+    }
+    
+    // SVG Visualization: Sun
+    function drawSun() {
+        const svg = visualizerCanvas;
+        svg.innerHTML = '';
+        
+        // Sun circle
+        const sunRadius = 45;
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', '120');
+        circle.setAttribute('cy', '120');
+        circle.setAttribute('r', sunRadius);
+        circle.setAttribute('fill', 'rgba(212, 165, 116, 0.85)');
+        svg.appendChild(circle);
+        
+        // Sun rays (respond to bass)
+        const rayCount = 12;
+        const rayLength = 30 + bassLevel * 40;
+        
+        for (let i = 0; i < rayCount; i++) {
+            const angle = (i / rayCount) * Math.PI * 2;
+            const x1 = 120 + Math.cos(angle) * (sunRadius + 5);
+            const y1 = 120 + Math.sin(angle) * (sunRadius + 5);
+            const x2 = 120 + Math.cos(angle) * (sunRadius + rayLength);
+            const y2 = 120 + Math.sin(angle) * (sunRadius + rayLength);
+            
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', x1);
+            line.setAttribute('y1', y1);
+            line.setAttribute('x2', x2);
+            line.setAttribute('y2', y2);
+            line.setAttribute('stroke', 'rgba(232, 155, 155, 0.7)');
+            line.setAttribute('stroke-width', '3');
+            line.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(line);
+        }
+    }
+    
+    // SVG Visualization: Sunset
+    function drawSunset() {
+        const svg = visualizerCanvas;
+        svg.innerHTML = '';
+        
+        // Horizon glow
+        const glow = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+        glow.setAttribute('cx', '120');
+        glow.setAttribute('cy', '140');
+        glow.setAttribute('rx', (80 + bassLevel * 30).toString());
+        glow.setAttribute('ry', '20');
+        glow.setAttribute('fill', 'rgba(232, 155, 155, ' + (0.3 + highLevel * 0.4) + ')');
+        svg.appendChild(glow);
+        
+        // Setting sun
+        const sunY = 140 + midLevel * 20;
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', '120');
+        circle.setAttribute('cy', sunY);
+        circle.setAttribute('r', '35');
+        circle.setAttribute('fill', 'rgba(212, 165, 116, 0.8)');
+        svg.appendChild(circle);
+        
+        // Light rays
+        for (let i = 0; i < 5; i++) {
+            const x = 80 + i * 20;
+            const rayHeight = 30 + bassLevel * 40;
+            
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', x);
+            line.setAttribute('y1', sunY);
+            line.setAttribute('x2', x);
+            line.setAttribute('y2', sunY + rayHeight);
+            line.setAttribute('stroke', 'rgba(232, 155, 155, ' + (0.4 + highLevel * 0.3) + ')');
+            line.setAttribute('stroke-width', '4');
+            line.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(line);
+        }
+    }
+    
+    // SVG Visualization: Moon & Stars
+    function drawMoon() {
+        const svg = visualizerCanvas;
+        svg.innerHTML = '';
+        
+        // Moon
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', '120');
+        circle.setAttribute('cy', '80');
+        circle.setAttribute('r', '40');
+        circle.setAttribute('fill', 'rgba(220, 210, 200, ' + (0.8 + highLevel * 0.2) + ')');
+        svg.appendChild(circle);
+        
+        // Stars (twinkle to beat)
+        const stars = [
+            {x: 40, y: 50},
+            {x: 200, y: 60},
+            {x: 50, y: 140},
+            {x: 190, y: 150},
+            {x: 80, y: 200},
+            {x: 160, y: 190}
+        ];
+        
+        stars.forEach((star, index) => {
+            const starSize = 2 + (highLevel * 3);
+            const opacity = 0.3 + (Math.sin(Date.now() / 200 + index) * 0.3) + (highLevel * 0.4);
+            
+            const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', star.x);
+            dot.setAttribute('cy', star.y);
+            dot.setAttribute('r', starSize);
+            dot.setAttribute('fill', 'rgba(220, 210, 200, ' + opacity + ')');
+            svg.appendChild(dot);
+        });
+    }
+    
+    // Render appropriate visualization
+    function renderVisualization() {
+        currentVisualization = getVisualizationByTime();
+        
+        switch(currentVisualization) {
+            case 'sunrise':
+                drawSunrise();
+                break;
+            case 'waves':
+                drawWaves();
+                break;
+            case 'sun':
+                drawSun();
+                break;
+            case 'sunset':
+                drawSunset();
+                break;
+            case 'moon':
+                drawMoon();
+                break;
+        }
+    }
+    
+    // Animation loop for beat-responsive visualization
+    function animate() {
+        if (!isPlaying) {
+            animationFrameId = requestAnimationFrame(animate);
+            return;
+        }
+        
+        updateFrequencyData();
+        renderVisualization();
+        
+        // Update fallback bars
+        const fallbackBars = visualizerFallback.querySelectorAll('.fallback-bar');
+        if (fallbackBars.length > 0) {
+            fallbackBars[0].style.height = (40 + bassLevel * 100) + 'px';
+            fallbackBars[1].style.height = (50 + midLevel * 90) + 'px';
+            fallbackBars[2].style.height = (60 + highLevel * 80) + 'px';
+            fallbackBars[3].style.height = (50 + midLevel * 90) + 'px';
+            fallbackBars[4].style.height = (40 + bassLevel * 100) + 'px';
+        }
+        
+        animationFrameId = requestAnimationFrame(animate);
     }
     
     // Update UI with current track info
@@ -1979,10 +2266,8 @@ console.log('Conversion tracking initialized');
         const track = playlist[currentTrackIndex];
         if (!track) return;
         
-        trackTitle.textContent = track.title;
-        trackArtist.textContent = track.artist;
-        
-        // Update playlist display
+        trackTitleViz.textContent = track.title;
+        trackArtistViz.textContent = track.artist;
         updatePlaylistDisplay();
     }
     
@@ -2020,20 +2305,29 @@ console.log('Conversion tracking initialized');
         audio.src = track.src;
         audio.load();
         updateTrackInfo();
-        progressFill.style.width = '0%';
-        currentTimeEl.textContent = '0:00';
-        totalTimeEl.textContent = '0:00';
     }
     
     // Play track
     function playTrack() {
+        // Initialize audio context on first play
+        if (!audioContext) {
+            initAudioContext();
+        }
+        
+        // Resume audio context if suspended
+        if (audioContext && audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        
         audio.play().then(() => {
             isPlaying = true;
             updatePlayPauseButton();
+            animate(); // Start animation loop
+            visualizerCanvas.classList.add('active');
+            visualizerFallback.classList.remove('hidden');
         }).catch(err => {
             console.log('Audio play failed:', err);
-            // Track might not exist yet
-            trackTitle.textContent = 'Add tracks to playlist';
+            trackTitleViz.textContent = 'Add tracks to playlist';
         });
     }
     
@@ -2055,17 +2349,17 @@ console.log('Conversion tracking initialized');
     
     // Update play/pause button icon
     function updatePlayPauseButton() {
-        const playIcon = playPauseBtn.querySelector('.play-icon');
-        const pauseIcon = playPauseBtn.querySelector('.pause-icon');
+        const playIcon = playPauseBtnViz.querySelector('.play-icon');
+        const pauseIcon = playPauseBtnViz.querySelector('.pause-icon');
         
         if (isPlaying) {
             playIcon.style.display = 'none';
             pauseIcon.style.display = 'block';
-            playPauseBtn.setAttribute('aria-label', 'Pause');
+            playPauseBtnViz.setAttribute('aria-label', 'Pause');
         } else {
             playIcon.style.display = 'block';
             pauseIcon.style.display = 'none';
-            playPauseBtn.setAttribute('aria-label', 'Play');
+            playPauseBtnViz.setAttribute('aria-label', 'Play');
         }
     }
     
@@ -2087,43 +2381,40 @@ console.log('Conversion tracking initialized');
         }
     }
     
-    // Update progress bar
-    audio.addEventListener('timeupdate', () => {
-        if (audio.duration) {
-            const progress = (audio.currentTime / audio.duration) * 100;
-            progressFill.style.width = `${progress}%`;
-            currentTimeEl.textContent = formatTime(audio.currentTime);
-        }
-    });
+    // Toggle playlist modal
+    function togglePlaylistModal() {
+        playlistModal.classList.toggle('open');
+    }
     
-    // Update total time when loaded
-    audio.addEventListener('loadedmetadata', () => {
-        totalTimeEl.textContent = formatTime(audio.duration);
-    });
+    // Close playlist modal
+    function closePlaylistModal() {
+        playlistModal.classList.remove('open');
+    }
     
     // Auto-play next track when current ends
     audio.addEventListener('ended', () => {
         nextTrack();
     });
     
-    // Event listeners
-    playPauseBtn.addEventListener('click', togglePlayPause);
-    nextBtn?.addEventListener('click', nextTrack);
-    prevBtn?.addEventListener('click', prevTrack);
+    // Event listeners for playback controls
+    playPauseBtnViz.addEventListener('click', togglePlayPause);
+    nextBtnViz?.addEventListener('click', nextTrack);
+    prevBtnViz?.addEventListener('click', prevTrack);
     
-    // Click on progress bar to seek
-    const progressBar = document.querySelector('.progress-bar');
-    progressBar?.addEventListener('click', (e) => {
-        const rect = progressBar.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const width = rect.width;
-        const percentage = clickX / width;
-        audio.currentTime = percentage * audio.duration;
+    // Event listeners for playlist modal
+    playlistToggle?.addEventListener('click', togglePlaylistModal);
+    playlistCloseBtn?.addEventListener('click', closePlaylistModal);
+    
+    // Close playlist when clicking outside
+    playlistModal?.addEventListener('click', (e) => {
+        if (e.target === playlistModal) {
+            closePlaylistModal();
+        }
     });
     
     // Initialize
     loadTrack();
     updatePlaylistDisplay();
     
-    console.log('Music player initialized with', playlist.length, 'tracks');
+    console.log('Ambient music visualizer initialized with', playlist.length, 'tracks');
 })();
