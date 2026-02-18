@@ -1759,6 +1759,70 @@
         </div>
     </section>
 
+    <!-- Now Playing Section -->
+    <section class="now-playing-section" id="nowPlaying">
+        <div class="now-playing-container">
+            <div class="now-playing-intro">
+                <h2 class="section-title">What I'm Listening To</h2>
+                <p class="section-subtitle">The sounds that fuel training, competition, and recovery</p>
+            </div>
+            <div class="music-player glassmorphic">
+                <div class="player-artwork">
+                    <div class="artwork-placeholder">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor" opacity="0.5">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                    </div>
+                    <div class="vinyl-effect"></div>
+                </div>
+                <div class="player-info">
+                    <p class="now-playing-label">Now Playing</p>
+                    <h3 class="track-title" id="trackTitle">Select a track</h3>
+                    <p class="track-artist" id="trackArtist">Amanda's Playlist</p>
+                    <div class="player-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-times">
+                            <span id="currentTime">0:00</span>
+                            <span id="totalTime">0:00</span>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button class="control-btn" id="prevTrack" aria-label="Previous track">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn play-btn" id="playPauseBtn" aria-label="Play">
+                            <svg class="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="pause-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="nextTrack" aria-label="Next track">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="playlist-preview">
+                    <p class="playlist-label">Up Next</p>
+                    <div class="playlist-tracks" id="playlistTracks">
+                        <div class="playlist-track placeholder-track">
+                            <span class="track-number">1</span>
+                            <span class="track-name">Add tracks to playlist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="music-note">🎵 Tracks rotate based on Amanda's current training phase</p>
+        </div>
+    </section>
+
     <!-- Bento Gallery Sections -->
     <section id="gallery-bento" class="gallery-bento-section">
         <div class="gallery-bento-container">
@@ -2531,6 +2595,56 @@
         </svg>
         <span class="progress-percent">0%</span>
         <p class="progress-label">explored</p>
+    </div>
+
+    <!-- Performance Tracker Widget (Sticky) -->
+    <div class="performance-tracker" id="performanceTracker">
+        <button class="tracker-toggle" id="trackerToggle" aria-label="Toggle performance tracker">
+            <svg class="tracker-icon-heart" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span class="tracker-hr-mini" id="trackerHrMini">--</span>
+        </button>
+        <div class="tracker-panel" id="trackerPanel">
+            <div class="tracker-header">
+                <h4 class="tracker-title">Amanda's Live Performance</h4>
+                <button class="tracker-close" id="trackerClose" aria-label="Minimize tracker">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="tracker-body">
+                <div class="tracker-hr-display">
+                    <svg class="tracker-heartbeat" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span class="tracker-hr-value" id="trackerHrValue">--</span>
+                    <span class="tracker-hr-unit">BPM</span>
+                </div>
+                <div class="tracker-stage" id="trackerStage">
+                    <span class="stage-label">Status</span>
+                    <span class="stage-value" id="stageValue">Connecting...</span>
+                </div>
+                <div class="tracker-zones">
+                    <div class="zone sleep" data-zone="sleep">Sleep</div>
+                    <div class="zone recovery" data-zone="recovery">Recovery</div>
+                    <div class="zone flow" data-zone="flow">Flow</div>
+                    <div class="zone build" data-zone="build">Build</div>
+                    <div class="zone peak" data-zone="peak">Peak</div>
+                </div>
+            </div>
+            <div class="tracker-sponsor" id="trackerSponsor">
+                <div class="sponsor-slot">
+                    <p class="sponsor-label">Powered by</p>
+                    <div class="sponsor-placeholder">
+                        <span class="sponsor-cta">Your Brand Here</span>
+                        <a href="#partners" class="sponsor-link">Become a Sponsor →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js?v=22" defer></script>

@@ -1698,3 +1698,432 @@ console.log('Conversion tracking initialized');
 
     console.log('Partnership flip cards initialized with', flipCards.length, 'cards');
 })();
+
+/* ==========================================
+   PERFORMANCE TRACKER WIDGET
+   Live heart rate display with Pulsoid integration
+   Demo mode when disconnected: Sleep (10pm-5:30am) / Recovery (other times)
+   ========================================== */
+(function initPerformanceTracker() {
+    const tracker = document.getElementById('performanceTracker');
+    const toggle = document.getElementById('trackerToggle');
+    const panel = document.getElementById('trackerPanel');
+    const closeBtn = document.getElementById('trackerClose');
+    const hrValue = document.getElementById('trackerHrValue');
+    const hrMini = document.getElementById('trackerHrMini');
+    const stageValue = document.getElementById('stageValue');
+    const trackerStage = document.getElementById('trackerStage');
+    const zones = document.querySelectorAll('.zone');
+    
+    if (!tracker) return;
+    
+    let isExpanded = false;
+    let pulsoidConnected = false;
+    let currentHR = null;
+    let pulsoidToken = null; // Will be set when Amanda connects
+    
+    // Toggle panel
+    toggle?.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        panel?.classList.toggle('active', isExpanded);
+    });
+    
+    closeBtn?.addEventListener('click', () => {
+        isExpanded = false;
+        panel?.classList.remove('active');
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isExpanded) {
+            isExpanded = false;
+            panel?.classList.remove('active');
+        }
+    });
+    
+    // Heart rate zones configuration
+    const HR_ZONES = {
+        sleep: { min: 0, max: 50, label: 'Sleep', color: '#6b7280' },
+        recovery: { min: 0, max: 65, label: 'Recovery', color: '#3b82f6' },
+        flow: { min: 66, max: 110, label: 'Flow', color: '#10b981' },
+        build: { min: 111, max: 155, label: 'Build', color: '#f59e0b' },
+        peak: { min: 156, max: 999, label: 'Peak', color: '#ef4444' }
+    };
+    
+    // Determine zone from HR
+    function getZoneFromHR(hr) {
+        if (hr >= 156) return 'peak';
+        if (hr >= 111) return 'build';
+        if (hr >= 66) return 'flow';
+        if (hr >= 51) return 'recovery';
+        return 'sleep';
+    }
+    
+    // Check if it's sleep time (10pm - 5:30am)
+    function isSleepTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const timeValue = hours * 60 + minutes;
+        
+        // 10pm (22:00) = 1320 minutes
+        // 5:30am = 330 minutes
+        return timeValue >= 1320 || timeValue < 330;
+    }
+    
+    // Get demo zone when not connected
+    function getDemoZone() {
+        return isSleepTime() ? 'sleep' : 'recovery';
+    }
+    
+    // Simulate gentle HR fluctuation for demo mode
+    function getDemoHR(zone) {
+        const baseHR = {
+            sleep: 52,
+            recovery: 58
+        };
+        const base = baseHR[zone] || 58;
+        // Add small random fluctuation (-3 to +3)
+        return base + Math.floor(Math.random() * 7) - 3;
+    }
+    
+    // Update display
+    function updateDisplay(hr, zone) {
+        // Update HR values
+        const displayHR = hr || '--';
+        hrValue.textContent = displayHR;
+        hrMini.textContent = hr ? hr : '--';
+        
+        // Update stage
+        const zoneConfig = HR_ZONES[zone];
+        stageValue.textContent = zoneConfig?.label || 'Unknown';
+        
+        // Update stage class for color
+        trackerStage.className = 'tracker-stage ' + zone;
+        
+        // Update zone indicators
+        zones.forEach(zoneEl => {
+            const zoneName = zoneEl.dataset.zone;
+            zoneEl.classList.toggle('active', zoneName === zone);
+        });
+    }
+    
+    // Try to connect to Pulsoid
+    async function connectToPulsoid() {
+        if (!pulsoidToken) {
+            // No token configured - use demo mode
+            console.log('Pulsoid: No token configured, using demo mode');
+            return false;
+        }
+        
+        try {
+            // Pulsoid WebSocket connection
+            const ws = new WebSocket(`wss://dev.pulsoid.net/api/v1/data/real_time?access_token=${pulsoidToken}`);
+            
+            ws.onopen = () => {
+                console.log('Pulsoid: Connected');
+                pulsoidConnected = true;
+            };
+            
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.data && data.data.heart_rate) {
+                        currentHR = data.data.heart_rate;
+                        const zone = getZoneFromHR(currentHR);
+                        updateDisplay(currentHR, zone);
+                    }
+                } catch (e) {
+                    console.log('Pulsoid: Parse error', e);
+                }
+            };
+            
+            ws.onerror = (error) => {
+                console.log('Pulsoid: Connection error', error);
+                pulsoidConnected = false;
+            };
+            
+            ws.onclose = () => {
+                console.log('Pulsoid: Connection closed');
+                pulsoidConnected = false;
+                // Fall back to demo mode
+                startDemoMode();
+            };
+            
+            return true;
+        } catch (e) {
+            console.log('Pulsoid: Failed to connect', e);
+            return false;
+        }
+    }
+    
+    // Demo mode - simulate HR based on time
+    function startDemoMode() {
+        const zone = getDemoZone();
+        const hr = getDemoHR(zone);
+        updateDisplay(hr, zone);
+        
+        // Update every 3 seconds with slight variation
+        setInterval(() => {
+            if (!pulsoidConnected) {
+                const currentZone = getDemoZone();
+                const currentDemoHR = getDemoHR(currentZone);
+                updateDisplay(currentDemoHR, currentZone);
+            }
+        }, 3000);
+    }
+    
+    // Auto-show tracker when scrolling to About section
+    function setupScrollTrigger() {
+        const aboutSection = document.getElementById('about');
+        if (!aboutSection) return;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tracker.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(aboutSection);
+    }
+    
+    // Initialize
+    async function init() {
+        // Try Pulsoid first
+        const connected = await connectToPulsoid();
+        
+        if (!connected) {
+            // Start demo mode
+            startDemoMode();
+        }
+        
+        // Setup scroll trigger
+        setupScrollTrigger();
+        
+        // Show tracker initially
+        tracker.classList.add('visible');
+        
+        console.log('Performance tracker initialized');
+    }
+    
+    init();
+})();
+
+/* ==========================================
+   NOW PLAYING MUSIC PLAYER
+   Glassmorphic audio player with playlist
+   ========================================== */
+(function initMusicPlayer() {
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevTrack');
+    const nextBtn = document.getElementById('nextTrack');
+    const trackTitle = document.getElementById('trackTitle');
+    const trackArtist = document.getElementById('trackArtist');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const playlistContainer = document.getElementById('playlistTracks');
+    
+    if (!playPauseBtn) return;
+    
+    // Playlist configuration - update these with actual tracks
+    const playlist = [
+        {
+            title: 'Training Vibes',
+            artist: 'Amanda\'s Playlist',
+            src: 'assets/music/track1.mp3',
+            artwork: null
+        },
+        {
+            title: 'Competition Mode',
+            artist: 'Amanda\'s Playlist',
+            src: 'assets/music/track2.mp3',
+            artwork: null
+        },
+        {
+            title: 'Recovery Flow',
+            artist: 'Amanda\'s Playlist',
+            src: 'assets/music/track3.mp3',
+            artwork: null
+        },
+        {
+            title: 'Beach Day Energy',
+            artist: 'Amanda\'s Playlist',
+            src: 'assets/music/track4.mp3',
+            artwork: null
+        },
+        {
+            title: 'Focus & Drive',
+            artist: 'Amanda\'s Playlist',
+            src: 'assets/music/track5.mp3',
+            artwork: null
+        }
+    ];
+    
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let audio = new Audio();
+    
+    // Format time as M:SS
+    function formatTime(seconds) {
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    // Update UI with current track info
+    function updateTrackInfo() {
+        const track = playlist[currentTrackIndex];
+        if (!track) return;
+        
+        trackTitle.textContent = track.title;
+        trackArtist.textContent = track.artist;
+        
+        // Update playlist display
+        updatePlaylistDisplay();
+    }
+    
+    // Render playlist
+    function updatePlaylistDisplay() {
+        if (!playlistContainer) return;
+        
+        playlistContainer.innerHTML = playlist.map((track, index) => `
+            <div class="playlist-track ${index === currentTrackIndex ? 'active' : ''}" data-index="${index}">
+                <span class="track-number">${index + 1}</span>
+                <span class="track-name">${track.title}</span>
+            </div>
+        `).join('');
+        
+        // Add click handlers to playlist tracks
+        playlistContainer.querySelectorAll('.playlist-track').forEach(trackEl => {
+            trackEl.addEventListener('click', () => {
+                const index = parseInt(trackEl.dataset.index);
+                if (index !== currentTrackIndex) {
+                    currentTrackIndex = index;
+                    loadTrack();
+                    if (isPlaying) {
+                        playTrack();
+                    }
+                }
+            });
+        });
+    }
+    
+    // Load current track
+    function loadTrack() {
+        const track = playlist[currentTrackIndex];
+        if (!track) return;
+        
+        audio.src = track.src;
+        audio.load();
+        updateTrackInfo();
+        progressFill.style.width = '0%';
+        currentTimeEl.textContent = '0:00';
+        totalTimeEl.textContent = '0:00';
+    }
+    
+    // Play track
+    function playTrack() {
+        audio.play().then(() => {
+            isPlaying = true;
+            updatePlayPauseButton();
+        }).catch(err => {
+            console.log('Audio play failed:', err);
+            // Track might not exist yet
+            trackTitle.textContent = 'Add tracks to playlist';
+        });
+    }
+    
+    // Pause track
+    function pauseTrack() {
+        audio.pause();
+        isPlaying = false;
+        updatePlayPauseButton();
+    }
+    
+    // Toggle play/pause
+    function togglePlayPause() {
+        if (isPlaying) {
+            pauseTrack();
+        } else {
+            playTrack();
+        }
+    }
+    
+    // Update play/pause button icon
+    function updatePlayPauseButton() {
+        const playIcon = playPauseBtn.querySelector('.play-icon');
+        const pauseIcon = playPauseBtn.querySelector('.pause-icon');
+        
+        if (isPlaying) {
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+            playPauseBtn.setAttribute('aria-label', 'Pause');
+        } else {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            playPauseBtn.setAttribute('aria-label', 'Play');
+        }
+    }
+    
+    // Next track
+    function nextTrack() {
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        loadTrack();
+        if (isPlaying) {
+            playTrack();
+        }
+    }
+    
+    // Previous track
+    function prevTrack() {
+        currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+        loadTrack();
+        if (isPlaying) {
+            playTrack();
+        }
+    }
+    
+    // Update progress bar
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = `${progress}%`;
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+        }
+    });
+    
+    // Update total time when loaded
+    audio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(audio.duration);
+    });
+    
+    // Auto-play next track when current ends
+    audio.addEventListener('ended', () => {
+        nextTrack();
+    });
+    
+    // Event listeners
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    nextBtn?.addEventListener('click', nextTrack);
+    prevBtn?.addEventListener('click', prevTrack);
+    
+    // Click on progress bar to seek
+    const progressBar = document.querySelector('.progress-bar');
+    progressBar?.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const percentage = clickX / width;
+        audio.currentTime = percentage * audio.duration;
+    });
+    
+    // Initialize
+    loadTrack();
+    updatePlaylistDisplay();
+    
+    console.log('Music player initialized with', playlist.length, 'tracks');
+})();
