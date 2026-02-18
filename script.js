@@ -2006,10 +2006,15 @@ console.log('Conversion tracking initialized');
                 analyser.connect(audioContext.destination);
             }
             
-            console.log('Audio context initialized for beat detection');
+            console.log('Audio context initialized:', {
+                state: audioContext.state,
+                sampleRate: audioContext.sampleRate,
+                fftSize: analyser.fftSize,
+                bufferLength: bufferLength
+            });
             return true;
         } catch (e) {
-            console.log('Web Audio API not available:', e);
+            console.error('Web Audio API initialization failed:', e);
             return false;
         }
     }
@@ -2258,6 +2263,8 @@ console.log('Conversion tracking initialized');
             fallbackBars[4].style.height = (40 + bassLevel * 100) + 'px';
         }
         
+        console.log('Animate loop:', {bass: bassLevel.toFixed(2), mid: midLevel.toFixed(2), high: highLevel.toFixed(2), viz: currentVisualization});
+        
         animationFrameId = requestAnimationFrame(animate);
     }
     
@@ -2309,24 +2316,31 @@ console.log('Conversion tracking initialized');
     
     // Play track
     function playTrack() {
+        console.log('playTrack() called, current track:', playlist[currentTrackIndex].src);
+        
         // Initialize audio context on first play
         if (!audioContext) {
+            console.log('Initializing audio context...');
             initAudioContext();
         }
         
         // Resume audio context if suspended
         if (audioContext && audioContext.state === 'suspended') {
+            console.log('Audio context suspended, resuming...');
             audioContext.resume();
         }
         
+        console.log('Attempting to play audio:', audio.src);
         audio.play().then(() => {
+            console.log('Audio playing successfully');
             isPlaying = true;
             updatePlayPauseButton();
             animate(); // Start animation loop
             visualizerCanvas.classList.add('active');
             visualizerFallback.classList.remove('hidden');
+            console.log('Visualizer active class added');
         }).catch(err => {
-            console.log('Audio play failed:', err);
+            console.error('Audio play failed:', err);
             trackTitleViz.textContent = 'Add tracks to playlist';
         });
     }
