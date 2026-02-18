@@ -4282,12 +4282,14 @@ p {
 .sand-court {
     position: relative;
     display: flex;
-    aspect-ratio: 16 / 9;
+    flex-direction: column;
+    aspect-ratio: 8 / 16;
     border-radius: 32px;
     overflow: hidden;
     border: 10px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(120deg, #f6e2c8 0%, #e1bc8c 60%, #d7a772 100%);
+    background: linear-gradient(180deg, #f7e6cc 0%, #e6bf8f 55%, #ce9f67 100%);
+    min-height: 720px;
 }
 
 .court-lines {
@@ -4302,19 +4304,19 @@ p {
 .court-net {
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 100%;
-    height: 10px;
+    left: 4%;
+    width: 92%;
+    height: 8px;
     background-image: repeating-linear-gradient(
         90deg,
         rgba(255, 255, 255, 0.85) 0,
         rgba(255, 255, 255, 0.85) 8px,
-        rgba(255, 255, 255, 0.2) 8px,
-        rgba(255, 255, 255, 0.2) 18px
+        rgba(255, 255, 255, 0) 8px,
+        rgba(255, 255, 255, 0) 18px
     );
     z-index: 2;
     transform: translateY(-50%);
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    opacity: 0.8;
 }
 
 .court-half {
@@ -4324,22 +4326,20 @@ p {
     align-items: stretch;
     isolation: isolate;
     cursor: pointer;
-    border-left: 1px solid rgba(255, 255, 255, 0.35);
+    min-height: 320px;
 }
 
-.court-half:first-child {
-    border-left: none;
+.court-half + .court-half {
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .court-half .court-content {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.45fr) 1fr;
-    gap: 1.5rem;
-    padding: 2rem;
+    position: relative;
     width: 100%;
-    align-items: start;
+    height: 100%;
+    padding: 0;
     opacity: 0.25;
-    filter: blur(5px);
+    filter: blur(6px);
     pointer-events: none;
     transition: opacity 0.7s ease, filter 0.7s ease;
 }
@@ -4417,8 +4417,51 @@ p {
                       radial-gradient(circle at 80% 20%, rgba(184, 129, 73, 0.3), transparent 45%);
 }
 
-.court-half .bento-gallery {
-    padding: 0;
+.court-half .bento-grid {
+    height: 100%;
+    padding: 1.75rem;
+    grid-auto-rows: minmax(90px, 1fr);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.court-info {
+    position: absolute;
+    left: 2.5rem;
+    bottom: 2.5rem;
+    max-width: 360px;
+    background: rgba(21, 20, 19, 0.7);
+    color: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.court-half.active .court-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.info-label {
+    display: inline-flex;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.court-info .bento-title,
+.court-info .bento-description,
+.court-info .bento-link {
+    color: inherit;
+}
+
+.court-info .bento-link {
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 .bento-title {
@@ -6141,45 +6184,44 @@ p {
     }
 }
 
-@media (max-width: 1200px) {
-    .court-half .court-content {
-        grid-template-columns: 1fr;
-    }
-}
-
 @media (max-width: 900px) {
     .sand-court {
-        flex-direction: column;
         aspect-ratio: auto;
+        min-height: 600px;
     }
     .court-net {
-        top: 50%;
-        height: 8px;
+        width: 94%;
+        left: 3%;
+        height: 6px;
         background-image: repeating-linear-gradient(
-            0deg,
+            90deg,
             rgba(255, 255, 255, 0.85) 0,
             rgba(255, 255, 255, 0.85) 6px,
-            rgba(255, 255, 255, 0.2) 6px,
-            rgba(255, 255, 255, 0.2) 14px
+            rgba(255, 255, 255, 0) 6px,
+            rgba(255, 255, 255, 0) 14px
         );
     }
-    .court-half {
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.35);
-    }
-    .court-half:first-child {
-        border-top: none;
+    .court-info {
+        left: 1.5rem;
+        right: 1.5rem;
+        bottom: 1.5rem;
     }
 }
 
 @media (max-width: 640px) {
     .mask-text {
         letter-spacing: 0.08em;
+        font-size: clamp(2.4rem, 12vw, 4rem);
     }
-    .court-half .court-content {
-        padding: 1.5rem;
-    }
-    .bento-grid {
+    .court-half .bento-grid {
+        padding: 1rem;
         grid-template-columns: repeat(2, 1fr);
+    }
+    .court-info {
+        position: relative;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 1rem;
     }
 }
