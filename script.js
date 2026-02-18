@@ -2007,7 +2007,7 @@ console.log('Conversion tracking initialized');
             // Try to connect audio element to analyser
             try {
                 if (!audioSource && audio) {
-                    audioSource = audioContext.createMediaElementAudioSource(audio);
+                    audioSource = audioContext.createMediaElementSource(audio);
                     audioSource.connect(analyser);
                     analyser.connect(audioContext.destination);
                     console.log('Audio source connected to analyser');
