@@ -1976,6 +1976,7 @@ console.log('Conversion tracking initialized');
     let dataArray = null;
     let audioSource = null;
     let animationFrameId = null;
+    let analyserActive = false;
     
     // Frequency data
     let bassLevel = 0;
@@ -1985,6 +1986,19 @@ console.log('Conversion tracking initialized');
     // Visualization state
     let currentVisualization = 'sunrise'; // will be set by time
     
+    function updateVisualizerMode(useAnalyser) {
+        analyserActive = useAnalyser;
+        if (useAnalyser) {
+            visualizerCanvas.classList.add('active');
+            visualizerFallback.classList.add('hidden');
+        } else {
+            visualizerCanvas.classList.remove('active');
+            visualizerFallback.classList.remove('hidden');
+        }
+    }
+
+    updateVisualizerMode(false);
+
     // Initialize Web Audio API
     function initAudioContext() {
         if (audioContext) return; // Already initialized
@@ -2010,10 +2024,12 @@ console.log('Conversion tracking initialized');
                     audioSource = audioContext.createMediaElementSource(audio);
                     audioSource.connect(analyser);
                     analyser.connect(audioContext.destination);
+                    updateVisualizerMode(true);
                     console.log('Audio source connected to analyser');
                 }
             } catch (sourceErr) {
                 console.log('Could not connect audio source to analyser:', sourceErr.message);
+                updateVisualizerMode(false);
                 // Continue anyway - we can still play audio without visualization
             }
             
@@ -2262,7 +2278,11 @@ console.log('Conversion tracking initialized');
         }
         
         // Only try to update frequency data if Web Audio API is available
-        if (analyser && dataArray) {
+        const canAnalyze = analyser && dataArray && audioContext && audioContext.state === 'running';
+        if (canAnalyze) {
+            if (!analyserActive) {
+                updateVisualizerMode(true);
+            }
             try {
                 updateFrequencyData();
                 renderVisualization();
@@ -2270,6 +2290,9 @@ console.log('Conversion tracking initialized');
                 console.log('Visualization update error:', err.message);
             }
         } else {
+            if (analyserActive) {
+                updateVisualizerMode(false);
+            }
             // Fallback: use simulated beat data
             bassLevel = 0.3 + Math.sin(Date.now() / 200) * 0.2;
             midLevel = 0.4 + Math.sin(Date.now() / 300) * 0.2;
@@ -2359,12 +2382,11 @@ console.log('Conversion tracking initialized');
             isPlaying = true;
             updatePlayPauseButton();
             animate(); // Start animation loop
-            visualizerCanvas.classList.add('active');
-            visualizerFallback.classList.remove('hidden');
-            console.log('Visualizer active class added');
+            updateVisualizerMode(Boolean(analyser && dataArray && audioContext));
         }).catch(err => {
             console.error('Audio play failed:', err);
             trackTitleViz.textContent = 'Add tracks to playlist';
+            updateVisualizerMode(false);
         });
     }
     
