@@ -1934,33 +1934,33 @@ console.log('Conversion tracking initialized');
     // Playlist configuration
     const playlist = [
         {
-            title: 'Training Vibes',
+            title: 'Acoustic Test',
             artist: 'Amanda\'s Playlist',
-            src: 'assets/music/track1.mp3',
+            src: 'assets/music/acoustictest.mp3',
             artwork: null
         },
         {
             title: 'Competition Mode',
             artist: 'Amanda\'s Playlist',
-            src: 'assets/music/track2.mp3',
+            src: 'assets/music/acoustictest.mp3',
             artwork: null
         },
         {
             title: 'Recovery Flow',
             artist: 'Amanda\'s Playlist',
-            src: 'assets/music/track3.mp3',
+            src: 'assets/music/acoustictest.mp3',
             artwork: null
         },
         {
             title: 'Beach Day Energy',
             artist: 'Amanda\'s Playlist',
-            src: 'assets/music/track4.mp3',
+            src: 'assets/music/acoustictest.mp3',
             artwork: null
         },
         {
             title: 'Focus & Drive',
             artist: 'Amanda\'s Playlist',
-            src: 'assets/music/track5.mp3',
+            src: 'assets/music/acoustictest.mp3',
             artwork: null
         }
     ];
