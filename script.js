@@ -1614,8 +1614,9 @@ console.log('Conversion tracking initialized');
    ========================================== */
 (function initBentoGallery() {
     const bentoItems = document.querySelectorAll('.bento-item');
+    const courtHalves = document.querySelectorAll('.court-half');
     
-    if (!bentoItems.length) return;
+    if (!bentoItems.length && !courtHalves.length) return;
     
     // Fade in animation on intersection
     const observerOptions = {
@@ -1657,6 +1658,43 @@ console.log('Conversion tracking initialized');
             });
         });
     });
+    
+    // Promote clicked item to featured state
+    const promoteItem = (item) => {
+        const grid = item.closest('.bento-grid');
+        if (!grid) return;
+        grid.querySelectorAll('.bento-item.promoted').forEach(node => node.classList.remove('promoted'));
+        item.classList.add('promoted');
+    };
+    
+    bentoItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            promoteItem(item);
+            e.stopPropagation();
+        });
+    });
+    
+    // Sand court mask interactions
+    if (courtHalves.length) {
+        const enableHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        let activeHalf = null;
+        
+        const activateHalf = (half) => {
+            if (!half || activeHalf === half) return;
+            courtHalves.forEach(h => h.classList.remove('active'));
+            half.classList.add('active');
+            activeHalf = half;
+        };
+        
+        courtHalves.forEach(half => {
+            if (enableHover) {
+                half.addEventListener('mouseenter', () => activateHalf(half));
+            }
+            half.addEventListener('click', () => activateHalf(half));
+        });
+        
+        activateHalf(courtHalves[0]);
+    }
     
     console.log('Bento gallery initialized with', bentoItems.length, 'items');
 })();
