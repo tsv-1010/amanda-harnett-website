@@ -1991,6 +1991,11 @@ console.log('Conversion tracking initialized');
         
         try {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) {
+                console.log('AudioContext not available in this browser');
+                return false;
+            }
+            
             audioContext = new AudioContext();
             analyser = audioContext.createAnalyser();
             analyser.fftSize = 256;
@@ -1999,11 +2004,17 @@ console.log('Conversion tracking initialized');
             const bufferLength = analyser.frequencyBinCount;
             dataArray = new Uint8Array(bufferLength);
             
-            // Connect audio element to analyser
-            if (!audioSource) {
-                audioSource = audioContext.createMediaElementAudioSource(audio);
-                audioSource.connect(analyser);
-                analyser.connect(audioContext.destination);
+            // Try to connect audio element to analyser
+            try {
+                if (!audioSource && audio) {
+                    audioSource = audioContext.createMediaElementAudioSource(audio);
+                    audioSource.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                    console.log('Audio source connected to analyser');
+                }
+            } catch (sourceErr) {
+                console.log('Could not connect audio source to analyser:', sourceErr.message);
+                // Continue anyway - we can still play audio without visualization
             }
             
             console.log('Audio context initialized:', {
@@ -2250,8 +2261,20 @@ console.log('Conversion tracking initialized');
             return;
         }
         
-        updateFrequencyData();
-        renderVisualization();
+        // Only try to update frequency data if Web Audio API is available
+        if (analyser && dataArray) {
+            try {
+                updateFrequencyData();
+                renderVisualization();
+            } catch (err) {
+                console.log('Visualization update error:', err.message);
+            }
+        } else {
+            // Fallback: use simulated beat data
+            bassLevel = 0.3 + Math.sin(Date.now() / 200) * 0.2;
+            midLevel = 0.4 + Math.sin(Date.now() / 300) * 0.2;
+            highLevel = 0.35 + Math.sin(Date.now() / 250) * 0.2;
+        }
         
         // Update fallback bars
         const fallbackBars = visualizerFallback.querySelectorAll('.fallback-bar');
