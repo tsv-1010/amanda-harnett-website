@@ -1,0 +1,21 @@
+* text=auto
+
+# Audio files
+*.mp3 binary
+*.wav binary
+*.m4a binary
+*.aac binary
+
+# Video files
+*.mp4 binary
+*.webm binary
+*.ogg binary
+*.mov binary
+*.m4v binary
+
+# Image files
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.svg binary
