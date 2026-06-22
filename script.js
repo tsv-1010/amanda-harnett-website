@@ -2009,6 +2009,13 @@ console.log('Conversion tracking initialized');
     const playlistCloseBtn = document.getElementById('playlistCloseBtn');
     const playlistContainer = document.getElementById('playlistTracks');
     
+    // New Widget DOM elements
+    const musicTracker = document.getElementById('musicTracker');
+    const musicTrackerToggle = document.getElementById('musicTrackerToggle');
+    const musicTrackerPanel = document.getElementById('musicTrackerPanel');
+    const musicTrackerClose = document.getElementById('musicTrackerClose');
+    const trackerMusicMini = document.getElementById('trackerMusicMini');
+    
     if (!playPauseBtnViz) return;
     
     // Playlist configuration
@@ -2048,6 +2055,7 @@ console.log('Conversion tracking initialized');
     // Audio state
     let currentTrackIndex = 0;
     let isPlaying = false;
+    let isPanelExpanded = false;
     let audio = new Audio();
     
     // Web Audio API for beat detection  
@@ -2133,7 +2141,7 @@ console.log('Conversion tracking initialized');
         analyser.getByteFrequencyData(dataArray);
         
         // Extract bass (low frequencies: 0-20Hz)
-        const bassEnd = Math.floor((20 / 22050) * dataArray.length);
+        const bassEnd = Math.max(1, Math.floor((20 / 22050) * dataArray.length));
         bassLevel = dataArray.slice(0, bassEnd).reduce((a, b) => a + b) / bassEnd / 255;
         
         // Extract mids (mid frequencies: 250-2000Hz)
@@ -2367,7 +2375,7 @@ console.log('Conversion tracking initialized');
                 updateFrequencyData();
                 renderVisualization();
             } catch (err) {
-                console.log('Visualization update error:', err.message);
+                // Fail silently to avoid spamming console
             }
         } else {
             if (analyserActive) {
@@ -2388,8 +2396,6 @@ console.log('Conversion tracking initialized');
             fallbackBars[3].style.height = (50 + midLevel * 90) + 'px';
             fallbackBars[4].style.height = (40 + bassLevel * 100) + 'px';
         }
-        
-        console.log('Animate loop:', {bass: bassLevel.toFixed(2), mid: midLevel.toFixed(2), high: highLevel.toFixed(2), viz: currentVisualization});
         
         animationFrameId = requestAnimationFrame(animate);
     }
@@ -2438,6 +2444,10 @@ console.log('Conversion tracking initialized');
         audio.src = track.src;
         audio.load();
         updateTrackInfo();
+        
+        if (trackerMusicMini) {
+            trackerMusicMini.textContent = track.title;
+        }
     }
     
     // Play track
@@ -2463,6 +2473,10 @@ console.log('Conversion tracking initialized');
             updatePlayPauseButton();
             animate(); // Start animation loop
             updateVisualizerMode(Boolean(analyser && dataArray && audioContext));
+            if (trackerMusicMini) {
+                const track = playlist[currentTrackIndex];
+                trackerMusicMini.textContent = `▶ ${track.title}`;
+            }
         }).catch(err => {
             console.error('Audio play failed:', err);
             trackTitleViz.textContent = 'Add tracks to playlist';
@@ -2475,6 +2489,10 @@ console.log('Conversion tracking initialized');
         audio.pause();
         isPlaying = false;
         updatePlayPauseButton();
+        if (trackerMusicMini) {
+            const track = playlist[currentTrackIndex];
+            trackerMusicMini.textContent = `⏸ ${track.title}`;
+        }
     }
     
     // Toggle play/pause
@@ -2530,6 +2548,22 @@ console.log('Conversion tracking initialized');
         playlistModal.classList.remove('open');
     }
     
+    // Auto-show tracker when scrolling to About section
+    function setupScrollTrigger() {
+        const aboutSection = document.getElementById('about');
+        if (!aboutSection) return;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    musicTracker?.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(aboutSection);
+    }
+    
     // Auto-play next track when current ends
     audio.addEventListener('ended', () => {
         nextTrack();
@@ -2551,9 +2585,31 @@ console.log('Conversion tracking initialized');
         }
     });
     
+    // Widget panel control event listeners
+    musicTrackerToggle?.addEventListener('click', () => {
+        isPanelExpanded = !isPanelExpanded;
+        musicTrackerPanel?.classList.toggle('active', isPanelExpanded);
+    });
+    
+    musicTrackerClose?.addEventListener('click', () => {
+        isPanelExpanded = false;
+        musicTrackerPanel?.classList.remove('active');
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isPanelExpanded) {
+            isPanelExpanded = false;
+            musicTrackerPanel?.classList.remove('active');
+        }
+    });
+    
     // Initialize
     loadTrack();
     updatePlaylistDisplay();
+    setupScrollTrigger();
     
-    console.log('Ambient music visualizer initialized with', playlist.length, 'tracks');
+    // Add visible class on load as well, so it mimics heart rate tracker
+    musicTracker?.classList.add('visible');
+    
+    console.log('Ambient music visualizer widget initialized with', playlist.length, 'tracks');
 })();
