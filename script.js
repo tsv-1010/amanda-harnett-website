@@ -222,14 +222,7 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Parallax effect on hero section
-const hero = document.querySelector('.hero');
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    if (hero && scrolled < hero.offsetHeight) {
-        hero.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
-    }
-});
+// Hero parallax scroll consolidated in initOptimizedScroll loop
 
 // Advanced reveal effect - cursor tracking
 const revealContainer = document.querySelector('.reveal-container');
@@ -259,53 +252,74 @@ if (revealContainer) {
     });
 }
 
-// Signature scroll animation
-const signatureScrollHandler = () => {
-    if (!heroSignature) return;
-    
+// Combined and optimized scroll listener loop using requestAnimationFrame
+(function initOptimizedScroll() {
+    let ticking = false;
     const heroSection = document.querySelector('.hero');
-    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-    const currentScroll = window.pageYOffset;
-    const scrollProgress = (currentScroll - heroSection.offsetTop) / heroSection.offsetHeight;
+    const heroSignatureElement = document.querySelector('.hero-signature');
+    const allSections = document.querySelectorAll('section[id]');
+    const allNavLinks = document.querySelectorAll('.nav-link');
     
-    if (scrollProgress > 0.7 && scrollProgress < 1.5) {
-        heroSignature.classList.add('scrolling-out');
-    } else {
-        heroSignature.classList.remove('scrolling-out');
+    function updateScrollEffects() {
+        const scrolled = window.pageYOffset || window.scrollY;
+        
+        // 1. Hero Parallax
+        if (heroSection && scrolled < heroSection.offsetHeight) {
+            heroSection.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
+        }
+        
+        // 2. Signature scroll animation
+        if (heroSignatureElement && heroSection) {
+            const scrollProgress = (scrolled - heroSection.offsetTop) / heroSection.offsetHeight;
+            
+            if (scrollProgress > 0.7 && scrollProgress < 1.5) {
+                heroSignatureElement.classList.add('scrolling-out');
+            } else {
+                heroSignatureElement.classList.remove('scrolling-out');
+            }
+            
+            if (scrollProgress > 0 && scrollProgress < 1) {
+                const yOffset = scrollProgress * 60;
+                const rotation = scrollProgress * 15;
+                heroSignatureElement.style.transform = `translateX(-50%) translateY(${yOffset}px) rotate(${rotation}deg)`;
+                heroSignatureElement.style.opacity = Math.max(0, 1 - scrollProgress * 0.5);
+            }
+        }
+        
+        // 3. Active Nav Link on Scroll
+        let current = '';
+        allSections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrolled >= sectionTop - 120) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        allNavLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href && href.slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+        
+        ticking = false;
     }
     
-    // Subtle rotation and movement
-    if (scrollProgress > 0 && scrollProgress < 1) {
-        const yOffset = scrollProgress * 60;
-        const rotation = scrollProgress * 15;
-        heroSignature.style.transform = `translateX(-50%) translateY(${yOffset}px) rotate(${rotation}deg)`;
-        heroSignature.style.opacity = Math.max(0, 1 - scrollProgress * 0.5);
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+        }
     }
-};
-
-window.addEventListener('scroll', signatureScrollHandler);
-
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 100) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.classList.add('active');
-        }
-    });
-});
+    
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Initial call to set active states
+    updateScrollEffects();
+    
+    console.log('Optimized scroll effects initialized');
+})();
 
 // Gallery scroll snap smooth behavior
 const galleryScroll = document.getElementById('galleryScroll');
@@ -567,11 +581,31 @@ if (heroContainer && heroReveal) {
         return path;
     }
     
-    // Mouse tracking - INSTANT, normalized coordinates
+    // Mouse tracking - INSTANT, normalized coordinates with 3D Tilt calculation
     heroContainer.addEventListener('mousemove', (e) => {
         const rect = heroContainer.getBoundingClientRect();
         targetX = (e.clientX - rect.left) / rect.width;
         targetY = (e.clientY - rect.top) / rect.height;
+        
+        // Update coordinates for CSS lens flare spotlight
+        heroContainer.style.setProperty('--blob-x', `${e.clientX - rect.left}px`);
+        heroContainer.style.setProperty('--blob-y', `${e.clientY - rect.top}px`);
+        
+        // Calculate 3D tilt angles
+        const tiltX = (0.5 - targetY) * 15; // Max 15deg tilt
+        const tiltY = (targetX - 0.5) * 15;
+        
+        // Apply tilt transform to container
+        heroContainer.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+        
+        // Parallax offset inside container
+        const baseImg = heroContainer.querySelector('.hero-base');
+        if (baseImg) {
+            baseImg.style.transform = `translate3d(${(targetX - 0.5) * -15}px, ${(targetY - 0.5) * -15}px, 20px) scale(1.05)`;
+        }
+        if (heroReveal) {
+            heroReveal.style.transform = `translate3d(${(targetX - 0.5) * -30}px, ${(targetY - 0.5) * -30}px, 40px) scale(1.05)`;
+        }
     });
     
     heroContainer.addEventListener('mouseenter', (e) => {
@@ -594,6 +628,16 @@ if (heroContainer && heroReveal) {
     heroContainer.addEventListener('mouseleave', () => {
         isHovering = false;
         targetRadius = 0;
+        
+        // Reset 3D transforms smoothly
+        heroContainer.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+        const baseImg = heroContainer.querySelector('.hero-base');
+        if (baseImg) {
+            baseImg.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+        }
+        if (heroReveal) {
+            heroReveal.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+        }
     });
     
     // Animation loop
