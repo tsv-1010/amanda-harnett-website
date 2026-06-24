@@ -1988,7 +1988,11 @@ console.log('Conversion tracking initialized');
         console.log('Performance tracker initialized');
     }
     
-    init();
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(init);
+    } else {
+        setTimeout(init, 200);
+    }
 })();
 
 /* ==========================================
@@ -2604,12 +2608,145 @@ console.log('Conversion tracking initialized');
     });
     
     // Initialize
-    loadTrack();
-    updatePlaylistDisplay();
-    setupScrollTrigger();
+    function init() {
+        loadTrack();
+        updatePlaylistDisplay();
+        setupScrollTrigger();
+        
+        // Add visible class on load as well, so it mimics heart rate tracker
+        musicTracker?.classList.add('visible');
+        
+        console.log('Ambient music visualizer widget initialized with', playlist.length, 'tracks');
+    }
     
-    // Add visible class on load as well, so it mimics heart rate tracker
-    musicTracker?.classList.add('visible');
-    
-    console.log('Ambient music visualizer widget initialized with', playlist.length, 'tracks');
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(init);
+    } else {
+        setTimeout(init, 200);
+    }
+})();
+
+// ==========================================
+// CUSTOM LEAD CAPTURE & INQUIRY MODALS LOGIC
+// ==========================================
+(function initCustomModals() {
+    const pressKitModal = document.getElementById('pressKitModal');
+    const closePressKitModal = document.getElementById('closePressKitModal');
+    const pressKitBackdrop = document.getElementById('pressKitBackdrop');
+    const pressKitForm = document.getElementById('pressKitForm');
+    const downloadPressKitBtn = document.getElementById('downloadPressKitBtn');
+
+    const sponsorshipModal = document.getElementById('sponsorshipModal');
+    const closeSponsorshipModal = document.getElementById('closeSponsorshipModal');
+    const sponsorshipBackdrop = document.getElementById('sponsorshipBackdrop');
+    const sponsorshipForm = document.getElementById('sponsorshipForm');
+    const inquiryEventName = document.getElementById('inquiryEventName');
+    const inquiryEventInput = document.getElementById('inquiry-event');
+
+    // Open Press Kit Modal
+    downloadPressKitBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        pressKitModal?.classList.add('active');
+    });
+
+    // Close Press Kit Modal
+    function hidePressKitModal() {
+        pressKitModal?.classList.remove('active');
+        pressKitForm?.reset();
+    }
+    closePressKitModal?.addEventListener('click', hidePressKitModal);
+    pressKitBackdrop?.addEventListener('click', hidePressKitModal);
+
+    // Handle Press Kit Submit & Download
+    pressKitForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('press-name')?.value;
+        const brand = document.getElementById('press-brand')?.value;
+        const email = document.getElementById('press-email')?.value;
+
+        if (name && brand && email) {
+            // Track Conversion
+            if (typeof window.trackConversion === 'function') {
+                window.trackConversion('press_kit_download', {
+                    'name': name,
+                    'brand': brand,
+                    'email': email
+                });
+            }
+            console.log('Press kit lead captured:', { name, brand, email });
+
+            // Trigger actual or dummy download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'assets/sponsorship/AmandaHarnett_PressKit.pdf'; // Path to press kit
+            downloadLink.download = 'AmandaHarnett_PressKit.pdf';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            alert('Thank you! Your download has started.');
+            hidePressKitModal();
+        }
+    });
+
+    // Open Sponsorship Modal
+    function openSponsorshipModal(eventName) {
+        if (inquiryEventName) inquiryEventName.textContent = eventName;
+        if (inquiryEventInput) inquiryEventInput.value = eventName;
+        sponsorshipModal?.classList.add('active');
+    }
+
+    // Close Sponsorship Modal
+    function hideSponsorshipModal() {
+        sponsorshipModal?.classList.remove('active');
+        sponsorshipForm?.reset();
+    }
+    closeSponsorshipModal?.addEventListener('click', hideSponsorshipModal);
+    sponsorshipBackdrop?.addEventListener('click', hideSponsorshipModal);
+
+    // Event listeners for timeline sponsor buttons
+    document.querySelectorAll('.event-sponsor-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const eventCard = btn.closest('.event-card');
+            const eventName = eventCard?.querySelector('.event-name')?.textContent || 'Tournament Leg';
+            openSponsorshipModal(eventName);
+        });
+    });
+
+    // Handle Sponsorship Submit
+    sponsorshipForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const eventName = inquiryEventInput?.value;
+        const name = document.getElementById('sponsor-name')?.value;
+        const brand = document.getElementById('sponsor-brand')?.value;
+        const email = document.getElementById('sponsor-email')?.value;
+        const notes = document.getElementById('sponsor-notes')?.value;
+
+        if (name && brand && email) {
+            // Track Conversion
+            if (typeof window.trackConversion === 'function') {
+                window.trackConversion('leg_sponsor_inquiry', {
+                    'event_name': eventName,
+                    'name': name,
+                    'brand': brand,
+                    'email': email,
+                    'notes': notes
+                });
+            }
+            console.log('Sponsorship inquiry captured:', { eventName, name, brand, email, notes });
+
+            alert(`Thank you for your interest! Amanda's team will contact you within 24-48 hours regarding sponsorship for ${eventName}.`);
+            hideSponsorshipModal();
+        }
+    });
+
+    // Global Esc key support to close modals
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            hidePressKitModal();
+            hideSponsorshipModal();
+        }
+    });
+
+    console.log('Custom lead capture modals initialized');
 })();

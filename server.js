@@ -45,7 +45,23 @@ const server = http.createServer((req, res) => {
             });
             return;
         }
-        
+        // Performance optimization: Cache headers
+        const cacheMaxAge = {
+            '.html': 3600, // 1 hour for HTML
+            '.css': 31536000, // 1 year for static assets (with versioned queries in index.html)
+            '.js': 31536000,
+            '.jpg': 31536000,
+            '.jpeg': 31536000,
+            '.png': 31536000,
+            '.gif': 31536000,
+            '.svg': 31536000,
+            '.ico': 31536000
+        };
+        const maxAge = cacheMaxAge[ext];
+        if (maxAge !== undefined) {
+            res.setHeader('Cache-Control', `public, max-age=${maxAge}${maxAge > 3600 ? ', immutable' : ''}`);
+        }
+
         res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'text/plain' });
         res.end(data);
     });
